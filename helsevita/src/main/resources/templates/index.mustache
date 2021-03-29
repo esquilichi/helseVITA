@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+{{> head}}
+<html>
+<body>
+	<h1>Listado de Usuarios</h1>
+	<a href="crearUsuario.html">Nuevo usuario</a>
+	<br>
+	
+	<a href="buscar.html">Buscar usuario</a>
+	<ul>
+		<br>{{#Usuarios}}
+		<li><a href="mostrar/{{-index}}">{{.}}</a> </li>
+		<br>
+		{{/Usuarios}}
+	</ul>
+</body>
+
+</html>
