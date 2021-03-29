@@ -1,0 +1,12 @@
+Cosas a hacer:
+
+-Diseño de la página web (CSS) MUY IMPORTANT
+-Herencia en Java (Usuario como padre, PersonalSanitario y Cliente heredados)
+-Decididir uso de ED (casi seguro que un mapa ;)
+-Opcional: Implementar Bootstrap Studio con nuestro proyecto de Spring
+-Guardar peticiones al Postman
+-PatchMapping("/api") (como el PUT pero mejor)
+-Separar el Service en un @Service (lógica de la aplicación) y @Respository (persistencia)
+-Pagina de RequestMapping("/error") y devolver el código de estado correspondiente
+-Revisar todos los códigos de estado, es decir, si actualizamos un obejto de la API, devolver el HTTP.status correspondiente
+-Mejorar consulta dinámica? Ya lo tengo hecho, podemos meterle JQUERY
