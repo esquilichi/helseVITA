@@ -1,63 +1,48 @@
 package com.urjc.es.helsevita;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    private Map <Long,Usuario> mapa = new ConcurrentHashMap<Long,Usuario>();
+
+    @Autowired
+    UserRepository repositorio;
     private Long lastId = (long) -1;
 
     public Usuario agregarUsuario(Usuario user){
         lastId++;
-        user.setId(lastId);
-        this.mapa.put(lastId, user);
-        return user;
+        return repositorio.agregarUsuario(user, lastId);
     }
 
     public boolean existe(Long id) {
-        return this.mapa.get(id) != null;
+        return repositorio.existe(id);
     }
 
     
     public void editarUsuario(Long id, Usuario usuario){
-        if (this.mapa.get(id) != null){
-            usuario.setId(id);
-            this.mapa.put(id, usuario);
-        }  
+        if (repositorio.existe(id)){
+            repositorio.editarUsuario(id, usuario);
+        }       
     }
 
     public void eliminarUsuario(Long id){
-        this.mapa.remove(id);
+        repositorio.eliminarUsuario(id);
     }
 
     
     public Usuario devolverUsuario(Long id){
-        return this.mapa.get(id);
+        return repositorio.devolverUsuario(id);
     }
 
     public Collection<Usuario> devolverTodos(){
-        return this.mapa.values();
+        return repositorio.devolverTodos();
     }
     
-    //FUNCIONA JEJEJEJEJEJEJEJEJEJE
     public Usuario buscar(String username){
-        
-        Iterator<Entry<Long, Usuario>> iterator = mapa.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Entry<Long, Usuario> entry = iterator.next();
-            //si tocais el .equals os parto un brazo <3
-            if (entry.getValue().getUsername().equals(username)){
-                System.out.println(entry.getValue().getUsername());
-                return entry.getValue();
-            }
-        }
-        return null;
+        return repositorio.buscar(username);
     }
 }
 
