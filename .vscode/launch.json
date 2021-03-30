@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-HelsevitaApplication<helsevita>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.urjc.es.helsevita.HelsevitaApplication",
+            "projectName": "helsevita",
+            "args": ""
+        }
+    ]
+}

@@ -57,4 +57,29 @@ public class UserRepository {
         }
         return null;
     }
+
+    public void actualizarUsuario(String usuario, Long id){
+        Usuario usuarioTemp = mapa.get(id);
+        usuarioTemp.setUsername(usuario);
+        mapa.put(id, usuarioTemp);
+    }
+
+
+    public void actualizarPassword(String password, Long id){
+        Usuario usuarioTemp = mapa.get(id);
+        usuarioTemp.setPassword(password);
+        mapa.put(id, usuarioTemp);
+    }
+
+    public void actualizarCorreo(String correo, Long id){
+        Usuario usuarioTemp = mapa.get(id);
+        usuarioTemp.setCorreo(correo);
+        mapa.put(id, usuarioTemp);
+    }
+
+    public void actualizarDNI(String dni, Long id){
+        Usuario usuarioTemp = mapa.get(id);
+        usuarioTemp.setdni(dni);
+        mapa.put(id, usuarioTemp);
+    }
 }

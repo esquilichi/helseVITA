@@ -44,6 +44,23 @@ public class UserService {
     public Usuario buscar(String username){
         return repositorio.buscar(username);
     }
+
+    public void actualizarUsuario(String usuario, long id){
+        repositorio.actualizarUsuario(usuario, id);
+    }
+
+
+    public void actualizarPassword(String password, Long id){
+        repositorio.actualizarPassword(password, id);
+    }
+
+    public void actualizarCorreo(String correo, Long id){
+        repositorio.actualizarCorreo(correo,id);
+    }
+
+    public void actualizarDNI(String dni, Long id){
+        repositorio.actualizarDNI(dni, id);
+    }
 }
 
 

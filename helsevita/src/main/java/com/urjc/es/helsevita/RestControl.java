@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,7 +31,6 @@ public class RestControl {
     }
 
     @PutMapping("/api/{id}")
-    
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
 
         if  (gestor.existe(id)){
@@ -43,7 +43,6 @@ public class RestControl {
     }
 
     @DeleteMapping("/api")
-    
     public ResponseEntity<Usuario> eliminarUsuario(@PathVariable Long id, @RequestBody Usuario usuario){
 
         if(gestor.existe(id)){
@@ -69,4 +68,24 @@ public class RestControl {
     public Collection<Usuario> anuncios() {
 		return gestor.devolverTodos();
 	}
+
+    @PatchMapping("/api/{id}")
+    public ResponseEntity<Usuario> patch(@RequestBody Usuario usuario, @PathVariable Long id){
+        if (gestor.existe(id)){
+            if(usuario.getUsername() != null)
+                gestor.actualizarUsuario(usuario.getUsername(), id);
+            if(usuario.getPassword() != null)
+                gestor.actualizarPassword(usuario.getPassword(),id);
+            if(usuario.getCorreo() != null)
+                gestor.actualizarCorreo(usuario.getCorreo(),id);
+            if(usuario.getdni() != null)
+                gestor.actualizarDNI(usuario.getdni(),id);
+
+            Usuario usuarioTemp = gestor.devolverUsuario(id);
+                
+            return new ResponseEntity<>(usuarioTemp, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
