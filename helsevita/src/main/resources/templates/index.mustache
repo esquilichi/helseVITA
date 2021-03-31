@@ -2,18 +2,83 @@
 <html lang="es">
 {{> head}}
 <html>
+<html lang="en">
+
+<head>
+
+  <style>
+    #sidebar {
+      width: 20%;
+      height: 100vh;
+      background: #99F6E9;
+    }
+  </style>
+</head>
+
 <body>
-	<h1>Listado de Usuarios</h1>
-	<a href="crearUsuario.html">Nuevo usuario</a>
-	<br>
+
+  <div class="d-flex">
+    <div id="sidebar">
+      <div class="p-2">
+        <p class="navbar-brand p-4 ">
+			<img src="/logo.png"
+				width="200"
+				height="200">
+        </p>
+      </div>
+      <div class="text-center">
+        <div class="list-group">
+          <a class="Datos-contacto text-dark w-100 ">
+            </i><big><strong>Datos de contacto</strong></big>
+          </a>
+          
+          <div class="text-center">
+            <p class="direccion  text-dark">  
+				<br><strong>Teléfono:</strong></br>
+          	</p>
+            <p  class="text-center  text-dark">  
+				<em>*Teléfono*</em>
+          	</p>
+            <a class="ubicacion text-dark">
+            	<br><big><strong>Ubicación</strong></br>
+          </a>
+          <div class="text-center" >
+            <p class="direccion  text-dark">  
+				<small><br><strong>Dirección:</strong></br></small>
+          	</p>
+            <p  class="text-center  text-dark">  
+				<small><em>*Dirección*</em></small>
+          </div>
+ 
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1520.64265238807!2d-3.878120951038786!3d40.33601656355386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd418e7adf68f543%3A0x841755428455a90b!2sUniversidad%20Rey%20Juan%20Carlos!5e0!3m2!1ses!2ses!4v1617183560082!5m2!1ses!2ses" width="250" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+
 	
-	<a href="buscar.html">Buscar usuario</a>
-	<ul>
-		<br>{{#Usuarios}}
-		<li><a href="mostrar/{{-index}}">{{.}}</a> </li>
-		<br>
-		{{/Usuarios}}
-	</ul>
+      <section class="p-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">	
+				<h1>Listado de Usuarios</h1>
+				<a href="crearUsuario.html">Nuevo usuario</a>
+				<br>
+				
+				<a href="buscar.html">Buscar usuario</a>
+				<ul>
+					<br>{{#Usuarios}}
+					<li><a href="mostrar/{{-index}}">{{.}}</a> </li>
+					<br>
+					{{/Usuarios}}
+				</ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
 </body>
 
 </html>
