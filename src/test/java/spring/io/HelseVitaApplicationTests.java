@@ -1,0 +1,13 @@
+package spring.io;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class HelseVitaApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
