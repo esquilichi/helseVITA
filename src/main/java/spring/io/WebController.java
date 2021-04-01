@@ -29,18 +29,20 @@ public class WebController {
 		return mv;
 	}
 
+
 	@GetMapping("/buscar")
 	ModelAndView buscar(Model model, @RequestParam String username) {
-		var mv = new ModelAndView("mostrar");
 		Usuario userTemp = gestor.buscar(username);
+		var mv = new ModelAndView("mostrar");
 		mv.addObject("usuario", userTemp);
 		return mv;
 	}
 
-	@GetMapping("/contacto")
-	ModelAndView contacto(Model model){ 
-		var mv = new ModelAndView("contact-us.html");
-
+	/*@ExceptionHandler(UserNotFoundException.class)
+	public ModelAndView excepcion(UserNotFoundException e){
+		var mv = new ModelAndView("user-not-found");
+		mv.addObject("username",e.getUsername());
 		return mv;
 	}
+	*/
 }
