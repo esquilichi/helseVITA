@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">{{> head}}
 <html>
-<body>
-	<h1>{{usuario.username}}</h1>
-	<h2>{{usuario.correo}}</h2>
-	<a href="/">Volver al tablon</a>
-</body>
+<main class="page landing-page">
+	<section class="clean-block clean-info light">
+		<div class="container">
+			<div class="block-heading">
+				<h1>{{usuario.username}}</h1>
+				<h2>{{usuario.correo}}</h2>
+				<a href="/">Volver a inicio</a>
+			</div>
+		</div>
+	</section>
+</main>
+
+{{> footer}}
+
 </html>
