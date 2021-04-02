@@ -50,8 +50,8 @@ function loadItems(){
 }
 
 function addItemsToPage(response){
-	
-	var itemsElem = document.getElementById('items');
+	console.log("Ha funcionado");
+	/*var itemsElem = document.getElementById('items');
 	
 	itemsElem.innerHTML = '';
 	
@@ -62,5 +62,5 @@ function addItemsToPage(response){
     	
     	var text = document.createTextNode(username);
     	li.appendChild(text);  		
-	}	
+	}	*/
 }
