@@ -3,6 +3,7 @@ package spring.io;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,16 +34,20 @@ public class WebController {
 	@GetMapping("/buscar")
 	ModelAndView buscar(Model model, @RequestParam String username) {
 		Usuario userTemp = gestor.buscar(username);
-		var mv = new ModelAndView("mostrar");
-		mv.addObject("usuario", userTemp);
-		return mv;
+		if(userTemp!=null){
+			var mv = new ModelAndView("mostrar");
+			mv.addObject("usuario", userTemp);
+			return mv;
+		}else{
+			throw new UserNotFoundException(username);
+		}
 	}
 
-	/*@ExceptionHandler(UserNotFoundException.class)
+	@ExceptionHandler(UserNotFoundException.class)
 	public ModelAndView excepcion(UserNotFoundException e){
 		var mv = new ModelAndView("user-not-found");
 		mv.addObject("username",e.getUsername());
 		return mv;
 	}
-	*/
+	
 }
