@@ -30,6 +30,13 @@ public class WebController {
 		return mv;
 	}
 
+	@RequestMapping("/mostrarUsuarios")
+	ModelAndView mostrarUsuarios(Model model) {
+		var mv = new ModelAndView("mostrarUsuarios");
+		mv.addObject("Usuarios", gestor.devolverTodos());
+		return mv;
+	}
+
 
 	@GetMapping("/buscar")
 	ModelAndView buscar(Model model, @RequestParam String username) {
