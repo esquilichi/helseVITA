@@ -1,19 +1,19 @@
 package spring.io;
 
-public class Usuario {
+public class User {
 	private String username;
 	private String password;
-	private String correo;
+	private String email;
 	private String dni;
 	private long id;
 
-	public Usuario() {
+	public User() {
 	}
 
-	public Usuario(String username, String password, String correo, String dni, Long id) {
+	public User(String username, String password, String email, String dni, Long id) {
 		this.username = username;
 		this.password = password;
-		this.correo = correo;
+		this.email = email;
 		this.dni = dni;
 		this.id = id;
 	}
@@ -42,12 +42,12 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public String getCorreo() {
-		return this.correo;
+	public String getEmail() {
+		return this.email;
 	}
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getdni() {

@@ -9,53 +9,53 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
 	@Autowired
-	UserRepository repositorio;
+	UserRepository repository;
 	private Long lastId = (long) -1;
 
-	public Usuario agregarUsuario(Usuario user) {
+	public User addUser(User user) {
 		lastId++;
-		return repositorio.agregarUsuario(user, lastId);
+		return repository.addUser(user, lastId);
 	}
 
-	public boolean existe(Long id) {
-		return repositorio.existe(id);
+	public boolean exists(Long id) {
+		return repository.exists(id);
 	}
 
-	public void editarUsuario(Long id, Usuario usuario) {
-		if (repositorio.existe(id)) {
-			repositorio.editarUsuario(id, usuario);
+	public void editUser(Long id, User User) {
+		if (repository.exists(id)) {
+			repository.editUser(id, User);
 		}
 	}
 
-	public void eliminarUsuario(Long id) {
-		repositorio.eliminarUsuario(id);
+	public void deleteUser(Long id) {
+		repository.deleteUser(id);
 	}
 
-	public Usuario devolverUsuario(Long id) {
-		return repositorio.devolverUsuario(id);
+	public User returnUser(Long id) {
+		return repository.returnUser(id);
 	}
 
-	public Collection<Usuario> devolverTodos() {
-		return repositorio.devolverTodos();
+	public Collection<User> returnAll() {
+		return repository.returnAll();
 	}
 
-	public Usuario buscar(String username) {
-		return repositorio.buscar(username);
+	public User search(String username) {
+		return repository.search(username);
 	}
 
-	public void actualizarUsuario(String usuario, long id) {
-		repositorio.actualizarUsuario(usuario, id);
+	public void updateUser(String User, long id) {
+		repository.updateUser(User, id);
 	}
 
-	public void actualizarPassword(String password, Long id) {
-		repositorio.actualizarPassword(password, id);
+	public void updatePassword(String password, Long id) {
+		repository.updatePassword(password, id);
 	}
 
-	public void actualizarCorreo(String correo, Long id) {
-		repositorio.actualizarCorreo(correo, id);
+	public void updateEmail(String correo, Long id) {
+		repository.updateEmail(correo, id);
 	}
 
-	public void actualizarDNI(String dni, Long id) {
-		repositorio.actualizarDNI(dni, id);
+	public void updateDNI(String dni, Long id) {
+		repository.updateDNI(dni, id);
 	}
 }
