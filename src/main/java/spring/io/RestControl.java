@@ -64,6 +64,8 @@ public class RestControl {
 		return manager.returnAll();
 	}
 
+
+
 	@PatchMapping("/api/{id}")
 	public ResponseEntity<User> patch(@RequestBody User user, @PathVariable Long id) {
 		if (manager.exists(id)) {
