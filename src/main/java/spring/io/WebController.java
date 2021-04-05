@@ -16,14 +16,14 @@ public class WebController {
 	UserService manager;
 
 	@RequestMapping("/")
-	ModelAndView index(Model model) {
+	ModelAndView index() {
 		var mv = new ModelAndView("index");
 		mv.addObject("Users", manager.returnAll());
 		return mv;
 	}
 
 	@RequestMapping("/mostrar/{id}")
-	ModelAndView view(Model model, @PathVariable long id) {
+	ModelAndView view(@PathVariable long id) {
 		User userTemp = manager.returnUser(id - 1);
 		var mv = new ModelAndView("mostrar");
 		mv.addObject("user", userTemp);
@@ -39,7 +39,7 @@ public class WebController {
 
 
 	@GetMapping("/buscar")
-	ModelAndView search(Model model, @RequestParam String username) {
+	ModelAndView search(@RequestParam String username) {
 		User userTemp = manager.search(username);
 		if(userTemp!=null){
 			var mv = new ModelAndView("mostrar");
