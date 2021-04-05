@@ -68,9 +68,9 @@ public class UserRepository {
 		map.put(id, UserTemp);
 	}
 
-	public void updateEmail(String correo, Long id) {
+	public void updateEmail(String email, Long id) {
 		User UserTemp = map.get(id);
-		UserTemp.setEmail(correo);
+		UserTemp.setEmail(email);
 		map.put(id, UserTemp);
 	}
 

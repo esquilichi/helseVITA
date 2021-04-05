@@ -6,7 +6,7 @@ function createItem() {
 
 	var username = document.getElementById('username').value;
 	var password = document.getElementById('password').value;
-	var correo = document.getElementById('correo').value;
+	var email = document.getElementById('email').value;
 	var dni = document.getElementById('dni').value;
 
 
@@ -14,7 +14,7 @@ function createItem() {
 	{ 
 	"username": username, 
 	"password":password,
-	"correo":correo,
+	"email":email,
 	"dni":dni 
 	};
 		

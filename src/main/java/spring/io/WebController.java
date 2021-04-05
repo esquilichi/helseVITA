@@ -26,14 +26,14 @@ public class WebController {
 	ModelAndView view(Model model, @PathVariable long id) {
 		User userTemp = manager.returnUser(id - 1);
 		var mv = new ModelAndView("mostrar");
-		mv.addObject("User", userTemp);
+		mv.addObject("user", userTemp);
 		return mv;
 	}
 
-	@RequestMapping("/mostrarUsers")
+	@RequestMapping("/viewUsers")
 	ModelAndView viewUsers(Model model) {
 		var mv = new ModelAndView("mostrarUsuarios");
-		mv.addObject("Users", manager.returnAll());
+		mv.addObject("users", manager.returnAll());
 		return mv;
 	}
 
@@ -43,7 +43,7 @@ public class WebController {
 		User userTemp = manager.search(username);
 		if(userTemp!=null){
 			var mv = new ModelAndView("mostrar");
-			mv.addObject("User", userTemp);
+			mv.addObject("user", userTemp);
 			return mv;
 		}else{
 			throw new UserNotFoundException(username);
