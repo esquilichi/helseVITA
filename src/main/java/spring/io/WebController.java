@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
+//The WebController is in charge of showing data through MVC (Modelo Vista Controlador)
 @Controller
 public class WebController {
+
+	//Pointer to the userService class. We do not need to initialize the userService class.
 	@Autowired
 	UserService manager;
 
@@ -50,6 +54,7 @@ public class WebController {
 		}
 	}
 
+	//Call to the exception
 	@ExceptionHandler(UserNotFoundException.class)
 	public ModelAndView exception(UserNotFoundException e){
 		var mv = new ModelAndView("user-not-found");

@@ -47,7 +47,7 @@ public class UserRepository {
 		while (iterator.hasNext()) {
 			Entry<Long, User> entry = iterator.next();
 			if (entry.getValue().getUsername().equals(username)) {
-				System.out.println(entry.getValue().getUsername());
+				//System.out.println(entry.getValue().getUsername());
 				return entry.getValue();
 			}
 		}

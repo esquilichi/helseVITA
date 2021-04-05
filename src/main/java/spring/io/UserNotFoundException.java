@@ -1,7 +1,6 @@
 package spring.io;
 
-
-//No funcionan
+//It executes when user don't exists
 
 public class UserNotFoundException extends RuntimeException{ 
 
@@ -9,7 +8,7 @@ public class UserNotFoundException extends RuntimeException{
     private static final long serialVersionUID = 1L;
     
     UserNotFoundException(String username){
-        super("No se ha encontrado el usuario: ");
+        super("No se ha encontrado el usuario: " +username);
         this.username = username;
     }
 
