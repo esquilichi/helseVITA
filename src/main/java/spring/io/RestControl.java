@@ -20,69 +20,69 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RestControl {
 
-	Set<Integer> conjunto = new TreeSet<>();
+	Set<Integer> set = new TreeSet<>();
 	@Autowired
-	UserService gestor;
+	UserService manager;
 
 	@PostMapping("/api")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Usuario nuevoUsuario(@RequestBody Usuario usuario) {
-		return gestor.agregarUsuario(usuario);
+	public User newUser(@RequestBody User user) {
+		return manager.addUser(user);
 	}
 
 	@PutMapping("/api/{id}")
-	public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
+	public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
 
-		if (gestor.existe(id)) {
-			gestor.editarUsuario(id, usuario);
-			return new ResponseEntity<>(usuario, HttpStatus.OK);
+		if (manager.exists(id)) {
+			manager.editUser(id, user);
+			return new ResponseEntity<>(user, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@DeleteMapping("/api")
-	public ResponseEntity<Usuario> eliminarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
+	public ResponseEntity<User> deleteUser(@PathVariable Long id, @RequestBody User user) {
 
-		if (gestor.existe(id)) {
-			gestor.eliminarUsuario(id);
+		if (manager.exists(id)) {
+			manager.deleteUser(id);
 
-			return new ResponseEntity<>(usuario, HttpStatus.OK);
+			return new ResponseEntity<>(user, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@GetMapping("/api/{id}")
-	public ResponseEntity<Usuario> obtenerusuario(@PathVariable Long id) {
-		if (gestor.existe(id)) {
-			Usuario usuarioTemp = gestor.devolverUsuario(id);
-			return new ResponseEntity<>(usuarioTemp, HttpStatus.OK);
+	public ResponseEntity<User> getUser(@PathVariable Long id) {
+		if (manager.exists(id)) {
+			User userTemp = manager.returnUser(id);
+			return new ResponseEntity<>(userTemp, HttpStatus.OK);
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@GetMapping("/api")
 	@ResponseStatus(HttpStatus.OK)
-	public Collection<Usuario> anuncios() {
-		return gestor.devolverTodos();
+	public Collection<User> advertisements() {
+		return manager.returnAll();
 	}
 
 	@PatchMapping("/api/{id}")
-	public ResponseEntity<Usuario> patch(@RequestBody Usuario usuario, @PathVariable Long id) {
-		if (gestor.existe(id)) {
-			if (usuario.getUsername() != null)
-				gestor.actualizarUsuario(usuario.getUsername(), id);
-			if (usuario.getPassword() != null)
-				gestor.actualizarPassword(usuario.getPassword(), id);
-			if (usuario.getCorreo() != null)
-				gestor.actualizarCorreo(usuario.getCorreo(), id);
-			if (usuario.getdni() != null)
-				gestor.actualizarDNI(usuario.getdni(), id);
+	public ResponseEntity<User> patch(@RequestBody User user, @PathVariable Long id) {
+		if (manager.exists(id)) {
+			if (user.getUsername() != null)
+				manager.updateUser(user.getUsername(), id);
+			if (user.getPassword() != null)
+				manager.updatePassword(user.getPassword(), id);
+			if (user.getEmail() != null)
+				manager.updateEmail(user.getEmail(), id);
+			if (user.getdni() != null)
+				manager.updateDNI(user.getdni(), id);
 
-			Usuario usuarioTemp = gestor.devolverUsuario(id);
+			User userTemp = manager.returnUser(id);
 
-			return new ResponseEntity<>(usuarioTemp, HttpStatus.OK);
+			return new ResponseEntity<>(userTemp, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

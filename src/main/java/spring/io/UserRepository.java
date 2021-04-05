@@ -10,46 +10,44 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserRepository {
-	private Map<Long, Usuario> mapa = new ConcurrentHashMap<Long, Usuario>();
+	private Map<Long, User> map = new ConcurrentHashMap<Long, User>();
 
 	UserRepository() {
 	}
 
-	public Usuario agregarUsuario(Usuario user, Long id) {
+	public User addUser(User user, Long id) {
 		user.setId(id);
-		this.mapa.put(id, user);
+		this.map.put(id, user);
 		return user;
 	}
 
-	public boolean existe(Long id) {
-		return this.mapa.get(id) != null;
+	public boolean exists(Long id) {
+		return this.map.get(id) != null;
 	}
 
-	public void editarUsuario(Long id, Usuario usuario) {
-		if (this.mapa.get(id) != null) {
-			usuario.setId(id);
-			this.mapa.put(id, usuario);
+	public void editUser(Long id, User User) {
+		if (this.map.get(id) != null) {
+			User.setId(id);
+			this.map.put(id, User);
 		}
 	}
 
-	public void eliminarUsuario(Long id) {
-		this.mapa.remove(id);
+	public void deleteUser(Long id) {
+		this.map.remove(id);
 	}
 
-	public Usuario devolverUsuario(Long id) {
-		return this.mapa.get(id);
+	public User returnUser(Long id) {
+		return this.map.get(id);
 	}
 
-	public Collection<Usuario> devolverTodos() {
-		return this.mapa.values();
+	public Collection<User> returnAll() {
+		return this.map.values();
 	}
 
-	// FUNCIONA <3
-	public Usuario buscar(String username) {
-		Iterator<Entry<Long, Usuario>> iterator = mapa.entrySet().iterator();
+	public User search(String username) {
+		Iterator<Entry<Long, User>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Entry<Long, Usuario> entry = iterator.next();
-			// si tocais el .equals os parto un brazo <3
+			Entry<Long, User> entry = iterator.next();
 			if (entry.getValue().getUsername().equals(username)) {
 				System.out.println(entry.getValue().getUsername());
 				return entry.getValue();
@@ -58,27 +56,27 @@ public class UserRepository {
 		return null;
 	}
 
-	public void actualizarUsuario(String usuario, Long id) {
-		Usuario usuarioTemp = mapa.get(id);
-		usuarioTemp.setUsername(usuario);
-		mapa.put(id, usuarioTemp);
+	public void updateUser(String User, Long id) {
+		User UserTemp = map.get(id);
+		UserTemp.setUsername(User);
+		map.put(id, UserTemp);
 	}
 
-	public void actualizarPassword(String password, Long id) {
-		Usuario usuarioTemp = mapa.get(id);
-		usuarioTemp.setPassword(password);
-		mapa.put(id, usuarioTemp);
+	public void updatePassword(String password, Long id) {
+		User UserTemp = map.get(id);
+		UserTemp.setPassword(password);
+		map.put(id, UserTemp);
 	}
 
-	public void actualizarCorreo(String correo, Long id) {
-		Usuario usuarioTemp = mapa.get(id);
-		usuarioTemp.setCorreo(correo);
-		mapa.put(id, usuarioTemp);
+	public void updateEmail(String email, Long id) {
+		User UserTemp = map.get(id);
+		UserTemp.setEmail(email);
+		map.put(id, UserTemp);
 	}
 
-	public void actualizarDNI(String dni, Long id) {
-		Usuario usuarioTemp = mapa.get(id);
-		usuarioTemp.setdni(dni);
-		mapa.put(id, usuarioTemp);
+	public void updateDNI(String dni, Long id) {
+		User UserTemp = map.get(id);
+		UserTemp.setdni(dni);
+		map.put(id, UserTemp);
 	}
 }

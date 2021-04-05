@@ -13,37 +13,37 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class WebController {
 	@Autowired
-	UserService gestor;
+	UserService manager;
 
 	@RequestMapping("/")
 	ModelAndView index(Model model) {
 		var mv = new ModelAndView("index");
-		mv.addObject("Usuarios", gestor.devolverTodos());
+		mv.addObject("Users", manager.returnAll());
 		return mv;
 	}
 
 	@RequestMapping("/mostrar/{id}")
-	ModelAndView mostrar(Model model, @PathVariable long id) {
-		Usuario userTemp = gestor.devolverUsuario(id - 1);
+	ModelAndView view(Model model, @PathVariable long id) {
+		User userTemp = manager.returnUser(id - 1);
 		var mv = new ModelAndView("mostrar");
-		mv.addObject("usuario", userTemp);
+		mv.addObject("user", userTemp);
 		return mv;
 	}
 
-	@RequestMapping("/mostrarUsuarios")
-	ModelAndView mostrarUsuarios(Model model) {
+	@RequestMapping("/viewUsers")
+	ModelAndView viewUsers(Model model) {
 		var mv = new ModelAndView("mostrarUsuarios");
-		mv.addObject("Usuarios", gestor.devolverTodos());
+		mv.addObject("users", manager.returnAll());
 		return mv;
 	}
 
 
 	@GetMapping("/buscar")
-	ModelAndView buscar(Model model, @RequestParam String username) {
-		Usuario userTemp = gestor.buscar(username);
+	ModelAndView search(Model model, @RequestParam String username) {
+		User userTemp = manager.search(username);
 		if(userTemp!=null){
 			var mv = new ModelAndView("mostrar");
-			mv.addObject("usuario", userTemp);
+			mv.addObject("user", userTemp);
 			return mv;
 		}else{
 			throw new UserNotFoundException(username);
@@ -51,7 +51,7 @@ public class WebController {
 	}
 
 	@ExceptionHandler(UserNotFoundException.class)
-	public ModelAndView excepcion(UserNotFoundException e){
+	public ModelAndView exception(UserNotFoundException e){
 		var mv = new ModelAndView("user-not-found");
 		mv.addObject("username",e.getUsername());
 		return mv;
