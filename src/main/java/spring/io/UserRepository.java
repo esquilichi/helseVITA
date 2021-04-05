@@ -26,10 +26,8 @@ public class UserRepository {
 	}
 
 	public void editUser(Long id, User User) {
-		if (this.map.get(id) != null) {
-			User.setId(id);
-			this.map.put(id, User);
-		}
+		User.setId(id);
+		this.map.put(id, User);
 	}
 
 	public void deleteUser(Long id) {

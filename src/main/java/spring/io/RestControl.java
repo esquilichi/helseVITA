@@ -1,9 +1,6 @@
 package spring.io;
 
 import java.util.Collection;
-import java.util.Set;
-import java.util.TreeSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RestControl {
 
-	Set<Integer> set = new TreeSet<>();
 	@Autowired
 	UserService manager;
 
@@ -41,13 +37,13 @@ public class RestControl {
 		}
 	}
 
-	@DeleteMapping("/api")
-	public ResponseEntity<User> deleteUser(@PathVariable Long id, @RequestBody User user) {
+	@DeleteMapping("/api/{id}")
+	public ResponseEntity<User> deleteUser(@PathVariable Long id) {
 
 		if (manager.exists(id)) {
 			manager.deleteUser(id);
 
-			return new ResponseEntity<>(user, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

@@ -31,7 +31,7 @@ public class WebController {
 	}
 
 	@RequestMapping("/viewUsers")
-	ModelAndView viewUsers(Model model) {
+	ModelAndView viewUsers() {
 		var mv = new ModelAndView("mostrarUsuarios");
 		mv.addObject("users", manager.returnAll());
 		return mv;
