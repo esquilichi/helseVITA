@@ -1,63 +1,81 @@
 package spring.io;
 
 import java.util.Collection;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
-
-//This class is in charge of the logic part
 @Service
 public class UserService {
 
-	@Autowired
-	UserRepository repository;
+	private Map<Long, User> map = new ConcurrentHashMap<Long, User>();
 	private Long lastId = (long) -1;
 
 	public User addUser(User user) {
 		lastId++;
-		return repository.addUser(user, lastId);
+		user.setId(lastId);
+		this.map.put(lastId, user);
+		return user;
 	}
 
 	public boolean exists(Long id) {
-		return repository.exists(id);
+		return this.map.get(id) != null;
 	}
 
 	public void editUser(Long id, User User) {
-		if (repository.exists(id)) {
-			repository.editUser(id, User);
+		if (this.exists(id)) {
+			User.setId(id);
+			this.map.put(id, User);
 		}
 	}
 
 	public void deleteUser(Long id) {
-		repository.deleteUser(id);
+		this.map.remove(id);
 	}
 
 	public User returnUser(Long id) {
-		return repository.returnUser(id);
+		return this.map.get(id);
 	}
 
 	public Collection<User> returnAll() {
-		return repository.returnAll();
+		return this.map.values();
 	}
 
 	public User search(String username) {
-		return repository.search(username);
+		Iterator<Entry<Long, User>> iterator = map.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<Long, User> entry = iterator.next();
+			if (entry.getValue().getUsername().equals(username)) {
+				//System.out.println(entry.getValue().getUsername());
+				return entry.getValue();
+			}
+		}
+		return null;
 	}
 
 	public void updateUser(String User, long id) {
-		repository.updateUser(User, id);
+		User UserTemp = map.get(id);
+		UserTemp.setUsername(User);
+		map.put(id, UserTemp);
 	}
 
 	public void updatePassword(String password, Long id) {
-		repository.updatePassword(password, id);
+		User UserTemp = map.get(id);
+		UserTemp.setPassword(password);
+		map.put(id, UserTemp);
 	}
 
 	public void updateEmail(String correo, Long id) {
-		repository.updateEmail(correo, id);
+		User UserTemp = map.get(id);
+		UserTemp.setEmail(correo);
+		map.put(id, UserTemp);
 	}
 
 	public void updateDNI(String dni, Long id) {
-		repository.updateDNI(dni, id);
+		User UserTemp = map.get(id);
+		UserTemp.setdni(dni);
+		map.put(id, UserTemp);
 	}
 }
