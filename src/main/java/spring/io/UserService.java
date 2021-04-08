@@ -24,10 +24,9 @@ public class UserService {
 		return this.map.get(id) != null;
 	}
 
-	public void editUser(Long id, User User) {
+	public void editUser(Long id, User user) {
 		if (this.exists(id)) {
-			User.setId(id);
-			this.map.put(id, User);
+			this.map.put(id, user);
 		}
 	}
 
@@ -48,34 +47,33 @@ public class UserService {
 		while (iterator.hasNext()) {
 			Entry<Long, User> entry = iterator.next();
 			if (entry.getValue().getUsername().equals(username)) {
-				//System.out.println(entry.getValue().getUsername());
 				return entry.getValue();
 			}
 		}
 		return null;
 	}
 
-	public void updateUser(String User, long id) {
-		User UserTemp = map.get(id);
-		UserTemp.setUsername(User);
-		map.put(id, UserTemp);
+	public void updateUser(String user, long id) {
+		User userTemp = map.get(id);
+		userTemp.setUsername(user);
+		map.put(id, userTemp);
 	}
 
 	public void updatePassword(String password, Long id) {
-		User UserTemp = map.get(id);
-		UserTemp.setPassword(password);
-		map.put(id, UserTemp);
+		User userTemp = map.get(id);
+		userTemp.setPassword(password);
+		map.put(id, userTemp);
 	}
 
 	public void updateEmail(String correo, Long id) {
-		User UserTemp = map.get(id);
-		UserTemp.setEmail(correo);
-		map.put(id, UserTemp);
+		User userTemp = map.get(id);
+		userTemp.setEmail(correo);
+		map.put(id, userTemp);
 	}
 
 	public void updateDNI(String dni, Long id) {
-		User UserTemp = map.get(id);
-		UserTemp.setdni(dni);
-		map.put(id, UserTemp);
+		User userTemp = map.get(id);
+		userTemp.setdni(dni);
+		map.put(id, userTemp);
 	}
 }
