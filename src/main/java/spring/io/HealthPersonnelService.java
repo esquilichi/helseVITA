@@ -13,7 +13,7 @@ public class HealthPersonnelService {
     //private Map<Long, User> map = new ConcurrentHashMap<Long, User>();
     private Long lastId = (long) -1;
 
-    public User addHealthPersonnel(HealthPersonnel healthPersonnel) {
+    public HealthPersonnel addHealthPersonnel(HealthPersonnel healthPersonnel) {
         lastId++;
         healthPersonnel.setId(lastId);
         List <Patient> patients = new ArrayList<Patient>();
