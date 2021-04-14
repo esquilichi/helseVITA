@@ -87,6 +87,12 @@
 			<form action="/buscar" method="Get"
 				style="border-top-color: rgb(151, 214, 181);">
 				<div class="form-group">
+						<input type="radio" onclick="uncheck()" id="username">
+						<label> Nombre de usuario</label>
+						<input type="radio" onclick="uncheck()" id="email">
+						<label > Correo </label>
+						<input type="radio" onclick="uncheck()" id="dni">
+						<label >DNI</label><br><br>
 					<label>Nombre de usuario</label><input class="form-control item"
 						type="text" name="username">
 				</div>
