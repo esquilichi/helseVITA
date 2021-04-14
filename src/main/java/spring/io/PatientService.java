@@ -1,6 +1,7 @@
 package spring.io;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -26,13 +27,16 @@ public class PatientService {
         return false;
     }
 
-    public void editHealthPersonnel(Long id, HealthPersonnel healthPersonnel, Patient patient) {
+    public void editPatient(Long id, HealthPersonnel healthPersonnel, Patient patient) {
         if (this.exists(id)) {
             this.map.put(patient, healthPersonnel);
         }
     }
 
-    public void deleteUser(Long id) {
+
+
+
+    public void deletePatient(Long id) {
         for (Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
             if(entry.getKey().getId()==id){
                 Patient patient= (Patient) entry.getKey();
@@ -114,4 +118,9 @@ public class PatientService {
             }
         }
     }
+
+    public Patient returnPatient(Long id) {
+        return this.map.get(id);
+    }
+
 }

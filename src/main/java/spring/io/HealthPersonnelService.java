@@ -35,7 +35,7 @@ public class HealthPersonnelService {
         }
     }
 
-    public void deleteUser(Long id) {
+    public void deleteHealthPersonnel(Long id) {
         for (Map.Entry <HealthPersonnel, List<Patient>> entry : patientsList.entrySet()){
             if(entry.getKey().getId()==id){
                 HealthPersonnel healthPersonnel= (HealthPersonnel) entry.getKey();
@@ -113,4 +113,10 @@ public class HealthPersonnelService {
         }
 
     }
+
+    public HealthPersonnel returnHealthPersonnel(Long id) {
+        return this.map.get(id);
+    }
+
+
 }
