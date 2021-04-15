@@ -80,9 +80,7 @@ public class UserService {
 	}
 	
 	public User searchDni(String dni) {
-		Iterator<Entry<Long, User>> iterator = map.entrySet().iterator();
-		while (iterator.hasNext()) {
-			Entry<Long, User> entry = iterator.next();
+		for(Map.Entry<Long, User> entry: map.entrySet()){
 			if (entry.getValue().getdni().equals(dni)) {
 				return entry.getValue();
 			}

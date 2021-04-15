@@ -66,36 +66,23 @@ public class WebController {
 	ModelAndView search(@RequestParam Map<String,String> requestParams) {
 		String input=requestParams.get("input");
    		String text=requestParams.get("username");
-		
-		
-		if(input.equals("0")){
-			User userTemp = manager.searchUsername(text);
-			if(userTemp!=null){
-				
-				var mv = new ModelAndView("mostrar");
-				mv.addObject("user", userTemp);
-				return mv;
-			}
-				throw new UserNotFoundException(text);
-		}else if(input.equals("1")){
-			User userTemp = manager.searchEmail(text);
-			if(userTemp!=null){
-				var mv = new ModelAndView("mostrar");
-				mv.addObject("user", userTemp);
-				return mv;
-			}
-				throw new UserNotFoundException(text);
-		}else if(input.equals("2")){
-			User userTemp = manager.searchDni(text);
-			if(userTemp!=null){
-				var mv = new ModelAndView("mostrar");
-				mv.addObject("user", userTemp);
-				return mv;
-			}
-				throw new UserNotFoundException(text);
-		}
-		throw new IncorrectSearchParametersException();		
+		User userTemp = new User();
 
+		if(input.equals("0")){
+			userTemp = manager.searchUsername(text);
+		}else if(input.equals("1")){
+			userTemp = manager.searchEmail(text);
+		}else if(input.equals("2")){
+			userTemp = manager.searchDni(text);
+		}else{
+			throw new IncorrectSearchParametersException();	
+		}
+		if(userTemp!=null){
+			var mv = new ModelAndView("mostrar");
+			mv.addObject("user", userTemp);
+			return mv;
+		}
+		throw new UserNotFoundException(text);	
 	}
 
 
