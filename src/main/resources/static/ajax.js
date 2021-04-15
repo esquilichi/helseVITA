@@ -1,7 +1,7 @@
 
 
 function loadItemsSanitario(objeto){
-	var id = objeto.id - 1;
+	var id = objeto.id -1;
 	console.log("La id es " + id);
     var client = new XMLHttpRequest();
     client.responseType = "json";
@@ -16,7 +16,7 @@ function loadItemsSanitario(objeto){
 }
 
 function loadItemsPaciente(objeto){
-	var id = objeto.id - 1;
+	var id = objeto.id-1;
 	console.log("La id es " + id);
     var client = new XMLHttpRequest();
     client.responseType = "json";

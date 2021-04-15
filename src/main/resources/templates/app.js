@@ -1,44 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-{{> head}}
-
-<main class="page contact-us-page">
-	<section class="clean-block clean-form dark">
-		<div class="container">
-			<div class="block-heading">
-			<h2 style="color: #94d4b4;">Elige un sanitario</h2>
-					<p>Selecciona un sanitario para que se te asigne como tu médico</p>
-			</div>
-			<form style="border-top-color: rgb(151, 214, 181);">
-				<div class="form-group">
-					<label for="name">Listado de sanitarios disponibles</label>
-				</div>
-				<select id="list" class="form-control">
-				<optgroup label="Sanitarios">
-					{{#doctors}}
-					<option value="{{-index}}" selected href="#">{{.}}</option>
-					{{/doctors}}
-				</optgroup>
-				</select>
-					<button onclick="addDoc()" type="submit"
-						class="btn btn-primary btn-block"
-						style="border-color: rgba(255, 255, 255, 0.4); background: rgb(255, 193, 105); color: #000000;">Crear</button>
-				</div>
-			</form>
-		</div>
-	</section>
-</main>
-
-{{> footer}}
-
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-<script src="assets/js/smoothproducts.min.js"></script>
-<script src="assets/js/theme.js"></script>
-<script>document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function(){
 	loadItems();
 })
 
@@ -166,7 +126,4 @@ function search(){
 	}
 	
 
-  }*/</script>
-</body>
-
-</html>
+  }*/

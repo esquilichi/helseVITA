@@ -41,12 +41,6 @@ public class WebController {
 		return mv;
 	}
 
-	@RequestMapping("/viewUsers")
-	ModelAndView viewUsers() {
-		var mv = new ModelAndView("mostrarUsuarios");
-		mv.addObject("users", manager.returnAll());
-		return mv;
-	}
 
 	@RequestMapping("/viewPatients")
 	ModelAndView viewPatients() {
@@ -57,7 +51,7 @@ public class WebController {
 
 	@RequestMapping("/viewHealthPersonnel")
 	ModelAndView viewHealthPersonnel(){
-		var mv = new ModelAndView("mostrarUsuarios");
+		var mv = new ModelAndView("mostrarSanitario");
 		mv.addObject("users", healthPersonnelManager.returnAll());
 		return mv;
 	}
@@ -131,7 +125,14 @@ public class WebController {
 		throw new UserNotFoundException(text);	
 	}
 
-
+	@RequestMapping("/chooseDoctors")
+	public ModelAndView chooseDoc(){
+		
+		var mv = new ModelAndView("choose-doctor");
+		mv.addObject("doctors",healthPersonnelManager.returnAll());
+		
+		return mv;
+	} 
 	//Call to the exception
 	@ExceptionHandler(UserNotFoundException.class)
 	public ModelAndView exception(UserNotFoundException e){
