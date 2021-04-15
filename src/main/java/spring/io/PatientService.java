@@ -177,7 +177,7 @@ public class PatientService {
     public void addAppointment(Appointment appointment, Long id){
         for (Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
             if(entry.getKey().getId()==id){
-                entry.getKey().addAppointment(appointment.getHour(), appointment.getMonth(), appointment.getYear());
+                entry.getKey().addAppointment(appointment.getHour(), appointment.getDay(), appointment.getMonth(), appointment.getYear());
                 break;
             }
         }
@@ -226,6 +226,7 @@ public class PatientService {
                 for(Appointment a : entry.getKey().appointments){
                     if(a.getId()==id_appointment){
                         a.setHour(appointment.getHour());
+			a.setDay(appointment.getDay());
                         a.setMonth(appointment.getMonth());
                         a.setYear(appointment.getYear());
                     }
