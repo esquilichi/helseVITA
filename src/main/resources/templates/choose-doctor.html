@@ -14,17 +14,11 @@
 				<div class="form-group">
 					<label for="name">Listado de sanitarios disponibles</label>
 				</div>
-				<div class="dropdown show">
-					<button class="btn btn-primary dropdown-toggle"
-						aria-expanded="true" data-toggle="dropdown" type="button" style="border-color: rgba(255, 255, 255, 0.4); background: rgb(151,214,181); color: #000000;>Dropdown
-					</button>
-					<div class="dropdown-menu show">
-						{{#users}}
-						<a class="dropdown-item" id="{{-index}}" href="#" onclick=" ">{{.}}</a>
-						<a class="dropdown-item"id="{{-index}}" href="#" onclick=" ">{{.}}</a>
-						<a class="dropdown-item" id="{{-index}}" href="#" onclick=" ">{{.}}</a>
-						{{/users}}
-					</div>
+				<select class="form-control" style="border-color: rgba(255, 255, 255, 0.4); background: rgb(151,214,181); color: #000000;>
+				<optgroup label="Sanitarios">
+				<option value="{{-index}}" selected href="#" onclick=" ">{{.}}</option>
+				</optgroup>
+				</select>
 				</div>
 				<div class="form-group">
 					<button onclick=" " type="submit"
