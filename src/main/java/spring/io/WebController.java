@@ -39,13 +39,19 @@ public class WebController {
 		return mv;
 	}
 
-	@RequestMapping("/viewUsers")
-	ModelAndView viewUsers() {
-		var mv = new ModelAndView("mostrarUsuarios");
+	@RequestMapping("/viewPatients")
+	ModelAndView viewPatients() {
+		var mv = new ModelAndView("mostrarPacientes");
 		mv.addObject("users", patientManager.returnAll());
 		return mv;
 	}
 
+	@RequestMapping("/viewHealthPersonnel")
+	ModelAndView viewHealthPersonnel(){
+		var mv = new ModelAndView("mostrarUsuarios");
+		mv.addObject("users", healthPersonnelManager.returnAll());
+		return mv;
+	}
 
 	@GetMapping("/buscar")
 	ModelAndView search(@RequestParam String username) {

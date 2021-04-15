@@ -46,7 +46,7 @@ public class HealthPersonnelRestControl {
 
     //DELETE USER
 
-    @DeleteMapping("/api/healthPersonnel{id}")
+    @DeleteMapping("/api/healthPersonnel/{id}")
     public ResponseEntity<HealthPersonnel> deleteHealthPatient(@PathVariable Long id) {
 
         if (healthPersonnelManager.exists(id)) {

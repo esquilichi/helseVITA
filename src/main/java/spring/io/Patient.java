@@ -1,7 +1,6 @@
 package spring.io;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Patient extends User{
