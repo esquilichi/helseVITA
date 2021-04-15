@@ -1,9 +1,9 @@
 package spring.io;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
@@ -118,7 +118,12 @@ public class HealthPersonnelService {
     }
 
     public HealthPersonnel returnHealthPersonnel(Long id) {
-        return this.map.get(id);
+        for (Map.Entry <HealthPersonnel, List<Patient>> entry : patientsList.entrySet()){
+            if(entry.getKey().getId()==id){
+                return entry.getKey();
+            }
+        }
+        return null;    
     }
 
 
