@@ -66,52 +66,38 @@ public class WebController {
 	ModelAndView search(@RequestParam Map<String,String> requestParams) {
 		String input=requestParams.get("input");
    		String text=requestParams.get("username");
-
+		
+		
 		if(input.equals("0")){
-			return searchUsername(text);
+			User userTemp = manager.searchUsername(text);
+			if(userTemp!=null){
+				
+				var mv = new ModelAndView("mostrar");
+				mv.addObject("user", userTemp);
+				return mv;
+			}
+				throw new UserNotFoundException(text);
 		}else if(input.equals("1")){
-			return searchEmail(text);
-		}else if(input.equals("3")){
-			return searchDni(text);
+			User userTemp = manager.searchEmail(text);
+			if(userTemp!=null){
+				var mv = new ModelAndView("mostrar");
+				mv.addObject("user", userTemp);
+				return mv;
+			}
+				throw new UserNotFoundException(text);
+		}else if(input.equals("2")){
+			User userTemp = manager.searchDni(text);
+			if(userTemp!=null){
+				var mv = new ModelAndView("mostrar");
+				mv.addObject("user", userTemp);
+				return mv;
+			}
+				throw new UserNotFoundException(text);
 		}
 		throw new IncorrectSearchParametersException();		
 
 	}
 
-	
-	ModelAndView searchUsername(String username) {
-		User userTemp = manager.searchUsername(username);
-		if(userTemp!=null){
-			var mv = new ModelAndView("mostrar");
-			mv.addObject("user", userTemp);
-			return mv;
-		}else{
-			throw new UserNotFoundException(username);
-		}
-	}
-
-	ModelAndView searchEmail(String email) {
-		User userTemp = manager.searchEmail(email);
-		if(userTemp!=null){
-			var mv = new ModelAndView("mostrar");
-			mv.addObject("user", userTemp);
-			return mv;
-		}else{
-			throw new UserNotFoundException(email);
-		}
-	}
-
-
-	ModelAndView searchDni(String dni) {
-		User userTemp = manager.searchDni(dni);
-		if(userTemp!=null){
-			var mv = new ModelAndView("mostrar");
-			mv.addObject("user", userTemp);
-			return mv;
-		}else{
-			throw new UserNotFoundException(dni);
-		}
-	}
 
 	//Call to the exception
 	@ExceptionHandler(UserNotFoundException.class)
@@ -120,5 +106,10 @@ public class WebController {
 		mv.addObject("username",e.getUsername());
 		return mv;
 	}
-	
+
+	@ExceptionHandler(IncorrectSearchParametersException.class)
+	public ModelAndView exception2(IncorrectSearchParametersException e){
+		var mv = new ModelAndView("incorrect-parameters");
+		return mv;
+	}
 }
