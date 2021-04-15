@@ -85,6 +85,52 @@ public class WebController {
 		throw new UserNotFoundException(text);	
 	}
 
+	@GetMapping("/searchPatient")
+	ModelAndView searchPatient(@RequestParam Map<String,String> requestParams) {
+		String input=requestParams.get("input");
+   		String text=requestParams.get("username");
+		Patient userTemp = new Patient();
+
+		if(input.equals("0")){
+			userTemp = patientManager.searchUsername(text);
+		}else if(input.equals("1")){
+			userTemp = patientManager.searchEmail(text);
+		}else if(input.equals("2")){
+			userTemp = patientManager.searchDni(text);
+		}else{
+			throw new IncorrectSearchParametersException();	
+		}
+		if(userTemp!=null){
+			var mv = new ModelAndView("mostrar");
+			mv.addObject("user", userTemp);
+			return mv;
+		}
+		throw new UserNotFoundException(text);	
+	}
+
+	@GetMapping("/searchHealthPersonnel")
+	ModelAndView searchHealthPersonnel(@RequestParam Map<String,String> requestParams) {
+		String input=requestParams.get("input");
+   		String text=requestParams.get("username");
+		HealthPersonnel userTemp = new HealthPersonnel();
+
+		if(input.equals("0")){
+			userTemp = healthPersonnelManager.searchUsername(text);
+		}else if(input.equals("1")){
+			userTemp = healthPersonnelManager.searchEmail(text);
+		}else if(input.equals("2")){
+			userTemp = healthPersonnelManager.searchDni(text);
+		}else{
+			throw new IncorrectSearchParametersException();	
+		}
+		if(userTemp!=null){
+			var mv = new ModelAndView("mostrar");
+			mv.addObject("user", userTemp);
+			return mv;
+		}
+		throw new UserNotFoundException(text);	
+	}
+
 
 	//Call to the exception
 	@ExceptionHandler(UserNotFoundException.class)

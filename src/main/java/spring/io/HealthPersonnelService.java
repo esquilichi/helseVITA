@@ -61,6 +61,33 @@ public class HealthPersonnelService {
         return null;
     }
 
+    public HealthPersonnel searchUsername(String username) {
+		for(Map.Entry<HealthPersonnel, List <Patient>> entry: patientsList.entrySet()){
+			if (entry.getKey().getUsername().equals(username)) {
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
+
+	public HealthPersonnel searchEmail(String email) {
+		for(Map.Entry<HealthPersonnel, List <Patient>> entry: patientsList.entrySet()){
+			if (entry.getKey().getEmail().equals(email)) {
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
+	
+	public HealthPersonnel searchDni(String dni) {
+		for(Map.Entry<HealthPersonnel, List <Patient>> entry: patientsList.entrySet()){
+			if (entry.getKey().getdni().equals(dni)) {
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
+
     public void updateUsername(String username, long id) {
         
         for (Map.Entry <HealthPersonnel, List<Patient>> entry : patientsList.entrySet()){

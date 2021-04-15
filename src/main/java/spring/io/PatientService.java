@@ -130,6 +130,33 @@ public class PatientService {
         return null;
     }
 
+    public Patient searchUsername(String username) {
+		for(Map.Entry<Patient, HealthPersonnel> entry: map.entrySet()){
+			if (entry.getKey().getUsername().equals(username)) {
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
+
+	public Patient searchEmail(String email) {
+		for(Map.Entry<Patient, HealthPersonnel> entry: map.entrySet()){
+			if (entry.getKey().getEmail().equals(email)) {
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
+	
+	public Patient searchDni(String dni) {
+		for(Map.Entry<Patient, HealthPersonnel> entry: map.entrySet()){
+			if (entry.getKey().getdni().equals(dni)) {
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
+
     public List<Appointment> returnAllAppointments(long id){
         Patient temp = null;
         for (Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
@@ -206,5 +233,7 @@ public class PatientService {
             }        
         }
     }
+
+    
 
 }
