@@ -7,6 +7,7 @@ public class Patient extends User{
 
     List<Appointment> appointments = new ArrayList<>();
 
+
     Patient() {}
 
     public Patient(String username, String password, String correo, String dni, Long id) {
