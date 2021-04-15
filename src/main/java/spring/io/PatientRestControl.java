@@ -1,6 +1,8 @@
 package spring.io;
 
 import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +30,8 @@ public class PatientRestControl {
     @PostMapping("/api/patients")
     @ResponseStatus(HttpStatus.CREATED)
     public Patient newPatient(@RequestBody Patient patient) {
-        return patientManager.addPatient(patient, null);
+        HealthPersonnel temp = new HealthPersonnel();
+        return patientManager.addPatient(patient, temp);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -104,5 +107,16 @@ public class PatientRestControl {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @PostMapping("/api/patients/{id}/appointments")
+    @ResponseStatus(HttpStatus.OK)
+    public Appointment newAppointment(@RequestBody Appointment appointment, @PathVariable long id) {
+        Patient temp = this.patientManager.returnPatient(id);
+        return temp.addAppointment(appointment.getHour(), appointment.getMonth(), appointment.getYear());
+    }
 
+    @GetMapping("/api/patients/{id}/appointments")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Appointment> returnAllAppoinments(@PathVariable long id){
+        return patientManager.returnAllAppointments(id);
+    }
 }

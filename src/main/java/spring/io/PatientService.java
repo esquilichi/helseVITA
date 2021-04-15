@@ -1,6 +1,7 @@
 package spring.io;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
@@ -129,4 +130,19 @@ public class PatientService {
         return null;
     }
 
+    public List<Appointment> returnAllAppointments(long id){
+        Patient temp = null;
+        for (Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                temp = entry.getKey();
+                break;
+            }
+        }
+
+        if (temp != null){
+            return temp.returnAllAppoinments();
+        } else {
+            return null;
+        }
+    }
 }

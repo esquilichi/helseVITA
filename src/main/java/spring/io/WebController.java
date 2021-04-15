@@ -18,6 +18,12 @@ public class WebController {
 	@Autowired
 	UserService manager;
 
+	@Autowired
+	PatientService patientManager;
+
+	@Autowired
+	HealthPersonnelService healthPersonnelManager;
+
 	@RequestMapping("/")
 	ModelAndView index() {
 		var mv = new ModelAndView("index");
@@ -36,7 +42,7 @@ public class WebController {
 	@RequestMapping("/viewUsers")
 	ModelAndView viewUsers() {
 		var mv = new ModelAndView("mostrarUsuarios");
-		mv.addObject("users", manager.returnAll());
+		mv.addObject("users", patientManager.returnAll());
 		return mv;
 	}
 

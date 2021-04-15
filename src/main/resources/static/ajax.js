@@ -9,7 +9,7 @@ function loadItems(objeto){
     	addItemsToPage(this.response);    	
     });
     
-    client.open("GET", "/api/" + id);
+    client.open("GET", "/api/patients/" + id);
     
     client.send();
 		
