@@ -1,10 +1,13 @@
 package spring.io;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PatientService {
 
     private Map <Patient, HealthPersonnel> map = new ConcurrentHashMap< Patient, HealthPersonnel>();
@@ -12,7 +15,7 @@ public class PatientService {
     //private Map<Long, User> map = new ConcurrentHashMap<Long, User>();
     private Long lastId = (long) -1;
 
-    public User addPatient(Patient patient, HealthPersonnel healthPersonnel) {
+    public Patient addPatient(Patient patient, HealthPersonnel healthPersonnel) {
         lastId++;
         patient.setId(lastId);
         this.map.put(patient, healthPersonnel);

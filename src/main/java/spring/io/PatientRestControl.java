@@ -1,0 +1,108 @@
+package spring.io;
+
+import java.util.Collection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+
+//This is the class that manages the API rest
+@RestController
+public class PatientRestControl {
+
+
+    @Autowired
+    PatientService patientManager;
+
+
+    //ADD USER FOR PATIENT
+    @PostMapping("/api/patients")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Patient newPatient(@RequestBody Patient patient) {
+        return patientManager.addPatient(patient, null);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //FIND USER FOR PATIENT AND HEALTH SERVICE
+
+    @PutMapping("/api/patients/{id}")
+    public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patient) {
+
+        if (patientManager.exists(id)) {
+            patientManager.editPatient(id, null, patient);
+            return new ResponseEntity<>(patient, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //DELETE USER
+
+    @DeleteMapping("/api/patients/{id}")
+    public ResponseEntity<Patient> deletePatient(@PathVariable Long id) {
+
+        if (patientManager.exists(id)) {
+            patientManager.deletePatient(id);
+
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //GET ONE SPECIFIED USER
+
+    @GetMapping("/api/patients/{id}")
+    public ResponseEntity<Patient> getPatient(@PathVariable Long id) {
+        if (patientManager.exists(id)) {
+            Patient patientTemp = patientManager.returnPatient(id);
+            return new ResponseEntity<>(patientTemp, HttpStatus.OK);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    //GET ALL USERS
+
+    @GetMapping("/api/patients")
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<Patient> advertisements() {
+        return patientManager.returnAll();
+    }
+
+
+    //UPDATE ONLY SPECIFIED FIELDS
+    @PatchMapping("/api/patients/{id}")
+    public ResponseEntity<Patient> patch(@RequestBody Patient patient, @PathVariable Long id) {
+        if (patientManager.exists(id)) {
+            if (patient.getUsername() != null)
+                patientManager.updateUsername(patient.getUsername(), id);
+            if (patient.getPassword() != null)
+                patientManager.updatePassword(patient.getPassword(), id);
+            if (patient.getEmail() != null)
+                patientManager.updateEmail(patient.getEmail(), id);
+            if (patient.getdni() != null)
+                patientManager.updateDNI(patient.getdni(), id);
+
+            Patient patientTemp = patientManager.returnPatient(id);
+
+            return new ResponseEntity<>(patientTemp, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+}
