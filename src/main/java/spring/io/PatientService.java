@@ -145,4 +145,66 @@ public class PatientService {
             return null;
         }
     }
+
+
+    public void addAppointment(Appointment appointment, Long id){
+        for (Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                entry.getKey().addAppointment(appointment.getHour(), appointment.getMonth(), appointment.getYear());
+                break;
+            }
+        }
+    }
+
+    public void deleteAppointment(Long id, Long id_appointment) {
+        for (Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                for(Appointment a : entry.getKey().appointments){
+                    if(a.getId()==id_appointment){
+                        entry.getKey().appointments.remove(a);
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean appointmentExists(Long id, Long id_appointment){
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                for(Appointment a : entry.getKey().appointments){
+                    if(a.getId()==id_appointment){
+                        return true;
+                    }
+                } 
+            }        
+        }
+        return false;
+    }
+
+    public Appointment returnAppointment(Long id, Long id_appointment){
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                for(Appointment a : entry.getKey().appointments){
+                    if(a.getId()==id_appointment){
+                        return a;
+                    }
+                } 
+            }        
+        }
+        return null;
+    }
+    public void editAppointment(Long id, Appointment appointment, Long id_appointment){
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                for(Appointment a : entry.getKey().appointments){
+                    if(a.getId()==id_appointment){
+                        a.setHour(appointment.getHour());
+                        a.setMonth(appointment.getMonth());
+                        a.setYear(appointment.getYear());
+                    }
+                } 
+            }        
+        }
+    }
+
 }

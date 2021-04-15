@@ -43,9 +43,9 @@ public class PatientRestControl {
         if (patientManager.exists(id)) {
             patientManager.editPatient(id, null, patient);
             return new ResponseEntity<>(patient, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
     }
 
 
@@ -117,6 +117,45 @@ public class PatientRestControl {
     @GetMapping("/api/patients/{id}/appointments")
     @ResponseStatus(HttpStatus.OK)
     public List<Appointment> returnAllAppoinments(@PathVariable long id){
-        return patientManager.returnAllAppointments(id);
+        if(patientManager.exists(id)){
+            return patientManager.returnAllAppointments(id);
+        }
+        return null;
+    }
+
+    @GetMapping("/api/patients/{id}/appointments/{id_appointment}")
+    @ResponseStatus(HttpStatus.OK)
+    public Appointment returnAppoinment(@PathVariable long id,  @PathVariable Long id_appointment){
+        if(patientManager.exists(id)){
+            if(patientManager.appointmentExists(id, id_appointment)){
+                return patientManager.returnAppointment(id, id_appointment);
+            }
+        }
+        return null;
+    }
+
+    @PutMapping("/api/patients/{id}/appointments/{id_appointment}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity <Appointment> updateAppointment(@PathVariable Long id, @RequestBody Appointment appointment,  @PathVariable Long id_appointment){
+        if(patientManager.exists(id)){
+            if(patientManager.appointmentExists(id, id_appointment)){
+                patientManager.editAppointment(id, appointment, id_appointment);
+                return new ResponseEntity<>(appointment, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    
+    }
+
+    @DeleteMapping("/api/patients/{id}/appointments/{id_appointment}")
+    public ResponseEntity<Appointment> deleteAppointment(@PathVariable Long id, @PathVariable Long id_appointment) {
+
+        if (patientManager.exists(id)) {
+            if(patientManager.appointmentExists(id, id_appointment)){
+                patientManager.deleteAppointment(id, id_appointment);
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+        } 
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
