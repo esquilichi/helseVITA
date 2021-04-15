@@ -92,6 +92,8 @@ public class HealthPersonnelRestControl {
                 healthPersonnelManager.updateEmail(healthPersonnel.getEmail(), id);
             if (healthPersonnel.getdni() != null)
                 healthPersonnelManager.updateDNI(healthPersonnel.getdni(), id);
+            if (healthPersonnel.getRole() != null)
+                healthPersonnelManager.updateRole(healthPersonnel.getRole(), id);
 
             HealthPersonnel healthPersonnelTemp = healthPersonnelManager.returnHealthPersonnel(id);
 

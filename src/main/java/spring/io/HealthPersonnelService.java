@@ -98,6 +98,15 @@ public class HealthPersonnelService {
         }
     }
 
+    public void updateRole(String role, Long id) {
+        for (Map.Entry <HealthPersonnel, List<Patient>> entry : patientsList.entrySet()){
+            if(entry.getKey().getId()==id){
+                entry.getKey().setRole(role);
+                break;
+            }
+        }
+    }
+
     /*public Centro getCentro() {
         return this.centro;
     }
