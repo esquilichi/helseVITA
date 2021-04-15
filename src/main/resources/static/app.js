@@ -112,3 +112,26 @@ function addItemsToPage(response){
     	li.appendChild(text);  		
 	}	*/
 }
+
+/* 
+function search(){
+	alert("hola");
+	var checkbox1=document.getElementById("Username");
+	var checkbox2=document.getElementById("Email");
+	var checkbox3=document.getElementById("Dni");
+	alert("1");
+	if (checkbox1.checked){
+		window.location.href("/searchUsername");
+		client.open("GET", "/searchUsername?input=0&username=" + text);
+	}
+	else if (checkbox2.checked){
+		window.location.href("/searchEmail");
+		client.open("GET", "/searchEmail?input=1&email=" + text);
+	}
+	else if (checkbox3.checked){
+		window.location.href("/searchDni");
+		client.open("GET", "/searchDni?input=2&dni=" + text);
+	}
+	
+
+  }*/
