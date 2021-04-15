@@ -111,7 +111,7 @@ public class PatientRestControl {
     @ResponseStatus(HttpStatus.OK)
     public Appointment newAppointment(@RequestBody Appointment appointment, @PathVariable long id) {
         Patient temp = this.patientManager.returnPatient(id);
-        return temp.addAppointment(appointment.getHour(), appointment.getMonth(), appointment.getYear());
+        return temp.addAppointment(appointment.getHour(),appointment.getDay(), appointment.getMonth(), appointment.getYear());
     }
 
     @GetMapping("/api/patients/{id}/appointments")
