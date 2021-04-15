@@ -14,8 +14,8 @@ public class Patient extends User{
         super(username, password, correo, dni, id);
     }
 
-    public Appointment addAppointment(int hour, int month,int year){
-        Appointment temp  = new Appointment(hour, month, year);
+    public Appointment addAppointment(int hour, int day, int month,int year){
+        Appointment temp  = new Appointment(hour, day, month, year);
         this.appointments.add(temp);
         return temp;
     }
