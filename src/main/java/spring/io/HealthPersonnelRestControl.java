@@ -1,9 +1,5 @@
 package spring.io;
-
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,9 +34,8 @@ public class HealthPersonnelRestControl {
 
     @PutMapping("/api/healthPersonnel/{id}")
     public ResponseEntity<HealthPersonnel> updateHealthPersonnel(@PathVariable Long id, @RequestBody HealthPersonnel healthPersonnel) {
-        List <Patient> temp = new ArrayList<Patient>();
         if (healthPersonnelManager.exists(id)) {
-            healthPersonnelManager.editHealthPersonnel(id, healthPersonnel, temp);
+            healthPersonnelManager.editHealthPersonnel(id, healthPersonnel);
             return new ResponseEntity<>(healthPersonnel, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

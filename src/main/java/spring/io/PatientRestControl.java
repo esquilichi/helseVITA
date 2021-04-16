@@ -39,9 +39,8 @@ public class PatientRestControl {
 
     @PutMapping("/api/patients/{id}")
     public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patient) {
-        HealthPersonnel temp = new HealthPersonnel();
         if (patientManager.exists(id)) {
-            patientManager.editPatient(id, temp, patient);
+            patientManager.editPatient(id, patient);
             return new ResponseEntity<>(patient, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -66,7 +65,6 @@ public class PatientRestControl {
 
 
 
-    ////////////////////////////////////////////////////////////////////////////////////
     //GET ONE SPECIFIED USER
 
     @GetMapping("/api/patients/{id}")

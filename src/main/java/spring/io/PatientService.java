@@ -29,10 +29,22 @@ public class PatientService {
         return false;
     }
 
-    public void editPatient(Long id, HealthPersonnel healthPersonnel, Patient patient) {
-        if (this.exists(id)) {
-            this.map.put(patient, healthPersonnel);
+    public void editPatient(Long id, Patient patient) {
+        for (Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                entry.getKey().setEmail(patient.getEmail());
+                entry.getKey().setPassword(patient.getPassword());
+                entry.getKey().setUsername(patient.getUsername());
+                entry.getKey().setdni(patient.getdni());
+            }
         }
+        /*if(this.exists(id)){
+             var temp = this.map.get(patient);
+            this.map.remove(patient);
+            this.map.put(patient, temp);
+
+        }*/
+       
     }
 
 

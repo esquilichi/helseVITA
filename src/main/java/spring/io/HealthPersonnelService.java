@@ -32,9 +32,14 @@ public class HealthPersonnelService {
         return false;
     }
 
-    public void editHealthPersonnel(Long id, HealthPersonnel healthPersonnel, List<Patient> patients) {
-        if (this.exists(id)) {
-            this.patientsList.put(healthPersonnel, patients);
+    public void editHealthPersonnel(Long id, HealthPersonnel healthPersonnel) {
+        for (Map.Entry <HealthPersonnel, List<Patient>> entry : patientsList.entrySet()){
+            if(entry.getKey().getId()==id){
+                entry.getKey().setEmail(healthPersonnel.getEmail());
+                entry.getKey().setPassword(healthPersonnel.getPassword());
+                entry.getKey().setUsername(healthPersonnel.getUsername());
+                entry.getKey().setdni(healthPersonnel.getdni());
+            }
         }
     }
 
