@@ -42,7 +42,22 @@ public class UserService {
 		return this.map.values();
 	}
 
+
+	
 	public User search(String username) {
+		Iterator<Entry<Long, User>> iterator = map.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<Long, User> entry = iterator.next();
+			if (entry.getValue().getUsername().equals(username)) {
+				//System.out.println(entry.getValue().getUsername());
+
+				return entry.getValue();
+			}
+		}
+		return null;
+	}
+	
+	public User searchUsername(String username) {
 		Iterator<Entry<Long, User>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<Long, User> entry = iterator.next();
@@ -53,6 +68,26 @@ public class UserService {
 		return null;
 	}
 
+	public User searchEmail(String email) {
+		Iterator<Entry<Long, User>> iterator = map.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<Long, User> entry = iterator.next();
+			if (entry.getValue().getEmail().equals(email)) {
+				return entry.getValue();
+			}
+		}
+		return null;
+	}
+	
+	public User searchDni(String dni) {
+		for(Map.Entry<Long, User> entry: map.entrySet()){
+			if (entry.getValue().getdni().equals(dni)) {
+				return entry.getValue();
+			}
+		}
+		return null;
+	}
+	
 	public void updateUser(String user, long id) {
 		User userTemp = map.get(id);
 		userTemp.setUsername(user);
@@ -76,4 +111,5 @@ public class UserService {
 		userTemp.setdni(dni);
 		map.put(id, userTemp);
 	}
+
 }
