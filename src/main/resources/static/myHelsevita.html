@@ -70,60 +70,27 @@
 							Frecuentes</a>
 					</div>
 				</div>
-				<button onclick="location.href='login.html'" class="btn btn-primary"
+				<button onclick="location.href='myHelsevita.html'" class="btn btn-primary"
 					type="button"
 					style="margin: 30px; background: rgb(255, 191, 105); font-size: 20px; border-color: rgba(255, 255, 255, 0.4); color: #000000;">Mi
 					helseVITA</button>
 			</div>
 	</nav>
-	<main class="page login-page">
+	<main class="page select-page">
 		<section class="clean-block clean-form dark">
-			<div class="container">
-				<div class="block-heading">
-					<h2 style="color: #94d4b4;">Nuevo Usuario</h2>
-					<p>Introduce los siguientes datos para crear un usuario nuevo</p>
-				</div>
-				<form action="/" style="border-top-color: rgb(151, 214, 181);">
-					<div class="form-group">
-						<label for="Username">Nombre de usuario</label><input type="text"
-							class="form-control" id="username"
-							placeholder="Nombre de usuario"> <small id="Privacy"
-							class="form-text text-muted">Tranquilo, tus datos estan
-							seguros con nosotros ;)</small>
-					</div>
-					<div class="form-group">
-						<label for="password">Contraseña</label><input type="password"
-							class="form-control" id="password" autocomplete="on" placeholder="Contraseña">
-					</div>
-					<div class="form-group">
-						<label for="email">Email</label><input type="text"
-							class="form-control" id="email"
-							placeholder="Introduce tu direccion de correo">
-					</div>
-					<div class="form-group">
-						<label for="dni">DNI</label><input type="text"
-							class="form-control" id="dni" placeholder="Introduce tu DNI">
-					</div>
-					<button onclick="createItem()" type="submit"
-						class="btn btn-primary btn-block"
-						style="border-color: rgba(255, 255, 255, 0.4); background: rgb(255, 193, 105); color: #000000;">Crear</button>
+		
+			<div class="block-heading"><br><br></div>
 
-				</form>
-			</div>
-			<div class="block-heading">
-				<h2 style="color: #94d4b4;">Buscar Usuario</h2>
-				<p>Introduce los siguientes datos para buscar un usuario
-					existente</p>
-			</div>
 
-			<form action="/buscar" method="Get"
-				style="border-top-color: rgb(151, 214, 181);">
-				<div class="form-group">
-					<label>Nombre de usuario</label><input class="form-control item"
-						type="text" name="username">
-				</div>
-				<button class="btn btn-primary btn-block" type="submit"
-					style="border-color: rgba(255, 255, 255, 0.4); background: rgb(255, 193, 105); color: #000000;">Buscar</button>
+			<form style="border-top-color: rgb(151, 214, 181);">
+
+				<button onclick="location.href='areaPaciente.html'" class="btn btn-primary"
+				type="button"
+				style="height: 110px ;width:205px; background: rgb(255, 191, 105); font-size: 20px; border-color: rgba(255, 255, 255, 0.4); color: #000000;">Área Paciente</button>
+
+				<button onclick="location.href='areaSanitario.html'" class="btn btn-primary"
+				type="button"
+				style="height: 110px; width:205px; background: rgb(255, 191, 105); font-size: 20px; border-color: rgba(255, 255, 255, 0.4); color: #000000;">Área Sanitario</button>
 			</form>
 
 		</section>
