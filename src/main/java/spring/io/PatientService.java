@@ -318,7 +318,7 @@ public class PatientService {
         }
     }
 
-    public void addDoc(Long id,HealthPersonnel h){
+    public HealthPersonnel addDoc(Long id,HealthPersonnel h){
         for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
             if(entry.getKey().getId()==id){
                 entry.getValue().setEmail(h.getEmail());
@@ -326,8 +326,10 @@ public class PatientService {
                 entry.getValue().setUsername(h.getUsername());
                 entry.getValue().setRole(h.getRole());
                 entry.getValue().setdni(h.getdni());
+                return entry.getValue();
             }
         }
+        return null;
     }
 
 }

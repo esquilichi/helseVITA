@@ -106,30 +106,37 @@ public class PatientRestControl {
         }
     }
     @PostMapping("/api/patients/{id}/appointments")
-    @ResponseStatus(HttpStatus.OK)
-    public Appointment newAppointment(@RequestBody Appointment appointment, @PathVariable long id) {
+    public ResponseEntity<Appointment> newAppointment(@RequestBody Appointment appointment, @PathVariable long id) {
         Patient temp = this.patientManager.returnPatient(id);
-        return temp.addAppointment(appointment.getHour(),appointment.getDay(), appointment.getMonth(), appointment.getYear());
+        if (temp != null){
+            var a = temp.addAppointment(appointment.getHour(),appointment.getDay(), appointment.getMonth(), appointment.getYear());
+            return new ResponseEntity<>(a, HttpStatus.OK);
+        }
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/api/patients/{id}/appointments")
     @ResponseStatus(HttpStatus.OK)
-    public List<Appointment> returnAllAppoinments(@PathVariable long id){
+    public ResponseEntity<List<Appointment>> returnAllAppoinments(@PathVariable long id){
         if(patientManager.exists(id)){
-            return patientManager.returnAllAppointments(id);
+            return new ResponseEntity<>(patientManager.returnAllAppointments(id),HttpStatus.OK);
         }
-        return null;
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/api/patients/{id}/appointments/{id_appointment}")
     @ResponseStatus(HttpStatus.OK)
-    public Appointment returnAppoinment(@PathVariable long id,  @PathVariable Long id_appointment){
+    public ResponseEntity<Appointment> returnAppoinment(@PathVariable long id,  @PathVariable Long id_appointment){
         if(patientManager.exists(id)){
             if(patientManager.appointmentExists(id, id_appointment)){
-                return patientManager.returnAppointment(id, id_appointment);
+                var a = patientManager.returnAppointment(id, id_appointment);
+                return new ResponseEntity<>(a,HttpStatus.OK);
             }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return null;
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        
     }
 
     @PutMapping("/api/patients/{id}/appointments/{id_appointment}")
@@ -159,8 +166,8 @@ public class PatientRestControl {
 
     @PostMapping("/api/patients/{id}/doctors/")
     public ResponseEntity<HealthPersonnel> addDoc(@PathVariable Long id, @RequestBody HealthPersonnel h){
-        patientManager.addDoc(id,h);
-        return new ResponseEntity<>(HttpStatus.OK);
+        var temp = patientManager.addDoc(id,h);
+        return new ResponseEntity<>(temp,HttpStatus.OK);
     }
     @GetMapping("/api/patients/{id}/doctors/")
     public ResponseEntity<HealthPersonnel> getDoc(@PathVariable Long id){
