@@ -23,10 +23,14 @@
                <br>{{#users}}
 		<li class="list-group-item"><a id="{{-index}}" href="#"
 		onclick="loadItemsPaciente(this)">{{.}}</a></li>
+
 		<div style="text-align: center;"">
-			<button onclick="appointment.html" type="button"
-			style="background: rgb(151, 214, 181); color: #000000; border-color: rgba(255, 255, 255, 0.4);"
-			class="btn btn-primary btn-sm ml-auto">Nueva cita</button>
+           <section>
+               <button onclick="appointment.html" type="button"
+                       style="background: rgb(151, 214, 181); color: #000000; border-color: rgba(255, 255, 255, 0.4);"
+                       class="btn btn-primary btn-sm ml-auto">Nueva cita</button>
+           </section>
+
 
 			<br> {{/users}}
 		</div>
