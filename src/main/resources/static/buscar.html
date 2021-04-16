@@ -63,7 +63,7 @@
 								fill="currentColor"></path>
                         </svg></a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="search.html">Buscador de
+						<a class="dropdown-item" href="search-center.html">Buscador de
 							Centros</a><a class="dropdown-item" href="work-with-us.html">Trabaja
 							con Nosotros</a><a class="dropdown-item" href="faq.html">Preguntas
 							Frecuentes</a>
@@ -84,10 +84,16 @@
 					existente</p>
 			</div>
 
-			<form action="/buscar" method="Get"
+			<form action="/search" method="GET"
 				style="border-top-color: rgb(151, 214, 181);">
 				<div class="form-group">
-					<label>Nombre de usuario</label><input class="form-control item"
+					<input type="radio" name="input" value="0">
+						<label> Nombre de usuario</label>
+					<input type="radio" name="input" value="1">
+						<label > Correo </label>
+					<input type="radio" name="input" value="2">
+						<label >DNI</label><br><br>
+					<input class="form-control item"
 						type="text" name="username">
 				</div>
 				<button class="btn btn-primary btn-block" type="submit"

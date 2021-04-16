@@ -17,7 +17,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
 <link rel="stylesheet" href="assets/css/Map-Clean.css">
 <link rel="stylesheet" href="assets/css/smoothproducts.css">
-<script src='app.js'></script>
 </head>
 
 <body>
@@ -64,7 +63,7 @@
 								fill="currentColor"></path>
                         </svg></a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="search.html">Buscador de
+						<a class="dropdown-item" href="search-center.html">Buscador de
 							Centros</a><a class="dropdown-item" href="work-with-us.html">Trabaja
 							con Nosotros</a><a class="dropdown-item" href="faq.html">Preguntas
 							Frecuentes</a>
@@ -79,38 +78,28 @@
 	<main class="page login-page">
 		<section class="clean-block clean-form dark">
 			<div class="container">
-				<div class="block-heading">
-					<h2 style="color: #94d4b4;">Nuevo Usuario</h2>
-					<p>Introduce los siguientes datos para crear un usuario nuevo</p>
-				</div>
-				<form style="border-top-color: rgb(151, 214, 181);">
-					<div class="form-group">
-						<label for="Username">Nombre de usuario</label><input type="text"
-							class="form-control" id="username"
-							placeholder="Nombre de usuario"> <small id="Privacy"
-							class="form-text text-muted">Tranquilo, tus datos estan
-							seguros con nosotros ;)</small>
-					</div>
-					<div class="form-group">
-						<label for="password">Contraseña</label><input type="password"
-							class="form-control" id="password" placeholder="Contraseña">
-					</div>
-					<div class="form-group">
-						<label for="email">Email</label><input type="text"
-							class="form-control" id="email"
-							placeholder="Introduce tu direccion de correo">
-					</div>
-					<div class="form-group">
-						<label for="dni">DNI</label><input type="text"
-							class="form-control" id="dni" placeholder="Introduce tu DNI">
-					</div>
-					<button onclick="createItem()" type="submit"
-						class="btn btn-primary btn-block"
-						style="border-color: rgba(255, 255, 255, 0.4); background: rgb(255, 193, 105); color: #000000;">Crear</button>
-
-				</form>
+			<div class="block-heading">
+				<h2 style="color: #94d4b4;">Buscar Usuario</h2>
+				<p>Introduce los siguientes datos para buscar un usuario
+					existente</p>
 			</div>
-	
+
+			<form action="/searchHealthPersonnel" method="GET"
+				style="border-top-color: rgb(151, 214, 181);">
+				<div class="form-group">
+					<input type="radio" name="input" value="0">
+						<label> Nombre de usuario</label>
+					<input type="radio" name="input" value="1">
+						<label > Correo </label>
+					<input type="radio" name="input" value="2">
+						<label >DNI</label><br><br>
+					<input class="form-control item"
+						type="text" name="username">
+				</div>
+				<button class="btn btn-primary btn-block" type="submit"
+					style="border-color: rgba(255, 255, 255, 0.4); background: rgb(255, 193, 105); color: #000000;">Buscar</button>
+			</form>
+
 		</section>
 		<footer class="footer-basic">
 			<div class="social">

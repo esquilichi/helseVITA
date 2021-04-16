@@ -22,25 +22,31 @@ public class RestControl {
 	@Autowired
 	UserService manager;
 
+
+	//ADD USER FOR PATIENT AND HEALTH PERSONNEL
 	@PostMapping("/api")
 	@ResponseStatus(HttpStatus.CREATED)
 	public User newUser(@RequestBody User user) {
 		return manager.addUser(user);
 	}
 
+	//FIND USER FOR PATIENT AND HEALTH SERVICE
+
 	@PutMapping("/api/{id}")
-	public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+	public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patient) {
 
 		if (manager.exists(id)) {
-			manager.editUser(id, user);
-			return new ResponseEntity<>(user, HttpStatus.OK);
+			manager.editUser(id, patient);
+			return new ResponseEntity<>(patient, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
+	//DELETE USER
+
 	@DeleteMapping("/api/{id}")
-	public ResponseEntity<User> deleteUser(@PathVariable Long id) {
+	public ResponseEntity<User> deletePatient(@PathVariable Long id) {
 
 		if (manager.exists(id)) {
 			manager.deleteUser(id);
@@ -51,6 +57,9 @@ public class RestControl {
 		}
 	}
 
+
+	//GET ONE SPECIFIED USER
+
 	@GetMapping("/api/{id}")
 	public ResponseEntity<User> getUser(@PathVariable Long id) {
 		if (manager.exists(id)) {
@@ -60,6 +69,9 @@ public class RestControl {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
+
+	//GET ALL USERS
+
 	@GetMapping("/api")
 	@ResponseStatus(HttpStatus.OK)
 	public Collection<User> advertisements() {
@@ -67,7 +79,7 @@ public class RestControl {
 	}
 
 
-
+	//UPDATE ONLY SPECIFIED FIELDS
 	@PatchMapping("/api/{id}")
 	public ResponseEntity<User> patch(@RequestBody User user, @PathVariable Long id) {
 		if (manager.exists(id)) {
@@ -87,4 +99,6 @@ public class RestControl {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+
+
 }

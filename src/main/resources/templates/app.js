@@ -35,19 +35,6 @@ function createPaciente() {
 
 }
 
-function loadItems(){
-	
-    var client = new XMLHttpRequest();
-    client.responseType = "json";
-    client.addEventListener("load", function(){
-    	addItemsToPage(this.response);    	
-    });
-    
-    client.open("GET", "/api");
-    
-    client.send();
-		
-}
 
 function createSanitario() {
 
@@ -96,6 +83,11 @@ function loadItems(){
 		
 }
 
+
+function addDoc(){
+	var selectedValue = document.getElementById("list").value;
+	alert(selectedValue);
+}
 
 function addItemsToPage(response){
 	console.log("Ha funcionado");

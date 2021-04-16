@@ -20,11 +20,20 @@
             </div>
             <div class="col-12">
               <ul class="list-group">
-                <div>
-                  <br>{{#users}}
-                  <li class="list-group-item"><a id="{{-index}}" href="#" onclick="loadItems(this)">{{.}}</a></li>
-                  <br> {{/users}}
-                </div>
+               <br>{{#users}}
+		<li class="list-group-item"><a id="{{-index}}" href="#"
+		onclick="loadItemsPaciente(this)">{{.}}</a></li>
+
+		<div style="text-align: center;"">
+           <section>
+               <button onclick="location.href='/chooseDoctors?id={{-index}}'" type="button"
+                       style="background: rgb(151, 214, 181); color: #000000; border-color: rgba(255, 255, 255, 0.4);"
+                       class="btn btn-primary btn-sm ml-auto">Seleccionar Doctor</button>
+           </section>
+
+
+			<br> {{/users}}
+		</div>
               </ul>
             </div>
           </div>
