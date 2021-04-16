@@ -146,4 +146,16 @@ public class WebController {
 		var mv = new ModelAndView("incorrect-parameters");
 		return mv;
 	}
+	@GetMapping("/chooseDoctors")
+	public ModelAndView chooseDoc(@RequestParam(required = false)  String id){
+		if (id != null){
+			var mv = new ModelAndView("choose-doctor");
+			mv.addObject("doctors",healthPersonnelManager.returnAll());
+			mv.addObject("id", Long.parseLong(id) - 1);
+			return mv;
+		}else{
+			var mv = new ModelAndView("index");
+			return mv;
+		}
+	}
 }

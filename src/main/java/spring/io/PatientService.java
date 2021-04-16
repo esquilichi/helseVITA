@@ -246,7 +246,26 @@ public class PatientService {
             }        
         }
     }
+    public void addDoc(Long id,HealthPersonnel h){
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                entry.getValue().setEmail(h.getEmail());
+                entry.getValue().setPassword(h.getPassword());
+                entry.getValue().setUsername(h.getUsername());
+                entry.getValue().setRole(h.getRole());
+                entry.getValue().setdni(h.getdni());
+            }
+        }
+    }
 
+    public HealthPersonnel returnDoc(Long id){
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                return entry.getValue();
+            }
+        }
+        return null;
+    }
     
 
 }

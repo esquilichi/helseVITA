@@ -156,4 +156,22 @@ public class PatientRestControl {
         } 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    @PostMapping("/api/patients/{id}/doctors/")
+    public ResponseEntity<HealthPersonnel> addDoc(@PathVariable Long id, @RequestBody HealthPersonnel h){
+        patientManager.addDoc(id,h);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("/api/patients/{id}/doctors/")
+    public ResponseEntity<HealthPersonnel> getDoc(@PathVariable Long id){
+        var temp = patientManager.returnDoc(id);
+        if(temp != null)
+        return new ResponseEntity<>(temp,HttpStatus.OK);
+        else
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    @PutMapping("/api/patients/{id}/doctors/")
+    public ResponseEntity<HealthPersonnel>putDoc(@PathVariable Long id, @RequestBody HealthPersonnel h){
+        patientManager.addDoc(id,h);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
