@@ -256,18 +256,11 @@ public class PatientService {
             }        
         }
     }
-    public void addDoc(Long id,HealthPersonnel h){
-        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
-            if(entry.getKey().getId()==id){
-                entry.getValue().setEmail(h.getEmail());
-                entry.getValue().setPassword(h.getPassword());
-                entry.getValue().setUsername(h.getUsername());
-                entry.getValue().setRole(h.getRole());
-                entry.getValue().setdni(h.getdni());
-            }
-        }
-    }
+    
+    
 
+   
+    
     public HealthPersonnel returnDoc(Long id){
         for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
             if(entry.getKey().getId()==id){
@@ -324,5 +317,56 @@ public class PatientService {
             }        
         }
     }
+<<<<<<< Updated upstream
+
+    public void updateDay(int day, Long id, Long id_appointment) {
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                for(Appointment a : entry.getKey().appointments){
+                    if(a.getId()==id_appointment){
+                        a.setDay(day);
+                    }
+                } 
+            }        
+        }
+    }
+
+    public void updateHour(int hour, Long id, Long id_appointment) {
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                for(Appointment a : entry.getKey().appointments){
+                    if(a.getId()==id_appointment){
+                        a.setHour(hour);
+                    }
+                } 
+            }        
+        }
+    }
+
+    public void updateMonth(int month, Long id, Long id_appointment) {
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                for(Appointment a : entry.getKey().appointments){
+                    if(a.getId()==id_appointment){
+                        a.setMonth(month);
+                    }
+                } 
+            }        
+        }
+    }
+
+    public void updateYear(int year, Long id, Long id_appointment) {
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                for(Appointment a : entry.getKey().appointments){
+                    if(a.getId()==id_appointment){
+                        a.setYear(year);
+                    }
+                } 
+            }        
+        }
+    }
+=======
+>>>>>>> Stashed changes
 
 }
