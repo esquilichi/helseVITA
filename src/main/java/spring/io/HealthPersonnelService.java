@@ -16,6 +16,17 @@ public class HealthPersonnelService {
     //private Map<Long, User> map = new ConcurrentHashMap<Long, User>();
     private Long lastId = (long) -1;
 
+    public HealthPersonnelService(){
+        var h = new HealthPersonnel("Dra. Clara","root","imane@helseVita.es","423424E",(long) -1, "Cardióloga");
+        addHealthPersonnel(h);
+        h = new HealthPersonnel("Dr. Ismael","root","clara@helseVita.es","423424E",(long) -1, "Pediatra");
+        addHealthPersonnel(h);
+        h = new HealthPersonnel("Dra. Imane","root","denisa@helseVita.es","423424E",(long) -1, "Pediatra");
+        addHealthPersonnel(h);
+        h = new HealthPersonnel("Dra. Denisa","root","ismael@helseVita.es","423424E",(long) -1, "Cardióloga");
+        addHealthPersonnel(h);
+    }
+
     public HealthPersonnel addHealthPersonnel(HealthPersonnel healthPersonnel) {
         lastId++;
         healthPersonnel.setId(lastId);
