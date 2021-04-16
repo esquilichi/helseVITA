@@ -1,8 +1,12 @@
 package spring.io;
 
+
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
@@ -196,12 +200,18 @@ public class PatientService {
     }
 
     public void deleteAppointment(Long id, Long id_appointment) {
-        for (Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+        List<Appointment> lista=new ArrayList<Appointment>();
+        
+        Iterator<Entry<Patient, HealthPersonnel>> iterator = map.entrySet().iterator();
+		while (iterator.hasNext()){
+            Entry<Patient, HealthPersonnel> entry = iterator.next();
             if(entry.getKey().getId()==id){
-                for(Appointment a : entry.getKey().appointments){
-                    if(a.getId()==id_appointment){
-                        entry.getKey().appointments.remove(a);
-                    }
+                lista = entry.getKey().returnAllAppoinments();   
+            }
+            for (int i = 0; i < lista.size(); i++) {
+                if(lista.get(i).getId()==id_appointment){
+                    entry.getKey().appointments.remove(lista.get(i));
+                    break;
                 }
             }
         }
@@ -266,6 +276,53 @@ public class PatientService {
         }
         return null;
     }
-    
+
+    public void updateDay(int day, Long id, Long id_appointment) {
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                for(Appointment a : entry.getKey().appointments){
+                    if(a.getId()==id_appointment){
+                        a.setDay(day);
+                    }
+                } 
+            }        
+        }
+    }
+
+    public void updateHour(int hour, Long id, Long id_appointment) {
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                for(Appointment a : entry.getKey().appointments){
+                    if(a.getId()==id_appointment){
+                        a.setHour(hour);
+                    }
+                } 
+            }        
+        }
+    }
+
+    public void updateMonth(int month, Long id, Long id_appointment) {
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                for(Appointment a : entry.getKey().appointments){
+                    if(a.getId()==id_appointment){
+                        a.setMonth(month);
+                    }
+                } 
+            }        
+        }
+    }
+
+    public void updateYear(int year, Long id, Long id_appointment) {
+        for(Map.Entry <Patient, HealthPersonnel> entry : map.entrySet()){
+            if(entry.getKey().getId()==id){
+                for(Appointment a : entry.getKey().appointments){
+                    if(a.getId()==id_appointment){
+                        a.setYear(year);
+                    }
+                } 
+            }        
+        }
+    }
 
 }

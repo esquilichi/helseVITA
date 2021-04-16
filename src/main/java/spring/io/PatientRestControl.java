@@ -156,6 +156,7 @@ public class PatientRestControl {
         } 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
     @PostMapping("/api/patients/{id}/doctors/")
     public ResponseEntity<HealthPersonnel> addDoc(@PathVariable Long id, @RequestBody HealthPersonnel h){
         patientManager.addDoc(id,h);
@@ -173,5 +174,35 @@ public class PatientRestControl {
     public ResponseEntity<HealthPersonnel>putDoc(@PathVariable Long id, @RequestBody HealthPersonnel h){
         patientManager.addDoc(id,h);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    //UPDATE ONLY SPECIFIED FIELDS
+    @PatchMapping("/api/patients/{id}/appointments/{id_appointments}")
+    public ResponseEntity<Appointment> patchAppointment(@RequestBody Appointment appointment, @PathVariable Long id, @PathVariable Long id_appointments) {
+
+        if (patientManager.appointmentExists(id, id_appointments)) {
+            String temp = String.valueOf(appointment.getDay());
+            if (temp!= null){
+                patientManager.updateDay(appointment.getDay(), id, id_appointments);}
+            
+            temp=String.valueOf(appointment.getHour());
+            if (temp!= null){
+                patientManager.updateHour(appointment.getHour(), id, id_appointments);}
+
+            temp=String.valueOf(appointment.getMonth());
+            if (temp!= null){
+                patientManager.updateMonth(appointment.getMonth(), id, id_appointments);}
+
+            temp=String.valueOf(appointment.getYear());
+            if (temp!= null){
+                patientManager.updateYear(appointment.getYear(), id, id_appointments);}
+            
+            Appointment temp1 = new Appointment(appointment.getHour(), appointment.getDay(), appointment.getMonth(), appointment.getYear());
+            return new ResponseEntity<>(temp1, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        
     }
 }
