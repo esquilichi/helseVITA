@@ -1,5 +1,9 @@
 package spring.io;
 import java.util.Collection;
+import java.util.Optional;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,22 +24,26 @@ public class HealthPersonnelRestControl {
 
 
     @Autowired
-    HealthPersonnelService healthPersonnelManager;
+    private HealthPersonnelRepository repository;
 
+    @PostConstruct
+    public void init(){
+        repository.save(new HealthPersonnel());
+    }
 
     @PostMapping("/api/healthPersonnel")
     @ResponseStatus(HttpStatus.CREATED)
     public HealthPersonnel newHealthPersonnel(@RequestBody HealthPersonnel healthPersonnel) {
-        return healthPersonnelManager.addHealthPersonnel(healthPersonnel);
+        return repository.save(healthPersonnel);
     }
 
     //FIND USER
 
 
     @PutMapping("/api/healthPersonnel/{id}")
-    public ResponseEntity<HealthPersonnel> updateHealthPersonnel(@PathVariable Long id, @RequestBody HealthPersonnel healthPersonnel) {
-        if (healthPersonnelManager.exists(id)) {
-            healthPersonnelManager.editHealthPersonnel(id, healthPersonnel);
+    public ResponseEntity<HealthPersonnel> updateHealthPersonnel(@PathVariable Integer id, @RequestBody HealthPersonnel healthPersonnel) {
+        if (repository.findById(id).isPresent()) {
+            repository.editHealthPersonnel(healthPersonnel, id);
             return new ResponseEntity<>(healthPersonnel, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -45,10 +53,10 @@ public class HealthPersonnelRestControl {
     //DELETE USER
 
     @DeleteMapping("/api/healthPersonnel/{id}")
-    public ResponseEntity<HealthPersonnel> deleteHealthPatient(@PathVariable Long id) {
+    public ResponseEntity<HealthPersonnel> deleteHealthPatient(@PathVariable Integer id) {
 
-        if (healthPersonnelManager.exists(id)) {
-            healthPersonnelManager.deleteHealthPersonnel(id);
+        if (repository.findById(id).isPresent()) {
+            repository.delete(repository.findById(id).get());
 
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
@@ -59,12 +67,13 @@ public class HealthPersonnelRestControl {
     //GET ONE SPECIFIED USER
 
     @GetMapping("/api/healthPersonnel/{id}")
-    public ResponseEntity<HealthPersonnel> getHealthPersonnel(@PathVariable Long id) {
-        if (healthPersonnelManager.exists(id)) {
-            HealthPersonnel healthPersonnelTemp = healthPersonnelManager.returnHealthPersonnel(id);
-            return new ResponseEntity<>(healthPersonnelTemp, HttpStatus.OK);
-        } else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<HealthPersonnel> getHealthPersonnel(@PathVariable Integer id) {
+        Optional<HealthPersonnel> op = repository.findById(id);
+        if (op.isPresent()) {
+            HealthPersonnel healthPersonnel = op.get();
+            return new ResponseEntity<>(healthPersonnel, HttpStatus.OK);
+        }  
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 
@@ -73,29 +82,33 @@ public class HealthPersonnelRestControl {
     @GetMapping("/api/healthPersonnel")
     @ResponseStatus(HttpStatus.OK)
     public Collection<HealthPersonnel> advertisements() {
-        return healthPersonnelManager.returnAll();
+        return repository.findAll();
     }
 
 
     //UPDATE ONLY SPECIFIED FIELDS
 
     @PatchMapping("/api/healthPersonnel/{id}")
-    public ResponseEntity<HealthPersonnel> patch(@RequestBody HealthPersonnel healthPersonnel, @PathVariable Long id) {
-        if (healthPersonnelManager.exists(id)) {
+    public ResponseEntity<HealthPersonnel> patch(@RequestBody HealthPersonnel healthPersonnel, @PathVariable Integer id) {
+        if (repository.findById(id).isPresent()) {
             if (healthPersonnel.getUsername() != null)
-                healthPersonnelManager.updateUsername(healthPersonnel.getUsername(), id);
+                repository.updateUsername(healthPersonnel.getUsername(), id);
             if (healthPersonnel.getPassword() != null)
-                healthPersonnelManager.updatePassword(healthPersonnel.getPassword(), id);
+                repository.updatePassword(healthPersonnel.getPassword(), id);
             if (healthPersonnel.getEmail() != null)
-                healthPersonnelManager.updateEmail(healthPersonnel.getEmail(), id);
+                repository.updateEmail(healthPersonnel.getEmail(), id);
             if (healthPersonnel.getdni() != null)
-                healthPersonnelManager.updateDNI(healthPersonnel.getdni(), id);
+                repository.updateDni(healthPersonnel.getdni(), id);
             if (healthPersonnel.getRole() != null)
-                healthPersonnelManager.updateRole(healthPersonnel.getRole(), id);
+                repository.updateRole(healthPersonnel.getRole(), id);
 
-            HealthPersonnel healthPersonnelTemp = healthPersonnelManager.returnHealthPersonnel(id);
+            Optional <HealthPersonnel> op = repository.findById(id);
 
-            return new ResponseEntity<>(healthPersonnelTemp, HttpStatus.OK);
+            if(op.isPresent()){
+                HealthPersonnel healthPersonnelTemp = op;
+                return new ResponseEntity<>(healthPersonnelTemp, HttpStatus.OK);
+
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

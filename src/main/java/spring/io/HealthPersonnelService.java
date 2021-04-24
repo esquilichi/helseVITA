@@ -1,22 +1,38 @@
 package spring.io;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 
 public class HealthPersonnelService {
 
-    private Map <HealthPersonnel, List <Patient>> patientsList = new ConcurrentHashMap< HealthPersonnel, List <Patient>>();
+
+	@Autowired
+	HealthPersonnelRepository repository;
+
+	@PostConstruct	
+	public void init() {
+		repository.save(new HealthPersonnel("Pepe", "1234", null, null, null, null));
+		repository.save(new HealthPersonnel("Juan", "Adios", "XXXX", null, null, null));
+	}
+
+	public Collection<HealthPersonnel> viewHealthPersonnel() {
+		return repository.findAll();
+	}
+
+
+
+    /*private Map <HealthPersonnel, List <Patient>> patientsList = new ConcurrentHashMap< HealthPersonnel, List <Patient>>();
     //private Centro centro;
     //private Map<Long, User> map = new ConcurrentHashMap<Long, User>();
     private Long lastId = (long) -1;
 
-    /*public HealthPersonnelService(){
+    //public HealthPersonnelService(){
         var h = new HealthPersonnel("Dra. Clara","root","imane@helseVita.es","423424E",(long) -1, "Cardióloga");
         addHealthPersonnel(h);
         h = new HealthPersonnel("Dr. Ismael","root","clara@helseVita.es","423424E",(long) -1, "Pediatra");
@@ -25,7 +41,7 @@ public class HealthPersonnelService {
         addHealthPersonnel(h);
         h = new HealthPersonnel("Dra. Denisa","root","ismael@helseVita.es","423424E",(long) -1, "Cardióloga");
         addHealthPersonnel(h);
-    }*/
+    }//
 
     public HealthPersonnel addHealthPersonnel(HealthPersonnel healthPersonnel) {
         lastId++;
@@ -150,13 +166,13 @@ public class HealthPersonnelService {
         }
     }
 
-    /*public Centro getCentro() {
+    //public Centro getCentro() {
         return this.centro;
     }
 
     public void setCentro(Centro centro) {
         this.centro = centro;
-    }*/
+    }//
 
     public List<Patient> getPatients(HealthPersonnel healthPersonnel){
         return this.patientsList.get(healthPersonnel);
@@ -177,6 +193,6 @@ public class HealthPersonnelService {
         }
         return null;    
     }
-
+*/
 
 }

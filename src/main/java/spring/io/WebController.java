@@ -24,7 +24,7 @@ public class WebController {
 	PatientService patientManager;
 
 	@Autowired
-	HealthPersonnelService healthPersonnelManager;
+    private HealthPersonnelRepository healthPersonnelRepository;
 
 	@RequestMapping("/")
 	ModelAndView index() {
@@ -52,7 +52,7 @@ public class WebController {
 	@RequestMapping("/viewHealthPersonnel")
 	ModelAndView viewHealthPersonnel(){
 		var mv = new ModelAndView("mostrarSanitario");
-		mv.addObject("users", healthPersonnelManager.returnAll());
+		mv.addObject("users", healthPersonnelRepository.findAll());
 		return mv;
 	}
 
@@ -109,11 +109,11 @@ public class WebController {
 		HealthPersonnel userTemp = new HealthPersonnel();
 
 		if(input.equals("0")){
-			userTemp = healthPersonnelManager.searchUsername(text);
+			userTemp = healthPersonnelRepository.findByUsername(text);
 		}else if(input.equals("1")){
-			userTemp = healthPersonnelManager.searchEmail(text);
+			userTemp = healthPersonnelRepository.findByEmail(text);
 		}else if(input.equals("2")){
-			userTemp = healthPersonnelManager.searchDni(text);
+			userTemp = healthPersonnelRepository.findByDni(text);
 		}else{
 			throw new IncorrectSearchParametersException();	
 		}
@@ -129,7 +129,7 @@ public class WebController {
 	public ModelAndView chooseDoc(){
 		
 		var mv = new ModelAndView("choose-doctor");
-		mv.addObject("doctors",healthPersonnelManager.returnAll());
+		mv.addObject("doctors",healthPersonnelRepository.findAll());
 		
 		return mv;
 	} 
@@ -150,7 +150,7 @@ public class WebController {
 	public ModelAndView chooseDoc(@RequestParam(required = false)  String id){
 		if (id != null){
 			var mv = new ModelAndView("choose-doctor");
-			mv.addObject("doctors",healthPersonnelManager.returnAll());
+			mv.addObject("doctors",healthPersonnelRepository.findAll());
 			mv.addObject("id", Long.parseLong(id) - 1);
 			return mv;
 		}else{
