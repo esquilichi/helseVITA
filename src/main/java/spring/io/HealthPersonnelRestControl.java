@@ -105,13 +105,13 @@ public class HealthPersonnelRestControl {
             Optional <HealthPersonnel> op = repository.findById(id);
 
             if(op.isPresent()){
-                HealthPersonnel healthPersonnelTemp = op;
+                HealthPersonnel healthPersonnelTemp = op.get();
                 return new ResponseEntity<>(healthPersonnelTemp, HttpStatus.OK);
 
             }
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
     }
 
 }

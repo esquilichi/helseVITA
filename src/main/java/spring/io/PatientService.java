@@ -1,18 +1,29 @@
 package spring.io;
 
-
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class PatientService {
 
+    @Autowired
+	PatientRepository repository;
+
+	@PostConstruct	
+	public void init() {
+		repository.save(new Patient("Pepe", "1234", null, null, null));
+		repository.save(new Patient("Juan", "Adios", "XXXX", null, null));
+	}
+
+	public Collection<Patient> viewPatient() {
+		return repository.findAll();
+    }
+
+    /*
     private Map <Patient, HealthPersonnel> map = new ConcurrentHashMap< Patient, HealthPersonnel>();
     //private Centro centro;
     //private Map<Long, User> map = new ConcurrentHashMap<Long, User>();
@@ -42,12 +53,12 @@ public class PatientService {
                 entry.getKey().setdni(patient.getdni());
             }
         }
-        /*if(this.exists(id)){
+        //if(this.exists(id)){
              var temp = this.map.get(patient);
             this.map.remove(patient);
             this.map.put(patient, temp);
 
-        }*/
+        }//
        
     }
 
@@ -114,13 +125,13 @@ public class PatientService {
         }
     }
 
-    /*public Centro getCentro() {
+    //public Centro getCentro() {
         return this.centro;
     }
 
     public void setCentro(Centro centro) {
         this.centro = centro;
-    }*/
+    }//
 
     public HealthPersonnel getHealthPersonnel(Patient patient){
         return this.map.get(patient);
@@ -331,5 +342,5 @@ public class PatientService {
         }
         return null;
     }
-
+*/
 }
