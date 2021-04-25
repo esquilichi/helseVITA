@@ -15,8 +15,8 @@ public class PatientService {
 
 	@PostConstruct	
 	public void init() {
-		repository.save(new Patient("Pepe", "1234", null, null, null));
-		repository.save(new Patient("Juan", "Adios", "XXXX", null, null));
+		repository.save(new Patient("Pepe", "1234", null, null));
+		repository.save(new Patient("Juan", "Adios", "XXXX", null));
 	}
 
 	public Collection<Patient> viewPatient() {

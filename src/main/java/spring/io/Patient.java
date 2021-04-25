@@ -1,36 +1,33 @@
 package spring.io;
+import javax.persistence.*;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
 @Entity
+@Table(name = "patient")
 public class Patient extends User{
 
     @Id
-    @GeneratedValue (strategy=GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue (strategy=GenerationType.IDENTITY)
+    @Column(name = "patient_ID")
+    private Integer patientId;
+
 
     private String username;
     private String password;
     private String email;
     private String dni;
 
-    @OneToMany
+    @OneToMany(mappedBy = "Patient")
     private List<Appointment> appointment;
 
     Patient() {}
 
-    public Patient(String username, String password, String email, String dni, Integer id) {
+    public Patient(String username, String password, String email, String dni) {
         this.username=username;
         this.email=email;
         this.password=password;
         this.dni=dni;
-        this.id=id;
     }
 
     public Integer getId() {

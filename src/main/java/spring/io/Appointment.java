@@ -1,15 +1,24 @@
 package spring.io;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Appointment")
 public class Appointment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "appointment_ID")
+    private long id;
     
     private int hour;
     private int day;
     private int month;
     private int year;
-    private long id;
+
     
     public Appointment(int hour, int day, int month, int year) {
-		super();
 		this.hour = hour;
 		this.day = day;
 		this.month = month;
@@ -59,5 +68,9 @@ public class Appointment {
     public void setId(long id) {
         this.id = id;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "patient_ID")
+    private Patient patient;
 
 }

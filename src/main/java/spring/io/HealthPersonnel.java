@@ -26,7 +26,7 @@ public class HealthPersonnel extends User{
 
     public HealthPersonnel() {}
 
-    public HealthPersonnel(String username, String password, String email, String dni, Long id, String role) {
+    public HealthPersonnel(String username, String password, String email, String dni, Lo id, String role) {
         super(username, password, email, dni, id);
         this.role =role;
     }
@@ -39,7 +39,7 @@ public class HealthPersonnel extends User{
 
     public String getDni (){return getDni();}
 
-    public Long getId(){return getId();}
+    public Integer getId(){return getId();}
 
     public String getRole() {return role; }
 
