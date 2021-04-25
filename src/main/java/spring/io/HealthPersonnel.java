@@ -26,7 +26,7 @@ public class HealthPersonnel extends User{
 
     public HealthPersonnel() {}
 
-    public HealthPersonnel(String username, String password, String email, String dni, Lo id, String role) {
+    public HealthPersonnel(String username, String password, String email, String dni, Integer id, String role) {
         super(username, password, email, dni, id);
         this.role =role;
     }

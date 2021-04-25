@@ -10,7 +10,7 @@ public class Patient extends User{
     @Id
     @GeneratedValue (strategy=GenerationType.IDENTITY)
     @Column(name = "patient_ID")
-    private Integer patientId;
+    private Integer id;
 
 
     private String username;
@@ -21,7 +21,7 @@ public class Patient extends User{
     @OneToMany(mappedBy = "Patient")
     private List<Appointment> appointment;
 
-    Patient() {}
+    public Patient() {}
 
     public Patient(String username, String password, String email, String dni) {
         this.username=username;
