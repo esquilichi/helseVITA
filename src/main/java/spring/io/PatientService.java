@@ -1,6 +1,10 @@
 package spring.io;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -11,16 +15,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PatientService {
 
     @Autowired
-	PatientRepository repository;
+	PatientRepository patientRepository;
+
+    @Autowired
+	HealthPersonnelRepository healthPersonnelRepository;
+
+    private List<Patient> patients;
 
 	@PostConstruct	
 	public void init() {
-		repository.save(new Patient("Pepe", "1234", null, null));
-		repository.save(new Patient("Juan", "Adios", "XXXX", null));
+		patientRepository.save(new Patient("Pepe", "1234", null, null));
+		patientRepository.save(new Patient("Juan", "Adios", "XXXX", null));
 	}
 
+
+
 	public Collection<Patient> viewPatient() {
-		return repository.findAll();
+		return (Collection<Patient>) patientRepository.findAll();
     }
 
     /*
@@ -343,4 +354,41 @@ public class PatientService {
         return null;
     }
 */
+
+	//ESPERO QUE ESTO FUNCIONE VALE :) HASTA QUE NO PODAMOS COMPILAR NADA
+	public void savePatient(Patient patient){
+		patientRepository.save(patient);
+	}
+
+	public Optional<Patient> getPatientbyId(Integer id){
+		return this.patientRepository.findById(id);
+	}
+
+	public List<Patient> returnAllPatients() {
+		List<Patient> patients = new ArrayList<>();
+		patientRepository.findAll().forEach(patients::add);
+		return patients;
+	}
+
+	public void addPatient(Patient patient){
+		patientRepository.save(patient);
+	}
+	public Optional<Patient> returnPatient(Patient patient, Integer id){
+		return patientRepository.findById(id);
+	}
+	public void updatePatient(Patient patient, Integer id){
+		/* Un indio de youtube dice que el metodo save() sabe si ya exista esa instancia del objeto
+		y haciendo el save() lo cambia el solito, espero que funcione así realmente
+		 */
+		patientRepository.save(patient);
+	}
+	public void eliminarPaciente(Patient patient){
+		patientRepository.delete(patient);
+	}
+
+	public List<Patient> returnAll(){
+		List<Patient> list = new ArrayList<>();
+		this.patientRepository.findAll().forEach(list::add);
+		return list;
+	}
 }

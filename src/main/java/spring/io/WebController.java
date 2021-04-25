@@ -34,7 +34,7 @@ public class WebController {
 	}
 
 	@RequestMapping("/mostrar/{id}")
-	ModelAndView view(@PathVariable long id) {
+	ModelAndView view(@PathVariable Integer id) {
 		User userTemp = manager.returnUser(id - 1);
 		var mv = new ModelAndView("mostrar");
 		mv.addObject("user", userTemp);
@@ -45,7 +45,7 @@ public class WebController {
 	@RequestMapping("/viewPatients")
 	ModelAndView viewPatients() {
 		var mv = new ModelAndView("mostrarPacientes");
-		mv.addObject("users", patientManager.returnAll());
+		mv.addObject("users", patientManager.returnAllPatients());
 		return mv;
 	}
 

@@ -1,11 +1,16 @@
 package spring.io;
 
+import javax.persistence.Column;
+
 public class User {
+	@Column(unique = true, nullable = false)
 	private String username;
+	@Column(unique = true, nullable = false)
 	private String password;
+	@Column(unique = true, nullable = false)
 	private String email;
+	@Column(unique = true, nullable = false)
 	private String dni;
-	private Integer id;
 
 	public User() {
 	}
@@ -15,7 +20,6 @@ public class User {
 		this.password = password;
 		this.email = email;
 		this.dni = dni;
-		this.id = id;
 	}
 
 	public User(String username, String password, String email, String dni) {
@@ -27,14 +31,6 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getPassword() {

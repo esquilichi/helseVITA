@@ -9,10 +9,8 @@ public class Patient extends User{
 
     @Id
     @GeneratedValue (strategy=GenerationType.IDENTITY)
-    @Column(name = "patient_ID")
+    @Column(nullable = false)
     private Integer id;
-
-
 
 
     @OneToMany(mappedBy = "Patient")

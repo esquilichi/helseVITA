@@ -26,6 +26,8 @@ public class PatientRestControl {
     @Autowired
     PatientRepository repository;
 
+    @Autowired
+    PatientService patientService;
 
     //ADD USER FOR PATIENT
     @PostMapping("/api/patients")
