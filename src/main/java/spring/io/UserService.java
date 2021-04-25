@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-	private Map<Long, User> map = new ConcurrentHashMap<Long, User>();
-	private Long lastId = (long) -1;
+	private Map<Integer, User> map = new ConcurrentHashMap<Integer, User>();
+	private Integer lastId = -1;
 
 	public User addUser(User user) {
 		lastId++;
@@ -20,21 +20,21 @@ public class UserService {
 		return user;
 	}
 
-	public boolean exists(Long id) {
+	public boolean exists(Integer id) {
 		return this.map.get(id) != null;
 	}
 
-	public void editUser(Long id, User user) {
+	public void editUser(Integer id, User user) {
 		if (this.exists(id)) {
 			this.map.put(id, user);
 		}
 	}
 
-	public void deleteUser(Long id) {
+	public void deleteUser(Integer id) {
 		this.map.remove(id);
 	}
 
-	public User returnUser(Long id) {
+	public User returnUser(Integer id) {
 		return this.map.get(id);
 	}
 
@@ -45,9 +45,9 @@ public class UserService {
 
 	
 	public User search(String username) {
-		Iterator<Entry<Long, User>> iterator = map.entrySet().iterator();
+		Iterator<Entry<Integer, User>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Entry<Long, User> entry = iterator.next();
+			Entry<Integer, User> entry = iterator.next();
 			if (entry.getValue().getUsername().equals(username)) {
 				//System.out.println(entry.getValue().getUsername());
 
@@ -58,9 +58,9 @@ public class UserService {
 	}
 	
 	public User searchUsername(String username) {
-		Iterator<Entry<Long, User>> iterator = map.entrySet().iterator();
+		Iterator<Entry<Integer, User>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Entry<Long, User> entry = iterator.next();
+			Entry<Integer, User> entry = iterator.next();
 			if (entry.getValue().getUsername().equals(username)) {
 				return entry.getValue();
 			}
@@ -69,9 +69,9 @@ public class UserService {
 	}
 
 	public User searchEmail(String email) {
-		Iterator<Entry<Long, User>> iterator = map.entrySet().iterator();
+		Iterator<Entry<Integer, User>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Entry<Long, User> entry = iterator.next();
+			Entry<Integer, User> entry = iterator.next();
 			if (entry.getValue().getEmail().equals(email)) {
 				return entry.getValue();
 			}
@@ -80,7 +80,7 @@ public class UserService {
 	}
 	
 	public User searchDni(String dni) {
-		for(Map.Entry<Long, User> entry: map.entrySet()){
+		for(Map.Entry<Integer, User> entry: map.entrySet()){
 			if (entry.getValue().getdni().equals(dni)) {
 				return entry.getValue();
 			}
@@ -88,25 +88,25 @@ public class UserService {
 		return null;
 	}
 	
-	public void updateUser(String user, long id) {
+	public void updateUser(String user, Integer id) {
 		User userTemp = map.get(id);
 		userTemp.setUsername(user);
 		map.put(id, userTemp);
 	}
 
-	public void updatePassword(String password, Long id) {
+	public void updatePassword(String password, Integer id) {
 		User userTemp = map.get(id);
 		userTemp.setPassword(password);
 		map.put(id, userTemp);
 	}
 
-	public void updateEmail(String correo, Long id) {
+	public void updateEmail(String correo, Integer id) {
 		User userTemp = map.get(id);
 		userTemp.setEmail(correo);
 		map.put(id, userTemp);
 	}
 
-	public void updateDNI(String dni, Long id) {
+	public void updateDNI(String dni, Integer id) {
 		User userTemp = map.get(id);
 		userTemp.setdni(dni);
 		map.put(id, userTemp);

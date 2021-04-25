@@ -13,7 +13,7 @@ public class Patient extends User{
 
     @Id
     @GeneratedValue (strategy=GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     private String username;
     private String password;
@@ -25,7 +25,7 @@ public class Patient extends User{
 
     Patient() {}
 
-    public Patient(String username, String password, String email, String dni, Long id) {
+    public Patient(String username, String password, String email, String dni, Integer id) {
         this.username=username;
         this.email=email;
         this.password=password;
@@ -33,11 +33,11 @@ public class Patient extends User{
         this.id=id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

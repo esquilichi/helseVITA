@@ -5,12 +5,12 @@ public class User {
 	private String password;
 	private String email;
 	private String dni;
-	private long id;
+	private Integer id;
 
 	public User() {
 	}
 
-	public User(String username, String password, String email, String dni, Long id) {
+	public User(String username, String password, String email, String dni, Integer id) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -26,11 +26,11 @@ public class User {
 		this.username = username;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
