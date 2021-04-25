@@ -2,6 +2,7 @@ package spring.io;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,39 +24,37 @@ public class PatientRestControl {
 
 
     @Autowired
-    PatientService patientManager;
+    PatientRepository repository;
 
 
     //ADD USER FOR PATIENT
     @PostMapping("/api/patients")
     @ResponseStatus(HttpStatus.CREATED)
     public Patient newPatient(@RequestBody Patient patient) {
-        HealthPersonnel temp = new HealthPersonnel();
-        return patientManager.addPatient(patient, temp);
+        return repository.save(patient);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////
     //FIND USER FOR PATIENT AND HEALTH SERVICE
 
     @PutMapping("/api/patients/{id}")
-    public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patient) {
-        if (patientManager.exists(id)) {
-            patientManager.editPatient(id, patient);
+    public ResponseEntity<Patient> updatePatient(@PathVariable Integer id, @RequestBody Patient patient) {
+        Optional <Patient> op = repository.findById(id);
+        if (op.isPresent()) {
+            repository.editPatient(patient, id);
             return new ResponseEntity<>(patient, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
 
-
-    ////////////////////////////////////////////////////////////////////////////////////
     //DELETE USER
 
     @DeleteMapping("/api/patients/{id}")
-    public ResponseEntity<Patient> deletePatient(@PathVariable Long id) {
-
-        if (patientManager.exists(id)) {
-            patientManager.deletePatient(id);
+    public ResponseEntity<Patient> deletePatient(@PathVariable Integer id) {
+        Optional <Patient> op = repository.findById(id);
+        if (op.isPresent()) {
+            Patient patient = op.get();
+            repository.delete(patient);
 
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
@@ -68,10 +67,11 @@ public class PatientRestControl {
     //GET ONE SPECIFIED USER
 
     @GetMapping("/api/patients/{id}")
-    public ResponseEntity<Patient> getPatient(@PathVariable Long id) {
-        if (patientManager.exists(id)) {
-            Patient patientTemp = patientManager.returnPatient(id);
-            return new ResponseEntity<>(patientTemp, HttpStatus.OK);
+    public ResponseEntity<Patient> getPatient(@PathVariable Integer id) {
+        Optional <Patient> op = repository.findById(id);
+        if (op.isPresent()) {
+            Patient patient = op.get();
+            return new ResponseEntity<>(patient, HttpStatus.OK);
         } else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -81,36 +81,37 @@ public class PatientRestControl {
     @GetMapping("/api/patients")
     @ResponseStatus(HttpStatus.OK)
     public Collection<Patient> advertisements() {
-        return patientManager.returnAll();
+        return repository.findAll();
     }
 
 
     //UPDATE ONLY SPECIFIED FIELDS
     @PatchMapping("/api/patients/{id}")
-    public ResponseEntity<Patient> patch(@RequestBody Patient patient, @PathVariable Long id) {
-        if (patientManager.exists(id)) {
+    public ResponseEntity<Patient> patch(@RequestBody Patient patient, @PathVariable Integer id) {
+        Optional <Patient> op = repository.findById(id);
+        if (op.isPresent()) {
+            //Patient patientTemp = op.get();
             if (patient.getUsername() != null)
-                patientManager.updateUsername(patient.getUsername(), id);
+                repository.updateUsername(patient.getUsername(), id);
             if (patient.getPassword() != null)
-                patientManager.updatePassword(patient.getPassword(), id);
+                repository.updatePassword(patient.getPassword(), id);
             if (patient.getEmail() != null)
-                patientManager.updateEmail(patient.getEmail(), id);
+                repository.updateEmail(patient.getEmail(), id);
             if (patient.getdni() != null)
-                patientManager.updateDNI(patient.getdni(), id);
+                repository.updateDni(patient.getdni(), id);
 
-            Patient patientTemp = patientManager.returnPatient(id);
-
-            return new ResponseEntity<>(patientTemp, HttpStatus.OK);
+            return new ResponseEntity<>(patient, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     @PostMapping("/api/patients/{id}/appointments")
-    public ResponseEntity<Appointment> newAppointment(@RequestBody Appointment appointment, @PathVariable long id) {
-        Patient temp = this.patientManager.returnPatient(id);
-        if (temp != null){
-            var a = temp.addAppointment(appointment.getHour(),appointment.getDay(), appointment.getMonth(), appointment.getYear());
-            return new ResponseEntity<>(a, HttpStatus.OK);
+    public ResponseEntity<Appointment> newAppointment(@RequestBody Appointment appointment, @PathVariable Integer id) {
+        Optional <Patient> op = this.repository.findById(id);
+        if (op.isPresent()){
+            Patient temp = op.get();
+            temp.getAppointments().add(appointment);
+            return new ResponseEntity<>(temp, HttpStatus.OK);
         }
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -118,18 +119,20 @@ public class PatientRestControl {
 
     @GetMapping("/api/patients/{id}/appointments")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Appointment>> returnAllAppoinments(@PathVariable long id){
-        if(patientManager.exists(id)){
-            return new ResponseEntity<>(patientManager.returnAllAppointments(id),HttpStatus.OK);
+    public ResponseEntity<List<Appointment>> returnAllAppoinments(@PathVariable Integer id){
+        Optional <Patient> op = this.repository.findById(id);
+        if(op.isPresent()){
+            return new ResponseEntity<>(repository.returnAllAppointments(id),HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/api/patients/{id}/appointments/{id_appointment}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Appointment> returnAppoinment(@PathVariable long id,  @PathVariable Long id_appointment){
-        if(patientManager.exists(id)){
-            if(patientManager.appointmentExists(id, id_appointment)){
+    public ResponseEntity<Appointment> returnAppoinment(@PathVariable Integer id,  @PathVariable Integer id_appointment){
+        Optional <Patient> op = this.repository.findById(id);
+        if(op.isPresent()){
+            if(repository.appointmentExists(id, id_appointment)){
                 var a = patientManager.returnAppointment(id, id_appointment);
                 return new ResponseEntity<>(a,HttpStatus.OK);
             }
