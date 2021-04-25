@@ -18,7 +18,9 @@ public class Patient extends User{
     @OneToMany(mappedBy = "Patient")
     private List<Appointment> appointment;
 
-    public Patient() {}
+    public Patient() {
+        super();
+    }
 
     public Patient(String username, String password, String email, String dni) {
        super(username, password, email, dni);
