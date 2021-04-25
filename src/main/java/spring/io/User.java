@@ -18,6 +18,9 @@ public class User {
 		this.id = id;
 	}
 
+	public User(String username, String password, String email, String dni) {
+	}
+
 	public String getUsername() {
 		return this.username;
 	}

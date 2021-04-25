@@ -32,15 +32,6 @@ public class HealthPersonnel extends User{
     }
 
 
-
-    public String getUsername(){return getUsername();}
-
-    public String getEmail(){return getEmail();}
-
-    public String getDni (){return getDni();}
-
-    public Integer getId(){return getId();}
-
     public String getRole() {return role; }
 
     public void setRole(String role) {
