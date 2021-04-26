@@ -22,11 +22,6 @@ public class PatientService {
 
     private List<Patient> patients;
 
-	@PostConstruct	
-	public void init() {
-		patientRepository.save(new Patient("Pepe", "1234", null, null));
-		patientRepository.save(new Patient("Juan", "Adios", "XXXX", null));
-	}
 
 
 
@@ -376,19 +371,25 @@ public class PatientService {
 	public Optional<Patient> returnPatient(Patient patient, Integer id){
 		return patientRepository.findById(id);
 	}
-	public void updatePatient(Patient patient, Integer id){
+	public void updatePatient(Patient patient){
 		/* Un indio de youtube dice que el metodo save() sabe si ya exista esa instancia del objeto
 		y haciendo el save() lo cambia el solito, espero que funcione así realmente
 		 */
 		patientRepository.save(patient);
 	}
-	public void eliminarPaciente(Patient patient){
+	public void delete(Patient patient){
 		patientRepository.delete(patient);
 	}
 
-	public List<Patient> returnAll(){
+	public List<Patient> findAll(){
 		List<Patient> list = new ArrayList<>();
 		this.patientRepository.findAll().forEach(list::add);
 		return list;
 	}
+
+	public Optional<Patient> findById(Integer id) {
+		return this.patientRepository.findById(id);
+	}
+
+
 }

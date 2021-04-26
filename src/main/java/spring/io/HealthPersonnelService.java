@@ -15,11 +15,7 @@ public class HealthPersonnelService {
 	@Autowired
 	HealthPersonnelRepository repository;
 
-	@PostConstruct	
-	public void init() {
-		repository.save(new HealthPersonnel("Pepe", "1234", null, null, null, null));
-		repository.save(new HealthPersonnel("Juan", "Adios", "XXXX", null, null, null));
-	}
+
 
 	public Collection<HealthPersonnel> viewHealthPersonnel() {
 		return repository.findAll();

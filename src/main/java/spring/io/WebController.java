@@ -79,7 +79,7 @@ public class WebController {
 		throw new UserNotFoundException(text);	
 	}
 
-	@GetMapping("/searchPatient")
+	/*@GetMapping("/searchPatient")
 	ModelAndView searchPatient(@RequestParam Map<String,String> requestParams) {
 		String input=requestParams.get("input");
    		String text=requestParams.get("username");
@@ -101,7 +101,7 @@ public class WebController {
 		}
 		throw new UserNotFoundException(text);	
 	}
-
+*/
 	@GetMapping("/searchHealthPersonnel")
 	ModelAndView searchHealthPersonnel(@RequestParam Map<String,String> requestParams) {
 		String input=requestParams.get("input");

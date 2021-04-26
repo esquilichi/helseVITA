@@ -42,7 +42,7 @@ public class PatientRestControl {
     public ResponseEntity<Patient> updatePatient(@PathVariable Integer id, @RequestBody Patient patient) {
         Optional <Patient> op = repository.findById(id);
         if (op.isPresent()) {
-            repository.editPatient(patient, id);
+            patientService.updatePatient(patient);
             return new ResponseEntity<>(patient, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -53,10 +53,10 @@ public class PatientRestControl {
 
     @DeleteMapping("/api/patients/{id}")
     public ResponseEntity<Patient> deletePatient(@PathVariable Integer id) {
-        Optional <Patient> op = repository.findById(id);
+        Optional <Patient> op = patientService.findById(id);
         if (op.isPresent()) {
             Patient patient = op.get();
-            repository.delete(patient);
+            patientService.delete(patient);
 
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
@@ -70,7 +70,7 @@ public class PatientRestControl {
 
     @GetMapping("/api/patients/{id}")
     public ResponseEntity<Patient> getPatient(@PathVariable Integer id) {
-        Optional <Patient> op = repository.findById(id);
+        Optional <Patient> op = patientService.findById(id);
         if (op.isPresent()) {
             Patient patient = op.get();
             return new ResponseEntity<>(patient, HttpStatus.OK);
@@ -82,13 +82,13 @@ public class PatientRestControl {
 
     @GetMapping("/api/patients")
     @ResponseStatus(HttpStatus.OK)
-    public Collection<Patient> advertisements() {
-        return repository.findAll();
+    public List<Patient> advertisements() {
+        return patientService.findAll();
     }
 
 
     //UPDATE ONLY SPECIFIED FIELDS
-    @PatchMapping("/api/patients/{id}")
+    /*@PatchMapping("/api/patients/{id}")
     public ResponseEntity<Patient> patch(@RequestBody Patient patient, @PathVariable Integer id) {
         Optional <Patient> op = repository.findById(id);
         if (op.isPresent()) {
@@ -107,6 +107,7 @@ public class PatientRestControl {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     @PostMapping("/api/patients/{id}/appointments")
     public ResponseEntity<Appointment> newAppointment(@RequestBody Appointment appointment, @PathVariable Integer id) {
         Optional <Patient> op = this.repository.findById(id);
@@ -215,6 +216,8 @@ public class PatientRestControl {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        
+
     }
+    */
+
 }

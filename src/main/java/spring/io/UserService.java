@@ -13,12 +13,7 @@ public class UserService {
 	private Map<Integer, User> map = new ConcurrentHashMap<Integer, User>();
 	private Integer lastId = -1;
 
-	public User addUser(User user) {
-		lastId++;
-		user.setId(lastId);
-		this.map.put(lastId, user);
-		return user;
-	}
+
 
 	public boolean exists(Integer id) {
 		return this.map.get(id) != null;
