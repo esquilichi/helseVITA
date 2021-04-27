@@ -26,11 +26,6 @@ public class HealthPersonnelRestControl {
     @Autowired
     private HealthPersonnelRepository repository;
 
-    @PostConstruct
-    public void init(){
-        repository.save(new HealthPersonnel());
-    }
-
     @PostMapping("/api/healthPersonnel")
     @ResponseStatus(HttpStatus.CREATED)
     public HealthPersonnel newHealthPersonnel(@RequestBody HealthPersonnel healthPersonnel) {

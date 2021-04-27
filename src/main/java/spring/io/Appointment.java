@@ -4,20 +4,26 @@ package spring.io;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Appointment")
+//@Table(name = "Appointment")
 public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "appointment_ID")
+    //@Column(name = "appointment_ID")
     private long id;
-    
+
     private int hour;
     private int day;
     private int month;
     private int year;
 
-    
+    @ManyToOne
+    private HealthPersonnel healthPersonnel;
+
+    @ManyToOne
+    //@JoinColumn(name = "patient_ID")
+    private Patient patient;
+
     public Appointment(int hour, int day, int month, int year) {
 		this.hour = hour;
 		this.day = day;
@@ -69,8 +75,6 @@ public class Appointment {
         this.id = id;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "patient_ID")
-    private Patient patient;
+
 
 }

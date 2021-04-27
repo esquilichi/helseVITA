@@ -15,7 +15,7 @@ public class HealthPersonnel extends User{
 
     @Id
     @GeneratedValue (strategy=GenerationType.AUTO)
-    private String role;
+    private Integer role;
 
     @OneToMany(cascade=CascadeType.ALL)
     private List<Appointment> appointment;
@@ -26,15 +26,15 @@ public class HealthPersonnel extends User{
 
     public HealthPersonnel() {}
 
-    public HealthPersonnel(String username, String password, String email, String dni, Integer id, String role) {
+    public HealthPersonnel(String username, String password, String email, String dni, Integer id, Integer role) {
         super(username, password, email, dni, id);
         this.role =role;
     }
 
 
-    public String getRole() {return role; }
+    public Integer getRole() {return role; }
 
-    public void setRole(String role) {
+    public void setRole(Integer role) {
         this.role = role;
     }
 }

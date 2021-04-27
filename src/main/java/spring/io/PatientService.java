@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,8 +22,6 @@ public class PatientService {
 	HealthPersonnelRepository healthPersonnelRepository;
 
     private List<Patient> patients;
-
-
 
 
 	public Collection<Patient> viewPatient() {
@@ -372,7 +371,7 @@ public class PatientService {
 		return patientRepository.findById(id);
 	}
 	public void updatePatient(Patient patient){
-		/* Un indio de youtube dice que el metodo save() sabe si ya exista esa instancia del objeto
+		/* Youtube dice que el metodo save() sabe si ya exista esa instancia del objeto
 		y haciendo el save() lo cambia el solito, espero que funcione así realmente
 		 */
 		patientRepository.save(patient);
@@ -391,5 +390,8 @@ public class PatientService {
 		return this.patientRepository.findById(id);
 	}
 
+	public void updateUsername() {
+		// SE HACE CON TYPED QUERY
+	}
 
 }

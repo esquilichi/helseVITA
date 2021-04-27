@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface HealthPersonnelRepository extends JpaRepository <HealthPersonnel, Integer> {
     public default void updateUsername(String username, Integer id){
-        
+
     }
     public default void updatePassword(String password, Integer id){
 
@@ -14,7 +14,7 @@ public interface HealthPersonnelRepository extends JpaRepository <HealthPersonne
     public default void updateEmail(String email, Integer id){
 
     }
-    public default void updateRole(String role, Integer id){
+    public default void updateRole(Integer role, Integer id){
 
     }
     public default void updateDni(String dni, Integer id){

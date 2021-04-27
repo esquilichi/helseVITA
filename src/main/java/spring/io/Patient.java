@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "patient")
+@Table
 public class Patient extends User{
 
     @Id
@@ -12,8 +12,10 @@ public class Patient extends User{
     @Column(nullable = false)
     private Integer id;
 
+    @ManyToMany
+    private List<HealthPersonnel> healthPersonnel;
 
-    @OneToMany(mappedBy = "Patient")
+    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
     private List<Appointment> appointment;
 
     public Patient() {
