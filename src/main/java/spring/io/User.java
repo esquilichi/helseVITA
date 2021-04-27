@@ -3,13 +3,13 @@ package spring.io;
 import javax.persistence.Column;
 
 public class User {
-	@Column(unique = true, nullable = false)
+	@Column
 	private String username;
-	@Column(unique = true, nullable = false)
+	@Column
 	private String password;
-	@Column(unique = true, nullable = false)
+	@Column
 	private String email;
-	@Column(unique = true, nullable = false)
+	@Column
 	private String dni;
 
 	public User() {

@@ -364,8 +364,9 @@ public class PatientService {
 		return patients;
 	}
 
-	public void addPatient(Patient patient){
-		patientRepository.save(patient);
+	public Patient addPatient(Patient patient){
+		Patient temp = patientRepository.save(patient);
+		return temp;
 	}
 	public Optional<Patient> returnPatient(Patient patient, Integer id){
 		return patientRepository.findById(id);

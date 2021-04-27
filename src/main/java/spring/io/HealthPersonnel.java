@@ -13,9 +13,12 @@ import javax.persistence.OneToMany;
 @Entity
 public class HealthPersonnel extends User{
 
+
+    private String role;
+
     @Id
     @GeneratedValue (strategy=GenerationType.AUTO)
-    private Integer role;
+    private Integer id;
 
     @OneToMany(cascade=CascadeType.ALL)
     private List<Appointment> appointment;
@@ -26,15 +29,15 @@ public class HealthPersonnel extends User{
 
     public HealthPersonnel() {}
 
-    public HealthPersonnel(String username, String password, String email, String dni, Integer id, Integer role) {
+    public HealthPersonnel(String username, String password, String email, String dni, Integer id, String role) {
         super(username, password, email, dni, id);
         this.role =role;
     }
 
 
-    public Integer getRole() {return role; }
+    public String getRole() {return role; }
 
-    public void setRole(Integer role) {
+    public void setRole(String role) {
         this.role = role;
     }
 }

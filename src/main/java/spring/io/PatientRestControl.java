@@ -33,7 +33,7 @@ public class PatientRestControl {
     @PostMapping("/api/patients")
     @ResponseStatus(HttpStatus.CREATED)
     public Patient newPatient(@RequestBody Patient patient) {
-        return repository.save(patient);
+        return patientService.addPatient(patient);
     }
 
     //FIND USER FOR PATIENT AND HEALTH SERVICE
