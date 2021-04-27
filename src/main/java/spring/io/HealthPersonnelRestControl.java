@@ -1,5 +1,10 @@
 package spring.io;
 import java.util.Collection;
+<<<<<<< Updated upstream
+=======
+import java.util.Optional;
+
+>>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,23 +24,39 @@ import org.springframework.web.bind.annotation.RestController;
 public class HealthPersonnelRestControl {
 
 
+
     @Autowired
+<<<<<<< Updated upstream
     HealthPersonnelService healthPersonnelManager;
 
+=======
+    private HealthPersonnelRepository healthPersonnelRepository;
+    private HealthPersonnel HealthPersonnelService;
+>>>>>>> Stashed changes
 
     @PostMapping("/api/healthPersonnel")
     @ResponseStatus(HttpStatus.CREATED)
     public HealthPersonnel newHealthPersonnel(@RequestBody HealthPersonnel healthPersonnel) {
+<<<<<<< Updated upstream
         return healthPersonnelManager.addHealthPersonnel(healthPersonnel);
+=======
+        return HealthPersonnelService.saveHealthPersonnel(healthPersonnel);
+>>>>>>> Stashed changes
     }
 
     //FIND USER
 
 
     @PutMapping("/api/healthPersonnel/{id}")
+<<<<<<< Updated upstream
     public ResponseEntity<HealthPersonnel> updateHealthPersonnel(@PathVariable Long id, @RequestBody HealthPersonnel healthPersonnel) {
         if (healthPersonnelManager.exists(id)) {
             healthPersonnelManager.editHealthPersonnel(id, healthPersonnel);
+=======
+    public ResponseEntity<HealthPersonnel> updateHealthPersonnel(@PathVariable Integer id, @RequestBody HealthPersonnel healthPersonnel) {
+        if (healthPersonnelRepository.findById(id).isPresent()) {
+            healthPersonnelRepository.editHealthPersonnel(healthPersonnel, id);
+>>>>>>> Stashed changes
             return new ResponseEntity<>(healthPersonnel, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -47,8 +68,13 @@ public class HealthPersonnelRestControl {
     @DeleteMapping("/api/healthPersonnel/{id}")
     public ResponseEntity<HealthPersonnel> deleteHealthPatient(@PathVariable Long id) {
 
+<<<<<<< Updated upstream
         if (healthPersonnelManager.exists(id)) {
             healthPersonnelManager.deleteHealthPersonnel(id);
+=======
+        if (healthPersonnelRepository.findById(id).isPresent()) {
+            healthPersonnelRepository.delete(healthPersonnelRepository.findById(id).get());
+>>>>>>> Stashed changes
 
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
@@ -59,12 +85,22 @@ public class HealthPersonnelRestControl {
     //GET ONE SPECIFIED USER
 
     @GetMapping("/api/healthPersonnel/{id}")
+<<<<<<< Updated upstream
     public ResponseEntity<HealthPersonnel> getHealthPersonnel(@PathVariable Long id) {
         if (healthPersonnelManager.exists(id)) {
             HealthPersonnel healthPersonnelTemp = healthPersonnelManager.returnHealthPersonnel(id);
             return new ResponseEntity<>(healthPersonnelTemp, HttpStatus.OK);
         } else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+=======
+    public ResponseEntity<HealthPersonnel> getHealthPersonnel(@PathVariable Integer id) {
+        Optional<HealthPersonnel> op = healthPersonnelRepository.findById(id);
+        if (op.isPresent()) {
+            HealthPersonnel healthPersonnel = op.get();
+            return new ResponseEntity<>(healthPersonnel, HttpStatus.OK);
+        }  
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+>>>>>>> Stashed changes
     }
 
 
@@ -73,13 +109,18 @@ public class HealthPersonnelRestControl {
     @GetMapping("/api/healthPersonnel")
     @ResponseStatus(HttpStatus.OK)
     public Collection<HealthPersonnel> advertisements() {
+<<<<<<< Updated upstream
         return healthPersonnelManager.returnAll();
+=======
+        return healthPersonnelRepository.findAll();
+>>>>>>> Stashed changes
     }
 
 
     //UPDATE ONLY SPECIFIED FIELDS
 
     @PatchMapping("/api/healthPersonnel/{id}")
+<<<<<<< Updated upstream
     public ResponseEntity<HealthPersonnel> patch(@RequestBody HealthPersonnel healthPersonnel, @PathVariable Long id) {
         if (healthPersonnelManager.exists(id)) {
             if (healthPersonnel.getUsername() != null)
@@ -94,6 +135,22 @@ public class HealthPersonnelRestControl {
                 healthPersonnelManager.updateRole(healthPersonnel.getRole(), id);
 
             HealthPersonnel healthPersonnelTemp = healthPersonnelManager.returnHealthPersonnel(id);
+=======
+    public ResponseEntity<HealthPersonnel> patch(@RequestBody HealthPersonnel healthPersonnel, @PathVariable Integer id) {
+        if (healthPersonnelRepository.findById(id).isPresent()) {
+            if (healthPersonnel.getUsername() != null)
+                healthPersonnelRepository.updateUsername(healthPersonnel.getUsername(), id);
+            if (healthPersonnel.getPassword() != null)
+                healthPersonnelRepository.updatePassword(healthPersonnel.getPassword(), id);
+            if (healthPersonnel.getEmail() != null)
+                healthPersonnelRepository.updateEmail(healthPersonnel.getEmail(), id);
+            if (healthPersonnel.getdni() != null)
+                healthPersonnelRepository.updateDni(healthPersonnel.getdni(), id);
+            if (healthPersonnel.getRole() != null)
+                healthPersonnelRepository.updateRole(healthPersonnel.getRole(), id);
+
+            Optional <HealthPersonnel> op = healthPersonnelRepository.findById(id);
+>>>>>>> Stashed changes
 
             return new ResponseEntity<>(healthPersonnelTemp, HttpStatus.OK);
         } else {

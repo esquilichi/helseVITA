@@ -1,6 +1,5 @@
 package spring.io;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -38,9 +36,16 @@ public class PatientRestControl {
     //FIND USER FOR PATIENT AND HEALTH SERVICE
 
     @PutMapping("/api/patients/{id}")
+<<<<<<< Updated upstream
     public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patient) {
         if (patientManager.exists(id)) {
             patientManager.editPatient(id, patient);
+=======
+    public ResponseEntity<Patient> updatePatient(@PathVariable Integer id, @RequestBody Patient patient) {
+        Optional <Patient> op = patientService.findById(id);
+        if (op.isPresent()) {
+            patientService.updatePatient(patient);
+>>>>>>> Stashed changes
             return new ResponseEntity<>(patient, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -3,15 +3,92 @@ package spring.io;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+<<<<<<< Updated upstream
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
+=======
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+>>>>>>> Stashed changes
 @Service
 
 public class HealthPersonnelService {
 
+<<<<<<< Updated upstream
     private Map <HealthPersonnel, List <Patient>> patientsList = new ConcurrentHashMap< HealthPersonnel, List <Patient>>();
+=======
+
+	@Autowired
+	PatientRepository patientRepository;
+
+	@Autowired
+	HealthPersonnelRepository healthPersonnelRepository;
+
+
+	public Collection<HealthPersonnel> viewHealthPersonnel() {
+		return healthPersonnelRepository.findAll();
+	}
+
+
+
+
+	//ESPERO QUE ESTO FUNCIONE VALE :) HASTA QUE NO PODAMOS COMPILAR NADA
+	public void saveHealthPersonnel(HealthPersonnel healthPersonnel){
+		healthPersonnelRepository.save(healthPersonnel);
+	}
+
+	public Optional<HealthPersonnel> getHealthPersonnelbyId(Integer id){
+		return this.healthPersonnelRepository.findById(id);
+	}
+
+	/*public List<Patient> returnAllHealthPatients() {
+		List<Patient> patients = new ArrayList<>();
+		healthPersonnelRepository.findAll().forEach(patients::add);
+		return patients;
+	}
+	*/
+
+	public HealthPersonnel addHealthPersonnel(HealthPersonnel healthPersonnel){
+		HealthPersonnel temp = healthPersonnelRepository.save(healthPersonnel);
+		return temp;
+	}
+	public Optional<HealthPersonnel> returnPatient(HealthPersonnel healthPersonnel, Integer id){
+		return healthPersonnelRepository.findById(id);
+	}
+	public void updateHealthPersonnel(HealthPersonnel healthPersonnel){
+		/* Youtube dice que el metodo save() sabe si ya exista esa instancia del objeto
+		y haciendo el save() lo cambia el solito, espero que funcione así realmente
+		 */
+		healthPersonnelRepository.save(healthPersonnel);
+	}
+	public void delete(HealthPersonnel healthPersonnel){
+		healthPersonnelRepository.delete(healthPersonnel);
+	}
+
+	public List<HealthPersonnel> findAll(){
+		List<HealthPersonnel> list = new ArrayList<>();
+		this.healthPersonnelRepository.findAll().forEach(list::add);
+		return list;
+	}
+
+	public Optional<HealthPersonnel> findById(Integer id) {
+		return this.healthPersonnelRepository.findById(id);
+	}
+
+	public void updateUsername() {
+		// SE HACE CON TYPED QUERY
+	}
+
+
+
+    /*private Map <HealthPersonnel, List <Patient>> patientsList = new ConcurrentHashMap< HealthPersonnel, List <Patient>>();
+>>>>>>> Stashed changes
     //private Centro centro;
     //private Map<Long, User> map = new ConcurrentHashMap<Long, User>();
     private Long lastId = (long) -1;

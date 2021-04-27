@@ -10,6 +10,11 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
+<<<<<<< Updated upstream
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+
+>>>>>>> Stashed changes
 @Service
 public class PatientService {
 
