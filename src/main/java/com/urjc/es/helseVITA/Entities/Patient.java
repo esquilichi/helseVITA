@@ -21,13 +21,13 @@ public class Patient {
     private String dni;
 
     @Column
-    private String nombre;
+    private String name;
     @Column
-    private String apellido1;
+    private String surename1;
     @Column
-    private String apellido2;
+    private String surename2;
     @Column
-    private Integer edad;
+    private Integer age;
 
     @ManyToMany
     private List<HealthPersonnel> healthPersonnelList;
@@ -37,15 +37,15 @@ public class Patient {
 
     public Patient(){ }
 
-    public Patient(String username, String password, String email, String dni, String nombre, String apellido1, String apellido2, Integer edad) {
+    public Patient(String username, String password, String email, String dni, String name, String surename1, String surename2, Integer age) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.dni = dni;
-        this.nombre = nombre;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.edad = edad;
+        this.name = name;
+        this.surename1 = surename1;
+        this.surename2 = surename2;
+        this.age = age;
     }
 
     public Integer getId() {
@@ -88,35 +88,35 @@ public class Patient {
         this.dni = dni;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getApellido1() {
-        return apellido1;
+    public String getSurename1() {
+        return surename1;
     }
 
-    public void setApellido1(String apellido1) {
-        this.apellido1 = apellido1;
+    public void setSurename1(String surename1) {
+        this.surename1 = surename1;
     }
 
-    public String getApellido2() {
-        return apellido2;
+    public String getSurename2() {
+        return surename2;
     }
 
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
+    public void setSurename2(String surename2) {
+        this.surename2 = surename2;
     }
 
-    public Integer getEdad() {
-        return edad;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setEdad(Integer edad) {
-        this.edad = edad;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

@@ -5,6 +5,8 @@ import com.urjc.es.helseVITA.Repositories.HealthPersonnelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,19 +16,42 @@ public class HealthPersonnelService {
     @Autowired
     HealthPersonnelRepository healthPersonnelRepository;
 
-    public Optional<HealthPersonnel> findById(Integer id){
-        return healthPersonnelRepository.findById(id);
+    
+    public HealthPersonnel addHealthPersonnel(HealthPersonnel HealthPersonnel){
+        return healthPersonnelRepository.save(HealthPersonnel);
     }
 
-    public List<HealthPersonnel> findAll(){
-        return healthPersonnelRepository.findAll();
+    public boolean exists(Integer id){
+        //Hay que mirar si funciona, deberia devolver Optional<>
+        if (healthPersonnelRepository.findById(id) != null){
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public List<HealthPersonnel> findByDni(String dni){
-        return healthPersonnelRepository.findHealthPersonnelByDni(dni);
+    public void delete(Integer id){
+        HealthPersonnel temp;
+        Optional<HealthPersonnel> tempOptional = healthPersonnelRepository.findById(id);
+            if (tempOptional.isPresent()) {
+                temp = tempOptional.get();
+                healthPersonnelRepository.delete(temp);
+            }
     }
 
-    public List<HealthPersonnel> findByUsername(String username){
-        return healthPersonnelRepository.findHealthPersonnelByUsername(username);
+    public HealthPersonnel returnHealthPersonnel(Integer id){
+        HealthPersonnel temp;
+        Optional<HealthPersonnel> tempOptional = healthPersonnelRepository.findById(id);
+        if (tempOptional.isPresent()){
+            temp = tempOptional.get();
+            return temp;
+        }
+        return null;
+    }
+
+    public Collection<HealthPersonnel> returnAllHealthPersonnels(){
+        List<HealthPersonnel> list = new ArrayList<>();
+        healthPersonnelRepository.findAll().forEach(list::add);
+        return list;
     }
 }

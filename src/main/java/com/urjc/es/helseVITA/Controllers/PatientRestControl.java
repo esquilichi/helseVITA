@@ -53,18 +53,18 @@ public class PatientRestControl {
         return patientService.returnAllPatients();
     }
 
-    @PatchMapping("/api/patiends/{id}")
+    @PatchMapping("/api/patients/{id}")
     public ResponseEntity<Patient> patchPatient(@PathVariable Integer id, @RequestBody Patient patient){
         if (patientService.exists(id)){
             //Get actual Patient with that ID
             Patient temp = patientService.returnPatient(id);
 
-            if (patient.getNombre() != null)
-                temp.setNombre(patient.getNombre());
-            if(patient.getApellido1() != null)
-                temp.setApellido1(patient.getApellido1());
-            if (patient.getApellido2() != null)
-                temp.setApellido2(patient.getApellido2());
+            if (patient.getName() != null)
+                temp.setName(patient.getName());
+            if(patient.getSurename1() != null)
+                temp.setSurename1(patient.getSurename1());
+            if (patient.getSurename2() != null)
+                temp.setSurename2(patient.getSurename2());
             if (patient.getDni() != null)
                 temp.setDni(patient.getDni());
             if (patient.getEmail() != null)
@@ -73,8 +73,8 @@ public class PatientRestControl {
                 temp.setPassword(patient.getPassword());
             if (patient.getUsername() != null)
                 temp.setUsername(patient.getUsername());
-            if (patient.getEdad() < 0)
-                temp.setEdad(patient.getEdad());
+            if (patient.getAge() < 0)
+                temp.setAge(patient.getAge());
 
             return new ResponseEntity<>(patientService.addPatient(temp),HttpStatus.OK);
         }
