@@ -53,7 +53,7 @@ public class AppointmentsRestControl {
         return appointmentService.returnAllAppointments();
     }
 
-    @PatchMapping("/api/Appointments/{id}")
+    @PatchMapping("/api/appointments/{id}")
     public ResponseEntity<Appointment> patchAppointment(@PathVariable Integer id, @RequestBody Appointment appointment){
         if (appointmentService.exists(id)){
             //Get actual Appointment with that ID

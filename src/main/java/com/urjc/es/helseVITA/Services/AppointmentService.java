@@ -3,12 +3,14 @@ package com.urjc.es.helseVITA.Services;
 import com.urjc.es.helseVITA.Entities.Appointment;
 import com.urjc.es.helseVITA.Repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class AppointmentService {
     @Autowired
     AppointmentRepository appointmentRepository;
