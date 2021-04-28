@@ -1,4 +1,4 @@
-package spring.io;
+package com.urjc.es.helseVITA;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

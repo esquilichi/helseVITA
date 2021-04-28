@@ -1,4 +1,4 @@
-package spring.io;
+package com.urjc.es.helseVITA;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
