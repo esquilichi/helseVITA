@@ -22,11 +22,7 @@ public class PatientService {
 
     public boolean exists(Integer id){
         //Hay que mirar si funciona, deberia devolver Optional<>
-        if (patientRepository.findById(id) != null){
-            return true;
-        } else {
-            return false;
-        }
+        return patientRepository.findById(id).isPresent();
     }
 
     public void delete(Integer id){
@@ -52,5 +48,20 @@ public class PatientService {
         List<Patient> list = new ArrayList<>();
         patientRepository.findAll().forEach(list::add);
         return list;
+    }
+
+    public Patient searchUsername(String text){
+        Optional<Patient> op = patientRepository.findByUsername(text);
+        return op.orElse(null);
+    }
+
+    public Patient searchEmail(String text){
+        Optional<Patient> op = patientRepository.findByEmail(text);
+        return op.orElse(null);
+    }
+
+    public Patient searchDNI(String text){
+        Optional<Patient> op = patientRepository.findByDni(text);
+        return op.orElse(null);
     }
 }

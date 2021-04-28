@@ -54,4 +54,28 @@ public class HealthPersonnelService {
         healthPersonnelRepository.findAll().forEach(list::add);
         return list;
     }
+
+    public HealthPersonnel searchUsername(String text){
+        Optional<HealthPersonnel> op = healthPersonnelRepository.findHealthPersonnelByUsername(text);
+        if (op.isPresent()){
+            return op.get();
+        }
+        return null;
+    }
+
+    public HealthPersonnel searchEmail(String text){
+        Optional<HealthPersonnel> op = healthPersonnelRepository.findHealthPersonnelByEmail(text);
+        if (op.isPresent()){
+            return op.get();
+        }
+        return null;
+    }
+
+    public HealthPersonnel searchDni(String text){
+        Optional<HealthPersonnel> op = healthPersonnelRepository.findHealthPersonnelByDni(text);
+        if (op.isPresent()){
+            return op.get();
+        }
+        return null;
+    }
 }
