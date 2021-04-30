@@ -23,28 +23,28 @@ public class Patient {
     @Column
     private String name;
     @Column
-    private String surename1;
+    private String surname1;
     @Column
-    private String surename2;
+    private String surname2;
     @Column
     private Integer age;
 
     @ManyToMany
     private List<HealthPersonnel> healthPersonnelList;
 
-    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="patient",cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 
     public Patient(){ }
 
-    public Patient(String username, String password, String email, String dni, String name, String surename1, String surename2, Integer age) {
+    public Patient(String username, String password, String email, String dni, String name, String surname1, String surname2, Integer age) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.dni = dni;
         this.name = name;
-        this.surename1 = surename1;
-        this.surename2 = surename2;
+        this.surname1 = surname1;
+        this.surname2 = surname2;
         this.age = age;
     }
 
@@ -96,20 +96,20 @@ public class Patient {
         this.name = name;
     }
 
-    public String getSurename1() {
-        return surename1;
+    public String getSurname1() {
+        return surname1;
     }
 
-    public void setSurename1(String surename1) {
-        this.surename1 = surename1;
+    public void setSurname1(String surname1) {
+        this.surname1 = surname1;
     }
 
-    public String getSurename2() {
-        return surename2;
+    public String getSurname2() {
+        return surname2;
     }
 
-    public void setSurename2(String surename2) {
-        this.surename2 = surename2;
+    public void setSurname2(String surname2) {
+        this.surname2 = surname2;
     }
 
     public Integer getAge() {

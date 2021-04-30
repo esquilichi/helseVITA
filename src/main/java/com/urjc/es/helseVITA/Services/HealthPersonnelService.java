@@ -14,7 +14,7 @@ import java.util.Optional;
 public class HealthPersonnelService {
 
     @Autowired
-    HealthPersonnelRepository healthPersonnelRepository;
+    HealthPersonnelRepository healthPersonnelRepository;    
 
     
     public HealthPersonnel addHealthPersonnel(HealthPersonnel HealthPersonnel){

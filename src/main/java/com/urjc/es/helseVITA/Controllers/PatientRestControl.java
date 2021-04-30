@@ -61,10 +61,10 @@ public class PatientRestControl {
 
             if (patient.getName() != null)
                 temp.setName(patient.getName());
-            if(patient.getSurename1() != null)
-                temp.setSurename1(patient.getSurename1());
-            if (patient.getSurename2() != null)
-                temp.setSurename2(patient.getSurename2());
+            if(patient.getSurname1() != null)
+                temp.setSurname1(patient.getSurname1());
+            if (patient.getSurname2() != null)
+                temp.setSurname2(patient.getSurname2());
             if (patient.getDni() != null)
                 temp.setDni(patient.getDni());
             if (patient.getEmail() != null)
@@ -73,7 +73,7 @@ public class PatientRestControl {
                 temp.setPassword(patient.getPassword());
             if (patient.getUsername() != null)
                 temp.setUsername(patient.getUsername());
-            if (patient.getAge() < 0)
+            if (patient.getAge() !=null)
                 temp.setAge(patient.getAge());
 
             return new ResponseEntity<>(patientService.addPatient(temp),HttpStatus.OK);

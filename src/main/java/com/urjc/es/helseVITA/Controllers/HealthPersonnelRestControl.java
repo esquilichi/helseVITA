@@ -52,7 +52,7 @@ public class HealthPersonnelRestControl {
         return healthPersonnelService.returnAllHealthPersonnels();
     }
 
-    @PatchMapping("/api/healthPersonnel/{id}")
+    @PatchMapping("/api/healthPersonnels/{id}")
     public ResponseEntity<HealthPersonnel> patchHealthPersonnel(@PathVariable Integer id, @RequestBody HealthPersonnel healthPersonnel){
         if (healthPersonnelService.exists(id)){
             //Get actual HealthPersonnel with that ID
@@ -60,10 +60,10 @@ public class HealthPersonnelRestControl {
 
             if (healthPersonnel.getName() != null)
                 temp.setName(healthPersonnel.getName());
-            if(healthPersonnel.getSurename1() != null)
-                temp.setSurename1(healthPersonnel.getSurename1());
-            if (healthPersonnel.getSurename2() != null)
-                temp.setSurename2(healthPersonnel.getSurename2());
+            if(healthPersonnel.getSurname1() != null)
+                temp.setSurname1(healthPersonnel.getSurname1());
+            if (healthPersonnel.getSurname2() != null)
+                temp.setSurname2(healthPersonnel.getSurname2());
             if (healthPersonnel.getDni() != null)
                 temp.setDni(healthPersonnel.getDni());
             if (healthPersonnel.getEmail() != null)
@@ -72,7 +72,7 @@ public class HealthPersonnelRestControl {
                 temp.setPassword(healthPersonnel.getPassword());
             if (healthPersonnel.getUsername() != null)
                 temp.setUsername(healthPersonnel.getUsername());
-            if (healthPersonnel.getAge() < 0)
+            if (healthPersonnel.getAge() != null)
                 temp.setAge(healthPersonnel.getAge());
 
             return new ResponseEntity<>(healthPersonnelService.addHealthPersonnel(temp),HttpStatus.OK);

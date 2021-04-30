@@ -8,7 +8,7 @@ import java.util.List;
 public class HealthPersonnel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
 
@@ -24,27 +24,27 @@ public class HealthPersonnel {
     @Column
     private String name;
     @Column
-    private String surename1;
+    private String surname1;
     @Column
-    private String surename2;
+    private String surname2;
     @Column
     private Integer age;
 
     @ManyToMany
     private List<Patient> patients;
 
-    @OneToMany
+    @OneToMany (mappedBy="healthPersonnel",cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 
-    public HealthPersonnel(String username, String password, String email, String dni, List<Patient> patients, String name, String surename1, String surename2, Integer age) {
+    public HealthPersonnel(String username, String password, String email, String dni, List<Patient> patients, String name, String surname1, String surname2, Integer age) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.dni = dni;
         this.patients = patients;
         this.name = name;
-        this.surename1 = surename1;
-        this.surename2 = surename2;
+        this.surname1 = surname1;
+        this.surname2 = surname2;
         this.age = age;
     }
 
@@ -116,20 +116,20 @@ public class HealthPersonnel {
         this.name = name;
     }
 
-    public String getSurename1() {
-        return surename1;
+    public String getSurname1() {
+        return surname1;
     }
 
-    public void setSurename1(String surename1) {
-        this.surename1 = surename1;
+    public void setSurname1(String surname1) {
+        this.surname1 = surname1;
     }
 
-    public String getSurename2() {
-        return surename2;
+    public String getSurname2() {
+        return surname2;
     }
 
-    public void setSurename2(String surename2) {
-        this.surename2 = surename2;
+    public void setSurname2(String surname2) {
+        this.surname2 = surname2;
     }
 
     public Integer getAge() {
