@@ -116,7 +116,7 @@
 
 				<input type="text" id="myInput" class="form-control" onkeyup="edad()" placeholder="Filtrado por edad" title="Busqueda Dinámica">
 
-				<input type="text" id="myInput2" class="form-control" onkeyup="cambia_id()" placeholder="Filtrado por nombre" title="Nombre">
+				<input type="text" id="myInput2" class="form-control" onkeyup="cambia_nombre()" placeholder="Filtrado por nombre" title="Nombre">
 
 				<input type="text" id="myInput3" class="form-control" onkeyup="cambia_apellido1()" placeholder="Filtrado por primer apellido" title="Apellido">
 			</form>
@@ -143,7 +143,7 @@
 						<th>{{email}}</th>
 						<th>{{age}}</th>
 						<th>{{username}}</th>
-						<th><a href="addAppointment/{{id}}">Nueva cita</a></th>
+						<th><a href="/addAppointment/{{id}}">Nueva cita</a></th>
 						</tr>
 						{{/object}}
 					</tbody>

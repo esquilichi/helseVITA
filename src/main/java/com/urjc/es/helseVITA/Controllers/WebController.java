@@ -141,9 +141,9 @@ public class WebController {
         }
     }
 
-    @RequestMapping("patient/addAppointment/{id}")
+    @RequestMapping("/addAppointment/{id}")
     public ModelAndView addAppointment(@PathVariable Integer id) {
-        var mv = new ModelAndView("appointment.html");
+        var mv = new ModelAndView("appointment");
         mv.addObject("paciente", patientService.returnPatient(id));
         mv.addObject("medicos", healthPersonnelService.returnAllHealthPersonnels());
         mv.addObject("citas", patientService.returnPatient(id).getHealthPersonnelList()); 

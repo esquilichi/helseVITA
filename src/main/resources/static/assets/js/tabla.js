@@ -71,3 +71,9 @@ function cambia_apellido1(){
         }
     }
 }
+
+function chulo(){
+    let input;
+    input = document.getElementById("miInputChulo");
+    alert(input.value);
+}
