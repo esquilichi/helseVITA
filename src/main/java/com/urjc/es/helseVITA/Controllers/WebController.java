@@ -49,7 +49,7 @@ public class WebController {
     }
 
     @RequestMapping("/viewHealthPersonnel")
-    ModelAndView viewHealthPersonnel(){
+    ModelAndView viewHealthPersonnel() {
         var mv = new ModelAndView("mostrarSanitario");
         mv.addObject("users", healthPersonnelService.returnAllHealthPersonnels());
         return mv;
@@ -81,16 +81,16 @@ public class WebController {
     }
     */
     @GetMapping({"/searchPatient"})
-    public String patientList(Model model, @RequestParam(name="q", required=false) String query) {
+    public String patientList(Model model, @RequestParam(name = "q", required = false) String query) {
         Collection<HealthPersonnel> result = (query == null) ? healthPersonnelService.returnAllHealthPersonnels() : healthPersonnelService.search(query);
-        model.addAttribute("object",result);
+        model.addAttribute("object", result);
         return "buscarPaciente";
     }
 
     @GetMapping({"/searchHealthPersonnel"})
-    public String healthPersonnelList(Model model, @RequestParam(name="q", required=false) String query) {
+    public String healthPersonnelList(Model model, @RequestParam(name = "q", required = false) String query) {
         Collection<HealthPersonnel> result = (query == null) ? healthPersonnelService.returnAllHealthPersonnels() : healthPersonnelService.search(query);
-        model.addAttribute("object",result);
+        model.addAttribute("object", result);
         return "buscarSanitario";
     }
 
@@ -119,31 +119,34 @@ public class WebController {
 
     //Call to the exception
     @ExceptionHandler(UserNotFoundException.class)
-    public ModelAndView exception(UserNotFoundException e){
+    public ModelAndView exception(UserNotFoundException e) {
         var mv = new ModelAndView("user-not-found");
-        mv.addObject("username",e.getUsername());
+        mv.addObject("username", e.getUsername());
         return mv;
     }
 
     @ExceptionHandler(IncorrectSearchParametersException.class)
-    public ModelAndView exception2(IncorrectSearchParametersException e){
+    public ModelAndView exception2(IncorrectSearchParametersException e) {
         return new ModelAndView("incorrect-parameters");
     }
+
     @GetMapping("/chooseDoctors")
-    public ModelAndView chooseDoc(@RequestParam(required = false)  String id){
-        if (id != null){
+    public ModelAndView chooseDoc(@RequestParam(required = false) String id) {
+        if (id != null) {
             var mv = new ModelAndView("choose-doctor");
-            mv.addObject("doctors",healthPersonnelService.returnAllHealthPersonnels());
+            mv.addObject("doctors", healthPersonnelService.returnAllHealthPersonnels());
             mv.addObject("id", Long.parseLong(id) - 1);
             return mv;
-        }else{
+        } else {
             return new ModelAndView("index");
         }
     }
-    @RequestMapping("/addAppointment/{id}")
-    public ModelAndView addAppointment(@PathVariable Integer id){
-        var mv = new ModelAndView("addAppointment");
+
+    @RequestMapping("/Appointment/{id}")
+    public ModelAndView addAppointment(@PathVariable Integer id) {
+        var mv = new ModelAndView("Appointment");
         mv.addObject("paciente", patientService.returnPatient(id));
+        mv.addObject("medicos", healthPersonnelService.returnAllHealthPersonnels());
         mv.addObject("citas", patientService.returnPatient(id).getHealthPersonnelList());
         return mv;
     }
