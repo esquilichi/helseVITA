@@ -1,6 +1,9 @@
 package com.urjc.es.helseVITA.Entities;
 
 import javax.persistence.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 @Entity
@@ -20,6 +23,8 @@ public class HealthPersonnel {
     private String email;
     @Column(nullable = false)
     private String dni;
+    @Column
+    private String role;
 
     @Column
     private String name;
@@ -31,22 +36,57 @@ public class HealthPersonnel {
     private Integer age;
 
     @ManyToMany
+    @Autowired
     private List<Patient> patients;
 
     @OneToMany (mappedBy="healthPersonnel",cascade = CascadeType.ALL)
+    @Autowired
     private List<Appointment> appointments;
 
-    public HealthPersonnel(String username, String password, String email, String dni, List<Patient> patients, String name, String surname1, String surname2, Integer age) {
+    public HealthPersonnel(String username, String password, String email, String dni, String name, String surname1, String surname2, Integer age, String role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.dni = dni;
-        this.patients = patients;
         this.name = name;
         this.surname1 = surname1;
         this.surname2 = surname2;
         this.age = age;
+        this.role=role;
     }
+
+    
+
+    public HealthPersonnel(Integer id, String username, String password, String email, String dni, String role,
+            String name, String surname1, String surname2, Integer age, List<Patient> patients,
+            List<Appointment> appointments) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.dni = dni;
+        this.role = role;
+        this.name = name;
+        this.surname1 = surname1;
+        this.surname2 = surname2;
+        this.age = age;
+        this.patients = patients;
+        this.appointments = appointments;
+    }
+
+
+
+    public String getRole() {
+        return role;
+    }
+
+
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+
 
     public HealthPersonnel() {
 

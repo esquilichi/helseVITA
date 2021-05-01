@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
-import java.util.Map;
 
 @Controller
 public class WebController {
@@ -142,12 +141,12 @@ public class WebController {
         }
     }
 
-    @RequestMapping("/Appointment/{id}")
+    @RequestMapping("patient/addAppointment/{id}")
     public ModelAndView addAppointment(@PathVariable Integer id) {
-        var mv = new ModelAndView("Appointment");
+        var mv = new ModelAndView("appointment.html");
         mv.addObject("paciente", patientService.returnPatient(id));
         mv.addObject("medicos", healthPersonnelService.returnAllHealthPersonnels());
-        mv.addObject("citas", patientService.returnPatient(id).getHealthPersonnelList());
+        mv.addObject("citas", patientService.returnPatient(id).getHealthPersonnelList()); 
         return mv;
     }
 }

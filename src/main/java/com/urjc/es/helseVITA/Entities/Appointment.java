@@ -33,6 +33,16 @@ public class Appointment {
         this.patient = patient;
     }
 
+    
+
+    public Appointment(Integer id, Integer hour, Integer day, Integer month, Integer year) {
+        this.id = id;
+        this.hour = hour;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
+
     public Integer getId() {
         return id;
     }

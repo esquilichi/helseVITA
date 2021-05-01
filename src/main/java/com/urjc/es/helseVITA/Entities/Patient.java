@@ -1,6 +1,9 @@
 package com.urjc.es.helseVITA.Entities;
 
 import javax.persistence.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 @Entity
@@ -30,9 +33,11 @@ public class Patient {
     private Integer age;
 
     @ManyToMany
+    @Autowired
     private List<HealthPersonnel> healthPersonnelList;
 
     @OneToMany(mappedBy="patient",cascade = CascadeType.ALL)
+    @Autowired
     private List<Appointment> appointments;
 
     public Patient(){ }
@@ -46,6 +51,23 @@ public class Patient {
         this.surname1 = surname1;
         this.surname2 = surname2;
         this.age = age;
+    }
+
+    
+
+    public Patient(Integer id, String username, String password, String email, String dni, String name, String surname1,
+            String surname2, Integer age, List<HealthPersonnel> healthPersonnelList, List<Appointment> appointments) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.dni = dni;
+        this.name = name;
+        this.surname1 = surname1;
+        this.surname2 = surname2;
+        this.age = age;
+        this.healthPersonnelList = healthPersonnelList;
+        this.appointments = appointments;
     }
 
     public Integer getId() {

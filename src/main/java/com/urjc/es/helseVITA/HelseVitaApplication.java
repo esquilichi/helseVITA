@@ -42,16 +42,24 @@ public class HelseVitaApplication {
 			String name =names.get(i-1);
 			String surname1 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			String surname2 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
-			return new Patient(String.format("%s%s", name, surname1),String.format("1234%s", name),String.format("%s.%s@helsevita.com",
+			List<HealthPersonnel> healthPersonnelList = fillHealthPersonnelList(healthPersonnelRepository);
+	
+			Patient temp = new Patient(String.format("%s%s", name, surname1),String.format("1234%s", name),String.format("%s.%s@helsevita.com",
 				name.toLowerCase(),surname1.toLowerCase()),"93827461S", name, surname1, surname2, 14);
+			temp.setHealthPersonnelList(healthPersonnelList);	
+			return temp;
 		}).collect(Collectors.toList()));
 
 		healthPersonnelRepository.saveAll(IntStream.rangeClosed(1, names.size()).mapToObj((i) -> {
 			String name =names.get(i-1);
 			String surname1 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			String surname2 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
-			return new HealthPersonnel(String.format("%s%s", name, surname1),String.format("1234%s", name),String.format("%s.%s@helsevita.com",
-				name.toLowerCase(),surname1.toLowerCase()),"93827461S", fillPatientsList(patientRepository), name, surname1, surname2, (int) (Math.random() * 100));
+			List<Patient> patientsList = fillPatientsList(patientRepository);
+	
+			HealthPersonnel temp = new HealthPersonnel(String.format("%s%s", name, surname1),String.format("1234%s", name),String.format("%s.%s@helsevita.com",
+				name.toLowerCase(),surname1.toLowerCase()),"93827461S", name, surname1, surname2, (int) (Math.random() * 100), null);
+			temp.setPatients(patientsList);
+			return temp; 
 		}).collect(Collectors.toList()));
 		};
 	}
@@ -67,6 +75,19 @@ public class HelseVitaApplication {
 			}
 		}
 		return patientsList;
+	}
+
+	private List<HealthPersonnel> fillHealthPersonnelList(HealthPersonnelRepository healthPersonnelRepository){
+		List <HealthPersonnel> healthPersonnelList=new ArrayList<>();
+		while (healthPersonnelList.size()<4) {
+			int rand; 
+			rand = (int) (Math.random() * 10); 
+			Optional <HealthPersonnel> temp = healthPersonnelRepository.findById(rand);
+			if(temp.isPresent()){
+				healthPersonnelList.add(temp.get());
+			}
+		}
+		return healthPersonnelList;
 	}
 
 }
