@@ -80,34 +80,17 @@ public class WebController {
         throw new UserNotFoundException(text);
     }
     */
-    @GetMapping("/searchPatient")
-    ModelAndView searchPatient(@RequestParam Map<String,String> requestParams) {
-        String input=requestParams.get("input");
-        String text=requestParams.get("username");
-        Patient userTemp = new Patient();
-
-        if(input.equals("0")){
-            userTemp = patientService.searchUsername(text);
-        }else if(input.equals("1")){
-            userTemp = patientService.searchEmail(text);
-        }else if(input.equals("2")){
-            userTemp = patientService.searchDNI(text);
-        }else{
-            throw new IncorrectSearchParametersException();
-        }
-        if(userTemp!=null){
-            var mv = new ModelAndView("mostrar");
-            mv.addObject("user", userTemp);
-            return mv;
-        }
-        throw new UserNotFoundException(text);
+    @GetMapping({"/searchPatient"})
+    public String patientList(Model model, @RequestParam(name="q", required=false) String query) {
+        Collection<HealthPersonnel> result = (query == null) ? healthPersonnelService.returnAllHealthPersonnels() : healthPersonnelService.search(query);
+        model.addAttribute("object",result);
+        return "buscarPaciente";
     }
 
-    @GetMapping({"/buscarSanitario"})
+    @GetMapping({"/searchHealthPersonnel"})
     public String healthPersonnelList(Model model, @RequestParam(name="q", required=false) String query) {
         Collection<HealthPersonnel> result = (query == null) ? healthPersonnelService.returnAllHealthPersonnels() : healthPersonnelService.search(query);
         model.addAttribute("object",result);
-       
         return "buscarSanitario";
     }
 
