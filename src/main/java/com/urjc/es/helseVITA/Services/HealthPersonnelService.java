@@ -55,6 +55,11 @@ public class HealthPersonnelService {
         return list;
     }
 
+    public List<HealthPersonnel> search(String input){
+        return healthPersonnelRepository.findHealthPersonnelByNameContains(input/*, input, input, input*/); 
+    }
+
+    /*
     public HealthPersonnel searchUsername(String text){
         Optional<HealthPersonnel> op = healthPersonnelRepository.findHealthPersonnelByUsername(text);
         if (op.isPresent()){
@@ -77,5 +82,5 @@ public class HealthPersonnelService {
             return op.get();
         }
         return null;
-    }
+    }*/
 }

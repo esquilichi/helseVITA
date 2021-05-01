@@ -1,6 +1,7 @@
 package com.urjc.es.helseVITA.Controllers;
 
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
+//import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Exceptions.IncorrectSearchParametersException;
 import com.urjc.es.helseVITA.Exceptions.UserNotFoundException;
@@ -8,9 +9,11 @@ import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collection;
 import java.util.Map;
 
 @Controller
@@ -100,7 +103,15 @@ public class WebController {
         throw new UserNotFoundException(text);
     }
 
-    @GetMapping("/searchHealthPersonnel")
+    @GetMapping({"/buscarSanitario"})
+    public String healthPersonnelList(Model model, @RequestParam(name="q", required=false) String query) {
+        Collection<HealthPersonnel> result = (query == null) ? healthPersonnelService.returnAllHealthPersonnels() : healthPersonnelService.search(query);
+        model.addAttribute("healthPersonnelList",result);
+       
+        return "buscarSanitario";
+    }
+
+    /*@GetMapping("/searchHealthPersonnel")
     ModelAndView searchHealthPersonnel(@RequestParam Map<String,String> requestParams) {
         String input=requestParams.get("input");
         String text=requestParams.get("username");
@@ -121,7 +132,7 @@ public class WebController {
             return mv;
         }
         throw new UserNotFoundException(text);
-    }
+    }*/
 
     //Call to the exception
     @ExceptionHandler(UserNotFoundException.class)
