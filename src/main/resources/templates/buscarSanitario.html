@@ -32,6 +32,26 @@
 				margin-bottom: 12px;
 			}
 
+			#myInput2 {
+				background-position: 10px 10px;
+				background-repeat: no-repeat;
+				width: 100%;
+				font-size: 16px;
+				padding: 12px 20px 12px 40px;
+				border: 1px solid #ddd;
+				margin-bottom: 12px;
+			}
+
+			#myInput3 {
+				background-position: 10px 10px;
+				background-repeat: no-repeat;
+				width: 100%;
+				font-size: 16px;
+				padding: 12px 20px 12px 40px;
+				border: 1px solid #ddd;
+				margin-bottom: 12px;
+			}
+
 			#myTable {
 				border-collapse: collapse;
 				width: 100%;
@@ -123,8 +143,12 @@
 					name="q" th:value="${param.q}">
 			</form>
 
-			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="FILTRADO POR EDAD" title="Busqueda Dinámica">
-			<div class="container" style="border-top-color: rgb(151, 214, 181)">
+			<input type="text" id="myInput" onkeyup="edad()" placeholder="FILTRADO POR EDAD" title="Busqueda Dinámica">
+
+			<input type="text" id="myInput2" onkeyup="cambia_id()" placeholder="FILTRADO POR NOMBRE" title="NOMBRE">
+
+			<input type="text" id="myInput3" onkeyup="cambia_apellido1()" placeholder="FILTRADO POR 1º APELLIDO" title="APELLIDO">
+
 
 				<table  class="table" style="border-top-color: rgb(151, 214, 181)">
 					<thead>
@@ -139,7 +163,8 @@
 					</thead>
 					<tbody id="myTable">
 						{{#object}}
-						<tr><th>{{id}}</th>
+						<tr>
+						<th>{{id}}</th>
 						<th>{{name}}</th>
 						<th>{{surname1}}</th>
 						<th>{{surname2}}</th>
