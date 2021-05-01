@@ -51,7 +51,7 @@ public class HelseVitaApplication {
 			String surname1 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			String surname2 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			return new HealthPersonnel(String.format("%s%s", name, surname1),String.format("1234%s", name),String.format("%s.%s@helsevita.com",
-				name.toLowerCase(),surname1.toLowerCase()),"93827461S", fillPatientsList(patientRepository), name, surname1, surname2, 14);
+				name.toLowerCase(),surname1.toLowerCase()),"93827461S", fillPatientsList(patientRepository), name, surname1, surname2, (int) (Math.random() * 100));
 		}).collect(Collectors.toList()));
 		};
 	}

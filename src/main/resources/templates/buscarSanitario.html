@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 	<head>
 	<meta charset="utf-8">
@@ -17,6 +17,41 @@
 		href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
 	<link rel="stylesheet" href="assets/css/Map-Clean.css">
 	<link rel="stylesheet" href="assets/css/smoothproducts.css">
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			#myInput {
+				background-position: 10px 10px;
+				background-repeat: no-repeat;
+				width: 100%;
+				font-size: 16px;
+				padding: 12px 20px 12px 40px;
+				border: 1px solid #ddd;
+				margin-bottom: 12px;
+			}
+
+			#myTable {
+				border-collapse: collapse;
+				width: 100%;
+				border: 1px solid #ddd;
+				font-size: 18px;
+			}
+
+			#myTable th, #myTable td {
+				text-align: left;
+				padding: 12px;
+			}
+
+			#myTable tr {
+				border-bottom: 1px solid #ddd;
+			}
+
+			#myTable tr.header, #myTable tr:hover {
+				background-color: #f1f1f1;
+			}
+		</style>
 	</head>
 	
 	<body>
@@ -80,17 +115,18 @@
 		<section class="clean-block clean-form dark">
 			<div class="container"></div>
 			<div class="block-heading">
-				<h2 style="color: #94d4b4;">Buscar Usuario</h2>
+				<h2 style="color: #94d4b4;">Buscar Sanitario</h2>
 			</div>
 
 			<form  class="navbar-form navbar-right" style="border-top-color: rgb(151, 214, 181)">
 				<input type="text" class="form-control" placeholder="Buscar..."
 					name="q" th:value="${param.q}">
-			</form>			
-			
+			</form>
+
+			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="FILTRADO POR EDAD" title="Busqueda Dinámica">
 			<div class="container" style="border-top-color: rgb(151, 214, 181)">
 
-				<table class="table" style="border-top-color: rgb(151, 214, 181)">
+				<table  class="table" style="border-top-color: rgb(151, 214, 181)">
 					<thead>
 						<tr>
 							<th style="color: #94d4b4">ID</th>
@@ -101,16 +137,17 @@
 							<th style="color: #94d4b4">Edad</th>
 							<th style="color: #94d4b4">Nombre de usuario</th>
 					</thead>
-					<tbody>
-						<tr th:each="healthPersonnel : ${healthPersonnelList}">
-							<td th:text="${healthPersonnel.id}"></td>
-							<td th:text="${healthPersonnel.name}"></td>
-							<td th:text="${healthPersonnel.surname1}"></td>
-							<td th:text="${healthPersonnel.surname2}"></td>
-							<td th:text="${healthPersonnel.email}"></td>
-							<td th:text="${healthPersonnel.age}"></td>
-							<td th:text="${healthPersonnel.username}"></td>
+					<tbody id="myTable">
+						{{#object}}
+						<tr><th>{{id}}</th>
+						<th>{{name}}</th>
+						<th>{{surname1}}</th>
+						<th>{{surname2}}</th>
+						<th>{{email}}</th>
+						<th>{{age}}</th>
+						<th>{{username}}</th>
 						</tr>
+						{{/object}}
 					</tbody>
 				</table>
 
@@ -143,6 +180,8 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
 	<script src="assets/js/smoothproducts.min.js"></script>
 	<script src="assets/js/theme.js"></script>
+	<script src="assets/js/tabla.js"></script>
+
 </body>
 
 </html>

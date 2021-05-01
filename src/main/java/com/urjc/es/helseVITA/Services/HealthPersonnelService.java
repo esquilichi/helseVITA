@@ -56,7 +56,7 @@ public class HealthPersonnelService {
     }
 
     public List<HealthPersonnel> search(String input){
-        return healthPersonnelRepository.findHealthPersonnelByNameContains(input/*, input, input, input*/); 
+        return healthPersonnelRepository.findHealthPersonnelByNameContainsIgnoreCaseOrSurname1ContainsIgnoreCaseOrSurname2ContainsIgnoreCaseOrEmailContainsIgnoreCase(input, input, input, input);
     }
 
     /*

@@ -106,7 +106,7 @@ public class WebController {
     @GetMapping({"/buscarSanitario"})
     public String healthPersonnelList(Model model, @RequestParam(name="q", required=false) String query) {
         Collection<HealthPersonnel> result = (query == null) ? healthPersonnelService.returnAllHealthPersonnels() : healthPersonnelService.search(query);
-        model.addAttribute("healthPersonnelList",result);
+        model.addAttribute("object",result);
        
         return "buscarSanitario";
     }
