@@ -157,4 +157,11 @@ public class WebController {
             return new ModelAndView("index");
         }
     }
+    @RequestMapping("/addAppointment/{id}")
+    public ModelAndView addAppointment(@PathVariable Integer id){
+        var mv = new ModelAndView("addAppointment");
+        mv.addObject("paciente", patientService.returnPatient(id));
+        mv.addObject("citas", patientService.returnPatient(id).getHealthPersonnelList());
+        return mv;
+    }
 }

@@ -1,5 +1,6 @@
 package com.urjc.es.helseVITA.Services;
 
+import com.urjc.es.helseVITA.Entities.Appointment;
 import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +64,18 @@ public class PatientService {
     public Patient searchDNI(String text){
         Optional<Patient> op = patientRepository.findByDni(text);
         return op.orElse(null);
+    }
+
+    public List<Appointment> addAppointmentToPatient(Integer id , Appointment a){
+        Optional<Patient> op  = patientRepository.findById(id);
+        if (op.isPresent()){
+            var temp = op.get();
+            List<Appointment> list = temp.getAppointments();
+            list.add(a);
+            temp.setAppointments(list);
+            patientRepository.save(temp);
+            return list;
+        }
+        return null;
     }
 }
