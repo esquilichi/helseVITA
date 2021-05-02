@@ -76,31 +76,6 @@
 							style="background: #ffc169; border-color: rgba(255, 255, 255, 0.4); color: #000000;">Enviar</button>
 					</div>
 				</form>
-
-				<div class="container" style="border-top-color: rgb(151, 214, 181)">
-					<table  class="table" style="border-top-color: rgb(151, 214, 181)">
-						<thead>
-						<tr>
-							<th style="color: #000000">Hora</th>
-							<th style="color: #000000">Día</th>
-							<th style="color: #000000">Mes</th>
-							<th style="color: #000000">Año</th>
-							<th style="color: #000000">Doctor Asociado</th>
-						</tr>
-						</thead>
-						<tbody id="myTable">
-						{{#citas}}
-						<tr>
-							<th>{{hour}}</th>
-							<th>{{day}}</th>
-							<th>{{month}}</th>
-							<th>{{year}}</th>
-							<th>{{healthPersonnel}}</th>
-						</tr>
-						{{/citas}}
-						</tbody>
-					</table>
-			</div>
 		</section>
 	</main>
 	{{> footer}}
