@@ -2,57 +2,208 @@
 <html>
 
 {{> head}}
+<main class="page contact-us-page">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2 style="color: #94d4b4;">Nueva cita</h2>
+                <form action="#" style="border-top-color: rgb(151, 214, 181)">
+                    <div id="value" class="form-group">
+                        <label>Listado de sanitarios disponibles</label>
+                    </div>
+                    <center>
+                        <select id="list" class="form-control" style="margin: 15px">
+                            <optgroup label="Sanitarios">
+                                {{#docs}}
+                                <option value="{{-index}}" selected href="#">{{.}}</option>
+                                {{/docs}}
+                            </optgroup>
+                        </select>
+                    </center>
+                    <button type="submit"
+                            class="btn btn-primary btn-block"
+                            style="border-color: rgba(255, 255, 255, 0.4); background: rgb(255, 193, 105); color: #000000;">
+                        Crear
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="clean-block clean-form light">
+        <div class="container" style="border-top-color: rgb(151, 214, 181)">
+            <div class="block-heading">
+                <h2 style="color: #94d4b4;">Listado de sanitarios para pedir
+                    cita</h2>
+                <div class="table-responsive">
+                    <table class="table" style="border-top-color: rgb(151, 214, 181)">
+                        <thead>
+                        <tr>
+                            <th style="color: #000000">ID</th>
+                            <th style="color: #000000">Nombre</th>
+                            <th style="color: #000000">Apellido 1</th>
+                            <th style="color: #000000">Apellido 2</th>
+                            <th style="color: #000000">Email</th>
+                            <th style="color: #000000">Edad</th>
+                            <th style="color: #000000">Nombre de usuario</th>
+                            <th style="color: #000000">Rol</th>
+                        </tr>
+                        </thead>
+                        <tbody id="myTable">
+                        {{#docs}}
+                        <tr>
+                            <th>{{id}}</th>
+                            <th>{{name}}</th>
+                            <th>{{surname1}}</th>
+                            <th>{{surname2}}</th>
+                            <th>{{email}}</th>
+                            <th>{{age}}</th>
+                            <th>{{username}}</th>
+                            <th>{{role}}</th>
+                        </tr>
+                        {{/docs}}
+                        </tbody>
+                    </table>
+                </div>
+    </section>
+</main>
+{{> footer}}
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="/assets/js/smoothproducts.min.js"></script>
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/tabla.js"></script>
+
+<script>document.addEventListener("DOMContentLoaded", function () {
+    loadItems();
+})
+
+function createPaciente() {
+
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    var email = document.getElementById('email').value;
+    var dni = document.getElementById('dni').value;
 
 
-	<main class="page contact-us-page">
-		<section class="clean-block clean-form dark">
-			<div class="container">
-				<div class="block-heading">
-					<h2 style="color: #94d4b4;">Nueva cita</h2>
-				</div>
+    var item =
+        {
+            "username": username,
+            "password": password,
+            "email": email,
+            "dni": dni
+        };
+
+    var client = new XMLHttpRequest();
+    client.responseType = "json";
+    client.addEventListener("load", function () {
+        console.log(this.response);
+        console.log(client.status);
+
+        loadItems();
+    });
+
+    client.open("POST", "/api/patients");
+
+    client.setRequestHeader("Content-type", "application/json");
+    var body = JSON.stringify(item);
+    client.send(body);
+
+}
 
 
-				<div class="container" style="border-top-color: rgb(151, 214, 181)">
-					<table  class="table" style="border-top-color: rgb(151, 214, 181)">
-						<thead>
-						<tr>
-							<th style="color: #000000">ID</th>
-							<th style="color: #000000">Nombre</th>
-							<th style="color: #000000">Apellido 1</th>
-							<th style="color: #000000">Apellido 2</th>
-							<th style="color: #000000">Email</th>
-							<th style="color: #000000">Edad</th>
-							<th style="color: #000000">Nombre de usuario</th>
-							<th style="color: #000000">Rol</th>
-							<th style="color: #000000">Elegir cita</th>
-						</thead>
-						<tbody id="myTable">
-						{{#docs}}
-						<tr>
-							<th>{{id}}</th>
-							<th>{{name}}</th>
-							<th>{{surname1}}</th>
-							<th>{{surname2}}</th>
-							<th>{{email}}</th>
-							<th>{{age}}</th>
-							<th>{{username}}</th>
-							<th>{{role}}</th>
-							<th><a href="/exito/{{id}}">Nueva cita</a></th>
-						</tr>
-						{{/docs}}
-						</tbody>
-					</table>
-				</div>
-		</section>
-	</main>
-	{{> footer}}
-	<script src="/assets/js/jquery.min.js"></script>
-	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-	<script src="/assets/js/smoothproducts.min.js"></script>
-	<script src="/assets/js/theme.js"></script>
-	<script src="/assets/js/tabla.js"></script>
-</body>
+function createSanitario() {
 
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    var email = document.getElementById('email').value;
+    var dni = document.getElementById('dni').value;
+
+
+    var item =
+        {
+            "username": username,
+            "password": password,
+            "email": email,
+            "dni": dni
+        };
+
+    var client = new XMLHttpRequest();
+    client.responseType = "json";
+    client.addEventListener("load", function () {
+        console.log(this.response);
+        console.log(client.status);
+
+        loadItems();
+    });
+
+    client.open("POST", "/api/healthPersonnel");
+
+    client.setRequestHeader("Content-type", "application/json");
+    var body = JSON.stringify(item);
+    client.send(body);
+
+}
+
+function loadItems() {
+
+    var client = new XMLHttpRequest();
+    client.responseType = "json";
+    client.addEventListener("load", function () {
+        addItemsToPage(this.response);
+    });
+
+    client.open("GET", "/api");
+
+    client.send();
+
+}
+
+
+function addDoc() {
+    var selectedValue = document.getElementById("list").value;
+    alert(selectedValue);
+}
+
+function addItemsToPage(response) {
+    console.log("Ha funcionado");
+    /*var itemsElem = document.getElementById('items');
+
+    itemsElem.innerHTML = '';
+
+    for(var item of response){
+        var username = item.username;
+        var li = document.createElement('li');
+        itemsElem.appendChild(li);
+
+        var text = document.createTextNode(username);
+        li.appendChild(text);
+    }	*/
+}
+
+/*
+function search(){
+	alert("hola");
+	var checkbox1=document.getElementById("Username");
+	var checkbox2=document.getElementById("Email");
+	var checkbox3=document.getElementById("Dni");
+	alert("1");
+	if (checkbox1.checked){
+		window.location.href("/searchUsername");
+		client.open("GET", "/searchUsername?input=0&username=" + text);
+	}
+	else if (checkbox2.checked){
+		window.location.href("/searchEmail");
+		client.open("GET", "/searchEmail?input=1&email=" + text);
+	}
+	else if (checkbox3.checked){
+		window.location.href("/searchDni");
+		client.open("GET", "/searchDni?input=2&dni=" + text);
+	}
+
+
+  }*/</script>
 </html>
