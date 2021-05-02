@@ -91,4 +91,10 @@ public class PatientService {
         temp.getSurname2(), temp.getAge(), temp.getHealthPersonnelList());
         patientRepository.save(temp2);
     }
+
+    public Patient returnPatientByUsername(String username){
+        var temp = patientRepository.findByUsername(username);
+        return temp.orElse(null);
+    }
+
 }

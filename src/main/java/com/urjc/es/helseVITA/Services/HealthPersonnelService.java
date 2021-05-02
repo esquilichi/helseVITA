@@ -27,7 +27,7 @@ public class HealthPersonnelService {
 
     public boolean exists(Integer id){
         //Hay que mirar si funciona, deberia devolver Optional<>
-        if (healthPersonnelRepository.findById(id) != null){
+        if (healthPersonnelRepository.findById(id).isPresent()){
             return true;
         } else {
             return false;

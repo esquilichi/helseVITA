@@ -2,11 +2,12 @@ package com.urjc.es.helseVITA.Repositories;
 
 import com.urjc.es.helseVITA.Entities.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.Collection;
 import java.util.Optional;
 
-public interface PatientRepository extends JpaRepository<Patient,Integer> {
+public interface PatientRepository extends JpaRepository<Patient,Integer>, JpaSpecificationExecutor<Patient> {
 
     public Optional<Patient> findByUsername(String username);
 

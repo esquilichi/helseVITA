@@ -9,8 +9,11 @@
         <div class="block-heading">
             <h2 style="color: #94d4b4;">Buscar Paciente</h2>
             <form action="/searchPatient" class="navbar-form navbar-right" style="border-top-color: rgb(151, 214, 181)">
-                <input type="text" class="form-control" placeholder="Búsqueda general" name="q">
+                <input type="text" class="form-control" placeholder="Búsqueda general" name="q1">
                 <br></br>
+                <input type="text" class="form-control" placeholder="Búsqueda general" name="q2">
+                <br></br>
+            </form>
                 <input type="text" id="myInput" class="form-control" onkeyup="edad()" placeholder="Filtrado por edad"
                        title="Busqueda Dinámica">
                 <br></br>
@@ -19,7 +22,7 @@
                 <br></br>
                 <input type="text" id="myInput3" class="form-control" onkeyup="cambia_apellido1()"
                        placeholder="Filtrado por primer apellido" title="Apellido">
-            </form>
+
         </div>
     </section>
     <section class="clean-block clean-form light">
@@ -43,7 +46,7 @@
                         {{#object}}
                         <tr>
                             <th>{{id}}</th>
-                            <th>{{name}}</th>
+                            <th><a href="/mostrar/{{id}}">{{name}}</a></th>
                             <th>{{surname1}}</th>
                             <th>{{surname2}}</th>
                             <th>{{email}}</th>

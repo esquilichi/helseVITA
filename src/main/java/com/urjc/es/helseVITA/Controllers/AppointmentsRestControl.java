@@ -1,5 +1,6 @@
 package com.urjc.es.helseVITA.Controllers;
 import com.urjc.es.helseVITA.Entities.*;
+import com.urjc.es.helseVITA.Services.PatientService;
 import org.springframework.web.bind.annotation.RestController;
 import com.urjc.es.helseVITA.Services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ public class AppointmentsRestControl {
     
     @Autowired
     AppointmentService appointmentService;
+
+    @Autowired
+    PatientService patientService;
 
     @PostMapping("/api/appointments")
     @ResponseStatus(HttpStatus.CREATED)
@@ -49,18 +53,18 @@ public class AppointmentsRestControl {
 
     //Get all appointments from one patient
     @GetMapping("/api/appointments/{patient}")
-    public ResponseEntity<Appointment> getPatientAppointment(@PathVariable Patient patient){
-        if (!appointmentService.existsPatientAppointment(patient)) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<>(appointmentService.returnPatientAppointments(patient),HttpStatus.OK);
+    public ResponseEntity<Appointment> getPatientAppointment(@PathVariable String patient){
+        var temp = patientService.returnPatientByUsername(patient);
+        if (temp != null){
+                return new ResponseEntity<>(appointmentService.returnPatientAppointments(temp),HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     //Get all appointment from one health personnel
     @GetMapping("/api/appointments/{healthPersonnel}")
     public ResponseEntity<Appointment> getHealthPersonnelAppointment(@PathVariable HealthPersonnel healthPersonnel){
-        if (appointmentService.existsHealthPersonnelAppointment(healthPersonnel))
+        if (!appointmentService.existsHealthPersonnelAppointment(healthPersonnel))
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         else {
             return new ResponseEntity<>(appointmentService.returnHealthPersonnelAppointments(healthPersonnel),HttpStatus.OK);

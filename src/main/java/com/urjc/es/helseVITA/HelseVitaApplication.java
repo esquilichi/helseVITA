@@ -78,9 +78,7 @@ public class HelseVitaApplication {
 			int rand;
 			rand = (int) (Math.random() * patientRepository.findAll().size());
 			Optional <Patient> temp = patientRepository.findById(rand);
-			if(temp.isPresent()){
-				patientsList.add(temp.get());
-			}
+			temp.ifPresent(patientsList::add);
 		}
 		return patientsList;
 	}
@@ -91,9 +89,7 @@ public class HelseVitaApplication {
 			int rand;
 			rand = (int) (Math.random() * healthPersonnelRepository.findAll().size());
 			Optional <HealthPersonnel> temp = healthPersonnelRepository.findById(rand);
-			if(temp.isPresent()){
-				healthPersonnelList.add(temp.get());
-			}
+			temp.ifPresent(healthPersonnelList::add);
 		}
 		return healthPersonnelList;
 	}

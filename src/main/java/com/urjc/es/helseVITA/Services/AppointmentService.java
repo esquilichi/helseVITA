@@ -24,15 +24,16 @@ public class AppointmentService {
 
     public boolean exists(Integer id){
         //Hay que mirar si funciona, deberia devolver Optional<>
-        return appointmentRepository.findById(id) != null;
+        var temp = appointmentRepository.findById(id);
+        return temp.isPresent();
     }
 
     public boolean existsPatientAppointment(Patient patient){
-        return appointmentRepository.findAppointmentsByPatient(patient) != null;
+        return appointmentRepository.findAppointmentsByPatient(patient).isPresent();
     }
 
     public boolean existsHealthPersonnelAppointment(HealthPersonnel healthPersonnel){
-        return appointmentRepository.findAppointmentsByHealthPersonnel(healthPersonnel) != null;
+        return appointmentRepository.findAppointmentsByHealthPersonnel(healthPersonnel).isPresent();
     }
 
     public void delete(Integer id){
