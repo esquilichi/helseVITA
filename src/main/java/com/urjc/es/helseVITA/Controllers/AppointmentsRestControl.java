@@ -1,5 +1,6 @@
 package com.urjc.es.helseVITA.Controllers;
 import com.urjc.es.helseVITA.Entities.*;
+import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
 import org.springframework.web.bind.annotation.RestController;
 import com.urjc.es.helseVITA.Services.AppointmentService;
@@ -17,6 +18,9 @@ public class AppointmentsRestControl {
 
     @Autowired
     PatientService patientService;
+
+    @Autowired
+    HealthPersonnelService healthPersonnelService;
 
     @PostMapping("/api/appointments")
     @ResponseStatus(HttpStatus.CREATED)
@@ -63,13 +67,15 @@ public class AppointmentsRestControl {
 
     //Get all appointment from one health personnel
     @GetMapping("/api/appointments/{healthPersonnel}")
-    public ResponseEntity<Appointment> getHealthPersonnelAppointment(@PathVariable HealthPersonnel healthPersonnel){
-        if (!appointmentService.existsHealthPersonnelAppointment(healthPersonnel))
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        else {
-            return new ResponseEntity<>(appointmentService.returnHealthPersonnelAppointments(healthPersonnel),HttpStatus.OK);
+    public ResponseEntity<Appointment> getHealthPersonnelAppointment(@PathVariable String healthPersonnel){
+        var temp = healthPersonnelService.returnHealthPersonnelByUsername(healthPersonnel);
+        if (temp != null) {
+            return new ResponseEntity<>(appointmentService.returnHealthPersonnelAppointments(temp), HttpStatus.OK);
+
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
 
 
     //Get All Users
