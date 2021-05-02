@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table
+@Entity(name = "health_personnel")
+@Table(name = "health_personnel")
 public class HealthPersonnel {
 
     @Id

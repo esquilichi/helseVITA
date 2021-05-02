@@ -10,8 +10,7 @@
             <h2 style="color: #94d4b4;">Buscar Sanitario</h2>
             <form action="/searchHealthPersonnel" class="navbar-form navbar-right" style="border-top-color: rgb(151, 214, 181)">
                 <input type="text" style="margin: 15px" class="form-control" placeholder="Búsqueda general" name="q1">
-                <input type="text" style="margin: 15px" class="form-control" placeholder="Búsqueda general" name="q2">
-                <input type="text" style="margin: 15px" class="form-control" placeholder="Búsqueda general" name="q3">
+                <input type="text" style="margin: 15px" class="form-control" placeholder="Búsqueda por edad" name="q2">
                 <button type="submit" class="btn btn-primary"
                         style="margin: 15px; background: rgb(255, 191, 105); font-size: 20px; border-color: rgba(255, 255, 255, 0.4); color: #000000;">
                     Enviar
@@ -21,8 +20,6 @@
         <div class="block-heading">
             <h3 style="color: rgb(255, 193, 105);">Filtrar por:</h3>
             <form class="navbar-form navbar-right" style="border-top-color:  rgb(255, 193, 105)">
-                <input type="text" id="myInput" class="form-control" onkeypress="edad()" placeholder="Filtrado por edad"
-                       title="Busqueda Dinámica">
                 <br></br>
                 <input type="text" id="myInput2" class="form-control" onkeypress="cambia_nombre()"
                        placeholder="Filtrado por nombre" title="NOMBRE">
@@ -47,6 +44,7 @@
                             <th style="color: #000000">Email</th>
                             <th style="color: #000000">Edad</th>
                             <th style="color: #000000">Nombre de usuario</th>
+                            <th style="color: #000000">Rol</th>
                         </thead>
                         <tbody id="myTable">
                         {{#object}}
@@ -58,6 +56,7 @@
                             <th>{{email}}</th>
                             <th>{{age}}</th>
                             <th>{{username}}</th>
+                            <th>{{role}}</th>
                         </tr>
                         {{/object}}
                         </tbody>

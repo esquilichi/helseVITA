@@ -20,4 +20,5 @@ public interface HealthPersonnelRepository extends JpaRepository<HealthPersonnel
 	
     public List<HealthPersonnel> findHealthPersonnelByNameContainsIgnoreCaseOrSurname1ContainsIgnoreCaseOrSurname2ContainsIgnoreCaseOrEmailContainsIgnoreCaseOrAgeContains(String name, String surname1, String surname2, String email, Integer age);
 
+    public List<HealthPersonnel> findByAge(Integer input);
 }

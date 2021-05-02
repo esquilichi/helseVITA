@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.*;
 
 @Controller
@@ -23,6 +25,9 @@ public class WebController {
 
     @Autowired
     HealthPersonnelService healthPersonnelService;
+
+    @Autowired
+    EntityManager entityManager;
 
     @RequestMapping("/")
     ModelAndView index() {
@@ -95,7 +100,7 @@ public class WebController {
             b2 = true;
         }
         if (b1 && b2){
-            mi_lista = intersection(result, result2);
+            mi_lista = intersectionP(result, result2);
         } else if (b1){
             mi_lista = result;
         }else if (b2){
@@ -112,9 +117,34 @@ public class WebController {
     }
 
     @GetMapping({"/searchHealthPersonnel"})
-    public String healthPersonnelList(Model model, @RequestParam(name = "q", required = false) String query) {
-        Collection<HealthPersonnel> result = (query == null) ? healthPersonnelService.returnAllHealthPersonnels() : healthPersonnelService.search(query);
-        model.addAttribute("object", result);
+    public String healthPersonnelList(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2" , required = false) String query2) {
+        boolean b1 = false;
+        boolean b2 = false;
+        List<HealthPersonnel> result = null;
+        List<HealthPersonnel> result2 = null;
+        List<HealthPersonnel> mi_lista;
+        if (query != null){
+            result = (List<HealthPersonnel>) healthPersonnelService.search(query);
+            b1 = true;
+        }
+        if (query2 != null){
+            result2 = healthPersonnelService.searchByAge(query2);
+            b2 = true;
+        }
+        if (b1 && b2){
+            mi_lista = intersectionH(result, result2);
+        } else if (b1){
+            mi_lista = result;
+        }else if (b2){
+            mi_lista = result2;
+        }else{
+            mi_lista = healthPersonnelService.returnAllHealthPersonnels();
+        }
+
+        if (result2 == null){
+            mi_lista = result;
+        }
+        model.addAttribute("object", mi_lista);
         return "buscarSanitario";
     }
 
@@ -191,8 +221,9 @@ public class WebController {
         citas.add(temp);
         paciente.setAppointments(citas);
         patientService.addPatient(paciente);
-        List<HealthPersonnel> lista = paciente.getHealthPersonnelList();
-
+        TypedQuery<HealthPersonnel> q1 = entityManager.createQuery("SELECT c FROM health_personnel c where c.id in (select health_personnel_list_id from patient_health_personnel_list where id = :id_paciente)",HealthPersonnel.class);
+        q1.setParameter("id_paciente",id_paciente);
+        var lista = q1.getResultList();
         var mv = new ModelAndView("cualDoctor");
         mv.addObject("cita", temp);
         mv.addObject("docs",lista);
@@ -200,7 +231,7 @@ public class WebController {
         return mv;
     }
 
-    
+
 
     public List<Patient> union(List<Patient> list1, List<Patient> list2) {
         if (!(list1 == null || list2 == null)){
@@ -213,11 +244,26 @@ public class WebController {
         }
         return null;
     }
-    public List<Patient> intersection(List<Patient> list1, List<Patient> list2) {
+    public List<Patient> intersectionP(List<Patient> list1, List<Patient> list2) {
         if (!(list1 == null || list2 == null)){
             List<Patient> list = new ArrayList<>();
 
             for (Patient t : list1) {
+                if(list2.contains(t)) {
+                    list.add(t);
+                }
+            }
+
+            return list;
+        }
+        return null;
+    }
+
+    public List<HealthPersonnel> intersectionH(List<HealthPersonnel> list1, List<HealthPersonnel> list2) {
+        if (!(list1 == null || list2 == null)){
+            List<HealthPersonnel> list = new ArrayList<>();
+
+            for (HealthPersonnel t : list1) {
                 if(list2.contains(t)) {
                     list.add(t);
                 }

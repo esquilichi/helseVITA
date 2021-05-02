@@ -53,7 +53,7 @@ public class HealthPersonnelService {
         return null;
     }
 
-    public Collection<HealthPersonnel> returnAllHealthPersonnels(){
+    public List<HealthPersonnel> returnAllHealthPersonnels(){
         List<HealthPersonnel> list = new ArrayList<>();
         healthPersonnelRepository.findAll().forEach(list::add);
         return list;
@@ -63,8 +63,13 @@ public class HealthPersonnelService {
         return healthPersonnelRepository.findHealthPersonnelByNameContainsIgnoreCaseOrSurname1ContainsIgnoreCaseOrSurname2ContainsIgnoreCaseOrEmailContainsIgnoreCase(input, input, input, input);
     }
 
-    public List<HealthPersonnel> searchWithEdad(String input){
-        return healthPersonnelRepository.findHealthPersonnelByNameContainsIgnoreCaseOrSurname1ContainsIgnoreCaseOrSurname2ContainsIgnoreCaseOrEmailContainsIgnoreCaseOrAgeContains(input,input,input,input,Integer.parseInt(input));
+    public List<HealthPersonnel> searchByAge(String input){
+        if (input.equals("")){
+            return null;
+        }{
+            return healthPersonnelRepository.findByAge(Integer.parseInt(input));
+        }
+
     }
 
 	public List <HealthPersonnel> availableHealthPersonnel(Appointment appointment) {
