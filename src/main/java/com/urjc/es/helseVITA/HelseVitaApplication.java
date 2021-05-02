@@ -9,6 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import com.urjc.es.helseVITA.Entities.EnumRoles;
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Repositories.HealthPersonnelRepository;
@@ -65,7 +66,7 @@ public class HelseVitaApplication {
 			List<Patient> patientsList = fillPatientsList(patientRepository);
 	
 			HealthPersonnel temp = new HealthPersonnel(String.format("%s%s", name, surname1),String.format("1234%s", name),String.format("%s.%s@helsevita.com",
-				name.toLowerCase(),surname1.toLowerCase()),"93827461S", name, surname1, surname2, (int) (Math.random() * 65), "Postureo");
+				name.toLowerCase(),surname1.toLowerCase()),"93827461S", name, surname1, surname2, (int) (Math.random() * 65), EnumRoles.randomRol().toString());
 			temp.setPatients(patientsList);
 			return temp; 
 		}).collect(Collectors.toList()));
