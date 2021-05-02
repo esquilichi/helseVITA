@@ -13,38 +13,14 @@
 					<input  type="hidden"  class="form-control"  name="id_paciente" value="{{paciente.id}}">
 						<label>Elige un día para la cita</label>
 					<input class="form-control" id="miInputChulo" type="datetime-local" name="tiempo">
-					<button type="submit">Click</button>
+					<center>
+					<button type="submit" class="btn btn-primary"
+							style="margin: 15px; background: rgb(255, 191, 105); font-size: 20px; border-color: rgba(255, 255, 255, 0.4); color: #000000;">
+						Enviar
+					</button></center>
 				</form>
 			</div>
 
-		</section>
-		<section class="clean-block clean-form light">
-				<div class="container" style="border-top-color: rgb(151, 214, 181)">
-					<div class="block-heading">
-						<h2 style="color: #94d4b4;">Listado de sanitarios para pedir
-							cita</h2>
-						<div class="table-responsive">
-					<table  class="table" style="border-top-color: rgb(151, 214, 181)">
-						<thead>
-						<tr>
-							<th style="color: #000000">Nombre Doctor</th>
-							<th style="color: #000000">Primer Apellido</th>
-							<th style="color: #000000">Rol</th>
-							<th style="color: #000000">Pedir cita</th>
-						</tr>
-						</thead>
-						<tbody id="myTable">
-							{{#object}}
-							<tr>					
-							<th>{{name}}</th>
-							<th>{{surname1}}</th>
-							<th>{{role}}</th>
-							<th><a href="citaAgregada.html">Nueva cita</a></th>
-							</tr>
-							{{/object}}
-						</tbody>
-					</table>
-			</div>
 		</section>
 	</main>
 	{{> footer}}
