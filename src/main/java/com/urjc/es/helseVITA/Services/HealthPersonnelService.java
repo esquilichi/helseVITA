@@ -100,4 +100,8 @@ public class HealthPersonnelService {
         }
         return null;
     }*/
+    public HealthPersonnel returnHealthPersonnelByUsername(String username){
+        var temp = healthPersonnelRepository.findHealthPersonnelByUsername(username);
+        return temp.orElse(null);
+    }
 }
