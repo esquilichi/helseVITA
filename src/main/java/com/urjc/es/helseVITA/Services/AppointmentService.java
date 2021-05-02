@@ -2,6 +2,7 @@ package com.urjc.es.helseVITA.Services;
 
 import com.urjc.es.helseVITA.Entities.Appointment;
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
+import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,15 @@ public class AppointmentService {
 
     public boolean exists(Integer id){
         //Hay que mirar si funciona, deberia devolver Optional<>
-        if (appointmentRepository.findById(id) != null){
-            return true;
-        } else {
-            return false;
-        }
+        return appointmentRepository.findById(id) != null;
+    }
+
+    public boolean existsPatientAppointment(Patient patient){
+        return appointmentRepository.findAppointmentsByPatient(patient) != null;
+    }
+
+    public boolean existsHealthPersonnelAppointment(HealthPersonnel healthPersonnel){
+        return appointmentRepository.findAppointmentsByHealthPersonnel(healthPersonnel) != null;
     }
 
     public void delete(Integer id){
@@ -42,6 +47,26 @@ public class AppointmentService {
     public Appointment returnAppointment(Integer id){
         Appointment temp;
         Optional<Appointment> tempOptional = appointmentRepository.findById(id);
+        if (tempOptional.isPresent()){
+            temp = tempOptional.get();
+            return temp;
+        }
+        return null;
+    }
+
+    public Appointment returnPatientAppointments(Patient patient){
+        Appointment temp;
+        Optional<Appointment> tempOptional = appointmentRepository.findAppointmentsByPatient(patient);
+        if (tempOptional.isPresent()){
+            temp = tempOptional.get();
+            return temp;
+        }
+        return null;
+    }
+
+    public Appointment returnHealthPersonnelAppointments(HealthPersonnel healthPersonnel){
+        Appointment temp;
+        Optional<Appointment> tempOptional = appointmentRepository.findAppointmentsByHealthPersonnel(healthPersonnel);
         if (tempOptional.isPresent()){
             temp = tempOptional.get();
             return temp;

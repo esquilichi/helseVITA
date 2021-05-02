@@ -46,6 +46,28 @@ public class AppointmentsRestControl {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    //Get all appointments from one patient
+    @GetMapping("/api/appointments/{patient}")
+    public ResponseEntity<Appointment> getPatientAppointment(@PathVariable Patient patient){
+        if (!appointmentService.existsPatientAppointment(patient)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(appointmentService.returnPatientAppointments(patient),HttpStatus.OK);
+        }
+    }
+
+    //Get all appointment from one health personnel
+    @GetMapping("/api/appointments/{healthPersonnel}")
+    public ResponseEntity<Appointment> getHealthPersonnelAppointment(@PathVariable HealthPersonnel healthPersonnel){
+        if (appointmentService.existsHealthPersonnelAppointment(healthPersonnel))
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        else {
+            return new ResponseEntity<>(appointmentService.returnHealthPersonnelAppointments(healthPersonnel),HttpStatus.OK);
+        }
+    }
+
+
     //Get All Users
     @GetMapping("/api/appointments")
     @ResponseStatus(HttpStatus.OK)
