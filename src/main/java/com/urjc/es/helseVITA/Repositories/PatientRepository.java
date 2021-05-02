@@ -1,11 +1,9 @@
 package com.urjc.es.helseVITA.Repositories;
 
-import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 public interface PatientRepository extends JpaRepository<Patient,Integer> {

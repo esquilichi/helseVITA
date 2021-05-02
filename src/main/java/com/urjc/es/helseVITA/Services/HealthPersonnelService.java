@@ -1,5 +1,6 @@
 package com.urjc.es.helseVITA.Services;
 
+import com.urjc.es.helseVITA.Entities.Appointment;
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Repositories.HealthPersonnelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class HealthPersonnelService {
 
     @Autowired
     HealthPersonnelRepository healthPersonnelRepository;    
+
+    @Autowired
+    AppointmentService appointmentService;
 
     
     public HealthPersonnel addHealthPersonnel(HealthPersonnel HealthPersonnel){
@@ -58,6 +62,19 @@ public class HealthPersonnelService {
     public List<HealthPersonnel> search(String input){
         return healthPersonnelRepository.findHealthPersonnelByNameContainsIgnoreCaseOrSurname1ContainsIgnoreCaseOrSurname2ContainsIgnoreCaseOrEmailContainsIgnoreCase(input, input, input, input);
     }
+
+	public List <HealthPersonnel> availableHealthPersonnel(Appointment appointment) {
+        List <HealthPersonnel> temp = healthPersonnelRepository.findAll();
+
+        List<HealthPersonnel> tempOptional = appointmentService.takenHealthPersonnel(appointment.getYear(), appointment.getMonth(), appointment.getDay(), appointment.getHour(), appointment.getMinute());
+        
+        for(HealthPersonnel entry : tempOptional){
+            if(temp.contains(entry)){
+                temp.remove(entry);
+            }
+        }
+        return temp;
+	}
 
     /*
     public HealthPersonnel searchUsername(String text){

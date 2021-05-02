@@ -11,6 +11,7 @@ public class Appointment {
     private Integer id;
 
     @Column
+    private Integer minute;
     private Integer hour;
     private Integer day;
     private Integer month;
@@ -24,8 +25,9 @@ public class Appointment {
 
     public Appointment(){}
 
-    public Appointment(Integer hour, Integer day, Integer month, Integer year, HealthPersonnel healthPersonnel, Patient patient) {
+    public Appointment(Integer minute, Integer hour, Integer day, Integer month, Integer year, HealthPersonnel healthPersonnel, Patient patient) {
         this.hour = hour;
+        this.minute=minute;
         this.day = day;
         this.month = month;
         this.year = year;
@@ -33,18 +35,19 @@ public class Appointment {
         this.patient = patient;
     }
 
-    public Appointment(Integer hour, Integer day, Integer month, Integer year,  Patient patient) {
+    public Appointment(Integer minute,Integer hour, Integer day, Integer month, Integer year,  Patient patient) {
         this.hour = hour;
+        this.minute=minute;
         this.day = day;
         this.month = month;
         this.year = year;
-        this.healthPersonnel = healthPersonnel;
         this.patient = patient;
     }
     
 
-    public Appointment(Integer id, Integer hour, Integer day, Integer month, Integer year) {
+    public Appointment(Integer minute,Integer id, Integer hour, Integer day, Integer month, Integer year) {
         this.id = id;
+        this.minute=minute;
         this.hour = hour;
         this.day = day;
         this.month = month;
@@ -65,6 +68,14 @@ public class Appointment {
 
     public void setHour(Integer hour) {
         this.hour = hour;
+    }
+
+    public Integer getMinute() {
+        return minute;
+    }
+
+    public void setMinute(Integer minute) {
+        this.minute = minute;
     }
 
     public Integer getDay() {

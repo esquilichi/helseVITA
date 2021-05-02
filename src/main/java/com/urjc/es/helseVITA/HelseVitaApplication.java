@@ -38,14 +38,13 @@ public class HelseVitaApplication {
 
 
 		List<String> names = Arrays.asList("Ismael", "Clara", "Imane", "Denisa", "Sara", "Luscas", "Hugo", "Carmen", 
-			"Maria", "Paula","Claudia", "Mario", "Diego", "Julia", "Daniel");
+			"María", "Paula","Claudia", "Mario", "Diego", "Julia", "Daniel");
 
-		List<String> surnames = Arrays.asList("Gomez", "Contreras", "Garcia", "Lopez", "Martin", "Torres", "Parra",
-			"Flores", "Gonzalez", "Rodriguez", "Perez", "Esquilichi", "Kadiri", "Velasco", "Nevares", "Saez", "Moya",
-			"Soler", "Parra", "Martinez");
+		List<String> surnames=Arrays.asList("Gómez", "Contreras", "García", "López", "Martín", "Torres", "Parra", 
+			"Flores", "González", "Rodríguez", "Perez", "Esquilichi", "Kadiri", "Velasco", "Nevares", "Saez", "Moya",
+			"Soler", "Parra", "Martínez");
 
 		Collections.shuffle(names);
-
 
 		patientRepository.saveAll(IntStream.rangeClosed(1, names.size()).mapToObj((i) -> {
 			String name =names.get(i-1);

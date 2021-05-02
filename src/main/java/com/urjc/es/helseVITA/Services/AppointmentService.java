@@ -1,6 +1,7 @@
 package com.urjc.es.helseVITA.Services;
 
 import com.urjc.es.helseVITA.Entities.Appointment;
+import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,5 +53,14 @@ public class AppointmentService {
         List<Appointment> list = new ArrayList<>();
         appointmentRepository.findAll().forEach(list::add);
         return list;
+    }
+
+    public List <HealthPersonnel> takenHealthPersonnel(Integer year, Integer month, Integer day, Integer hour, Integer minute){
+        List <Appointment> temp = appointmentRepository.findAppointmentByYearAndMonthAndDayAndHourAndMinute(year, month, day, hour, minute);
+        List <HealthPersonnel> temp2 = new ArrayList<>();
+        for(Appointment entry : temp){
+            temp2.add(entry.getHealthPersonnel());
+        }
+        return temp2;
     }
 }

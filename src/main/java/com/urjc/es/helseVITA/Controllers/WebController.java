@@ -8,7 +8,6 @@ import com.urjc.es.helseVITA.Exceptions.IncorrectSearchParametersException;
 import com.urjc.es.helseVITA.Exceptions.UserNotFoundException;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 @Controller
 public class WebController {
@@ -43,7 +41,7 @@ public class WebController {
         mv.addObject("user", temp);
         return mv;
     }
-
+/* 
 
     @RequestMapping("/viewPatients")
     ModelAndView viewPatients() {
@@ -57,7 +55,7 @@ public class WebController {
         var mv = new ModelAndView("mostrarSanitario");
         mv.addObject("users", healthPersonnelService.returnAllHealthPersonnels());
         return mv;
-    }
+    } */
 
     //This is for users, don´t delete in case we go back to
     //using Inheritance
@@ -133,7 +131,7 @@ public class WebController {
     public ModelAndView exception2(IncorrectSearchParametersException e) {
         return new ModelAndView("incorrect-parameters");
     }
-
+/* 
     @GetMapping("/chooseDoctors")
     public ModelAndView chooseDoc(@RequestParam(required = false) String id) {
         if (id != null) {
@@ -144,10 +142,36 @@ public class WebController {
         } else {
             return new ModelAndView("index");
         }
-    }
+    } */
 
-    @RequestMapping("/addAppointment/{id}")
-    public ModelAndView addAppointment(@PathVariable Integer id) {
+    @GetMapping("/addAppointment/{id}")
+    public ModelAndView addAppointment(Model model, @PathVariable Integer id, @RequestParam Map<String,String> requestParams) {
+
+         //var id_paciente = Integer.parseInt(requestParams.get("id_paciente"));
+        String text = requestParams.get("tiempo");
+
+        int year;
+        int month;
+        int day;
+        int hour;
+        int minute;
+
+        Appointment temp = new Appointment();
+
+        var paciente = patientService.returnPatient(id);
+
+        if(text!=null){
+            year = Integer.parseInt((String) text.subSequence(0,4));
+            month = Integer.parseInt((String) text.subSequence(5,7));
+            day = Integer.parseInt((String) text.subSequence(8,10));
+            hour = Integer.parseInt((String) text.subSequence(11,13));
+            minute = Integer.parseInt((String) text.subSequence(16,17));
+            temp = new Appointment(hour,minute, day,month,year,paciente);
+        }
+
+        Collection<HealthPersonnel> result = (text == null) ? healthPersonnelService.returnAllHealthPersonnels() : healthPersonnelService.availableHealthPersonnel(temp);
+        model.addAttribute("object", result);
+ 
         var mv = new ModelAndView("appointment");
         mv.addObject("paciente", patientService.returnPatient(id));
         mv.addObject("medicos", healthPersonnelService.returnAllHealthPersonnels());
@@ -163,10 +187,10 @@ public class WebController {
         int month = Integer.parseInt((String) text.subSequence(5,7));
         int day = Integer.parseInt((String) text.subSequence(8,10));
         int hour = Integer.parseInt((String) text.subSequence(11,13));
-        //int min = Integer.parseInt((String) text.subSequence(16,17)); //Es inútil, no hay atributo minutos, pero no me quiteis la ilusión...
+        int minute = Integer.parseInt((String) text.subSequence(16,17)); //Es inútil, no hay atributo minutos, pero no me quiteis la ilusión...
 
         var paciente = patientService.returnPatient(id_paciente);
-        Appointment temp = new Appointment(hour,day,month,year,paciente);
+        Appointment temp = new Appointment(hour,minute, day,month,year,paciente);
 
         List<Appointment> citas = paciente.getAppointments();
         citas.add(temp);
