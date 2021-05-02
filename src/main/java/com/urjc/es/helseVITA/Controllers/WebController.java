@@ -145,37 +145,10 @@ public class WebController {
     } */
 
     @GetMapping("/addAppointment/{id}")
-    public ModelAndView addAppointment(Model model, @PathVariable Integer id, @RequestParam Map<String,String> requestParams) {
-
-         //var id_paciente = Integer.parseInt(requestParams.get("id_paciente"));
-        String text = requestParams.get("tiempo");
-
-        int year;
-        int month;
-        int day;
-        int hour;
-        int minute;
-
-        Appointment temp = new Appointment();
-
-        var paciente = patientService.returnPatient(id);
-
-        if(text!=null){
-            year = Integer.parseInt((String) text.subSequence(0,4));
-            month = Integer.parseInt((String) text.subSequence(5,7));
-            day = Integer.parseInt((String) text.subSequence(8,10));
-            hour = Integer.parseInt((String) text.subSequence(11,13));
-            minute = Integer.parseInt((String) text.subSequence(16,17));
-            temp = new Appointment(hour,minute, day,month,year,paciente);
-        }
-
-        Collection<HealthPersonnel> result = (text == null) ? healthPersonnelService.returnAllHealthPersonnels() : healthPersonnelService.availableHealthPersonnel(temp);
-        model.addAttribute("object", result);
- 
+    public ModelAndView addAppointment(Model model, @PathVariable Integer id) {
+        var temp = patientService.returnPatient(id);
         var mv = new ModelAndView("appointment");
-        mv.addObject("paciente", patientService.returnPatient(id));
-        mv.addObject("medicos", healthPersonnelService.returnAllHealthPersonnels());
-        mv.addObject("citas", patientService.returnPatient(id).getHealthPersonnelList()); 
+        mv.addObject("paciente", temp);
         return mv;
     }
 
