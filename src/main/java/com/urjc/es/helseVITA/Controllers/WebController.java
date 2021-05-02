@@ -91,7 +91,7 @@ public class WebController {
             b1 = true;
         }
         if (query2 != null){
-            result2 = (List<Patient>) patientService.searchByAge(query2);
+            result2 = patientService.searchByAge(query2);
             b2 = true;
         }
         if (b1 && b2){
@@ -102,6 +102,10 @@ public class WebController {
             mi_lista = result2;
         }else{
             mi_lista = (List<Patient>) patientService.returnAllPatients();
+        }
+
+        if (result2 == null){
+            mi_lista = result;
         }
         model.addAttribute("object", mi_lista);
         return "buscarPaciente";
@@ -195,6 +199,8 @@ public class WebController {
         mv.addObject("paciente",paciente);
         return mv;
     }
+
+    
 
     public List<Patient> union(List<Patient> list1, List<Patient> list2) {
         if (!(list1 == null || list2 == null)){
