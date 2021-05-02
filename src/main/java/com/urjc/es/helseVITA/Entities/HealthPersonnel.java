@@ -55,7 +55,22 @@ public class HealthPersonnel {
         this.role=role;
     }
 
-    
+        public HealthPersonnel(Integer id, String username, String password, String email, String dni, String role,
+            String name, String surname1, String surname2, Integer age, List<Patient> patients) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.dni = dni;
+        this.role = role;
+        this.name = name;
+        this.surname1 = surname1;
+        this.surname2 = surname2;
+        this.age = age;
+        this.patients = patients;
+    }
+
+
 
     public HealthPersonnel(Integer id, String username, String password, String email, String dni, String role,
             String name, String surname1, String surname2, Integer age, List<Patient> patients,

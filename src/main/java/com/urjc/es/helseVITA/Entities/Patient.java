@@ -70,6 +70,20 @@ public class Patient {
         this.appointments = appointments;
     }
 
+    public Patient(Integer id, String username, String password, String email, String dni, String name, String surname1,
+            String surname2, Integer age, List<HealthPersonnel> healthPersonnelList) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.dni = dni;
+        this.name = name;
+        this.surname1 = surname1;
+        this.surname2 = surname2;
+        this.age = age;
+        this.healthPersonnelList = healthPersonnelList;
+    }
+
     public Integer getId() {
         return id;
     }

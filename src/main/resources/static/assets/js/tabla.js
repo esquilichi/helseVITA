@@ -79,7 +79,7 @@ function chulo(){
 }
 
 function cambia_fecha(){
-    let input, filter, table, tr, th, i, txtValue, year, month, day, hour, minute, temp;
+    let input, table, tr, th, i, txtValue, year, month, day, hour, minute, temp;
     input = document.getElementById("fecha");
 
     year = input.subSequence(0,4);
@@ -94,7 +94,7 @@ function cambia_fecha(){
         th = tr[i].getElementsByTagName("th")[1];
         if (th){
             txtValue = th.textContent || th.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1){
+            if (txtValue.indexOf(input) > -1){
                 if (tr[i].style.display === ""){
                     tr[i].style.display = "";
                 }else if (tr[i].style.display === "none"){
