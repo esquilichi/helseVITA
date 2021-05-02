@@ -63,15 +63,17 @@ public class HealthPersonnelService {
         return healthPersonnelRepository.findHealthPersonnelByNameContainsIgnoreCaseOrSurname1ContainsIgnoreCaseOrSurname2ContainsIgnoreCaseOrEmailContainsIgnoreCase(input, input, input, input);
     }
 
+    public List<HealthPersonnel> searchWithEdad(String input){
+        return healthPersonnelRepository.findHealthPersonnelByNameContainsIgnoreCaseOrSurname1ContainsIgnoreCaseOrSurname2ContainsIgnoreCaseOrEmailContainsIgnoreCaseOrAgeContains(input,input,input,input,Integer.parseInt(input));
+    }
+
 	public List <HealthPersonnel> availableHealthPersonnel(Appointment appointment) {
         List <HealthPersonnel> temp = healthPersonnelRepository.findAll();
 
         List<HealthPersonnel> tempOptional = appointmentService.takenHealthPersonnel(appointment.getYear(), appointment.getMonth(), appointment.getDay(), appointment.getHour(), appointment.getMinute());
         
         for(HealthPersonnel entry : tempOptional){
-            if(temp.contains(entry)){
-                temp.remove(entry);
-            }
+            temp.remove(entry);
         }
         return temp;
 	}

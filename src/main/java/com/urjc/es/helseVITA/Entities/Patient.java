@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,12 +34,10 @@ public class Patient {
     private Integer age;
 
     @ManyToMany
-    @Autowired
-    private List<HealthPersonnel> healthPersonnelList;
+    private List<HealthPersonnel> healthPersonnelList = new ArrayList<>();
 
     @OneToMany(mappedBy="patient",cascade = CascadeType.ALL)
-    @Autowired
-    private List<Appointment> appointments;
+    private List<Appointment> appointments = new ArrayList<>();
 
     public Patient(){ }
 

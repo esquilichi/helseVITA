@@ -81,7 +81,15 @@ public class PatientService {
     }
 
     public Collection<Patient> search(String input) {
-        return patientRepository.findHealthPersonnelByNameContainsIgnoreCaseOrSurname1ContainsIgnoreCaseOrSurname2ContainsIgnoreCaseOrEmailContainsIgnoreCase(input, input, input, input);
+        return patientRepository.findPatientByNameContainsIgnoreCaseOrSurname1ContainsIgnoreCaseOrSurname2ContainsIgnoreCaseOrEmailContainsIgnoreCase(input, input, input, input);
+    }
+    public List<Patient> searchByAge(String input){
+        if (input.equals("")){
+            return null;
+        }else {
+            return patientRepository.findPatientByAge(Integer.parseInt(input));
+        }
+
     }
     public void newHealthPersonnel (HealthPersonnel healthPersonnel, Integer id){
         Patient temp = patientRepository.findById(id).get();
