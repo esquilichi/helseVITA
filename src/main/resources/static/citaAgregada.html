@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html>
 
-{{> head}}
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Contacto</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+<link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+<link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+<link rel="stylesheet" href="assets/css/Footer-Basic.css">
+<link rel="stylesheet" href="assets/css/Footer-Dark.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+<link rel="stylesheet" href="assets/css/Map-Clean.css">
+<link rel="stylesheet" href="assets/css/smoothproducts.css">
+</head>
 
 <body>
 	<nav
@@ -13,15 +29,15 @@
 					class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navcol-1">
-				<a href="/"><img src="/assets/img/helseVITA%20color%20copia.png"
+				<a href="/"><img src="assets/img/helseVITA%20color%20copia.png"
 					style="width: 200px;"></a>
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="/"
-						style="width: 90px; font-size: 20px; color: rgba(0, 0, 0, 0.5);">Inicio</a></li>
+					<li class="nav-item"><a class="nav-link active" href="/"
+						style="width: 100px; font-size: 20px; color: rgba(0, 0, 0, 0.5);">Inicio</a></li>
 					<li class="nav-item"><a class="nav-link" href="/#seguros"
 						style="width: 100px; font-size: 20px;">Seguros</a></li>
 					<li class="nav-item"><a class="nav-link" href="/#somos"
-						style="font-size: 20px; width: 100px;"> Somos</a></li>
+						style="font-size: 20px; width: 100px;">Somos</a></li>
 					<li class="nav-item" style="width: 100px;"><a class="nav-link"
 						href="contact-us.html" style="font-size: 20px;">Contacto</a></li>
 				</ul>
@@ -47,7 +63,7 @@
 								fill="currentColor"></path>
                         </svg></a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="search.html">Buscador de
+						<a class="dropdown-item" href="search-center.html">Buscador de
 							Centros</a><a class="dropdown-item" href="work-with-us.html">Trabaja
 							con Nosotros</a><a class="dropdown-item" href="faq.html">Preguntas
 							Frecuentes</a>
@@ -59,52 +75,31 @@
 					helseVITA</button>
 			</div>
 	</nav>
-	<main class="page contact-us-page">
-		<section class="clean-block clean-form dark">
-			<div class="container">
-				<div class="block-heading">
-					<h2 style="color: #94d4b4;">Nueva cita</h2>
-				</div>
-				<form style="border-top-color: #97d6b5;">
-					<input type="hidden"  id="fecha" class="form-control" onkeypress="cambia_fecha()" placeholder="Filtrado por fecha" title="Busqueda Dinámica" name="id_paciente" value="{{paciente.id}}">
-					<div id="{{paciente.id}}" class="form-group">
-						<label>Elige un día para la cita</label><input
-							class="form-control" id="miInputChulo" type="datetime-local" name="tiempo">
-					</div>
-				</form>
-
-				<div class="container" style="border-top-color: rgb(151, 214, 181)">
-					<table  class="table" style="border-top-color: rgb(151, 214, 181)">
-						<thead>
-						<tr>
-							<th style="color: #000000">Nombre Doctor</th>
-							<th style="color: #000000">Primer Apellido</th>
-							<th style="color: #000000">Rol</th>
-							<th style="color: #000000">Pedir cita</th>
-						</tr>
-						</thead>
-						<tbody id="myTable">
-							{{#object}}
-							<tr>					
-							<th>{{name}}</th>
-							<th>{{surname1}}</th>
-							<th>{{role}}</th>
-							<th><a href="citaAgregada.html">Nueva cita</a></th>
-							</tr>
-							{{/object}}
-						</tbody>
-					</table>
-			</div>
-		</section>
+	
 	</main>
-	{{> footer}}
-	<script src="/assets/js/jquery.min.js"></script>
-	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+	<footer class="footer-basic">
+		<div class="social">
+			<a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
+				class="icon ion-social-facebook"></i></a><a href="#"><i
+				class="icon ion-social-twitter"></i></a>
+		</div>
+		<ul class="list-inline">
+			<li class="list-inline-item"><a href="/">Inicio</a></li>
+			<li class="list-inline-item"></li>
+			<li class="list-inline-item"><a href="faq.html">Preguntas
+					Frecuentes</a></li>
+			<li class="list-inline-item"><a href="#">Términos</a></li>
+			<li class="list-inline-item"><a href="#">Política de
+					Privacidad</a></li>
+		</ul>
+		<p class="copyright">helseVITA © 2021</p>
+	</footer>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-	<script src="/assets/js/smoothproducts.min.js"></script>
-	<script src="/assets/js/theme.js"></script>
-	<script src="/assets/js/tabla.js"></script>
+	<script src="assets/js/smoothproducts.min.js"></script>
+	<script src="assets/js/theme.js"></script>
 </body>
 
 </html>

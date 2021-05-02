@@ -187,7 +187,7 @@ public class WebController {
         int month = Integer.parseInt((String) text.subSequence(5,7));
         int day = Integer.parseInt((String) text.subSequence(8,10));
         int hour = Integer.parseInt((String) text.subSequence(11,13));
-        int minute = Integer.parseInt((String) text.subSequence(16,17)); //Es inútil, no hay atributo minutos, pero no me quiteis la ilusión...
+        int minute = Integer.parseInt((String) text.subSequence(14,16)); //Es inútil, no hay atributo minutos, pero no me quiteis la ilusión...
 
         var paciente = patientService.returnPatient(id_paciente);
         Appointment temp = new Appointment(hour,minute, day,month,year,paciente);
