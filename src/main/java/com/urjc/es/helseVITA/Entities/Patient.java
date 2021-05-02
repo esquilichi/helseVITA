@@ -33,7 +33,7 @@ public class Patient {
     @Column
     private Integer age;
 
-    @ManyToMany(mappedBy = "patient_health_personnel_list")
+    @ManyToMany
     private List<HealthPersonnel> healthPersonnelList = new ArrayList<>();
 
     @OneToMany(mappedBy="patient",cascade = CascadeType.ALL)
