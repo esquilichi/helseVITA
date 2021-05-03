@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -52,9 +53,10 @@ public class HelseVitaApplication {
 			String surname1 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			String surname2 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			List<HealthPersonnel> healthPersonnelList = fillHealthPersonnelList(healthPersonnelRepository);
+			String dni = newDni();
 	
 			Patient temp = new Patient(String.format("%s%s", name, surname1),String.format("1234%s", name),String.format("%s.%s@helsevita.com",
-				name.toLowerCase(),surname1.toLowerCase()),"93827461S", name, surname1, surname2, (int) (Math.random() * 95));
+				name.toLowerCase(),surname1.toLowerCase()), dni, name, surname1, surname2, (int) (Math.random() * 95));
 			temp.setHealthPersonnelList(healthPersonnelList);
 			return temp;
 		}).collect(Collectors.toList()));
@@ -64,9 +66,10 @@ public class HelseVitaApplication {
 			String surname1 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			String surname2 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			List<Patient> patientsList = fillPatientsList(patientRepository);
+			String dni = newDni();
 	
 			HealthPersonnel temp = new HealthPersonnel(String.format("%s%s", name, surname1),String.format("1234%s", name),String.format("%s.%s@helsevita.com",
-				name.toLowerCase(),surname1.toLowerCase()),"93827461S", name, surname1, surname2, (int) (Math.random() * 65), EnumRoles.randomRol().toString());
+				name.toLowerCase(),surname1.toLowerCase()), dni, name, surname1, surname2, (int) (Math.random() * 65), EnumRoles.randomRol().toString());
 			temp.setPatients(patientsList);
 			return temp; 
 		}).collect(Collectors.toList()));
@@ -93,6 +96,27 @@ public class HelseVitaApplication {
 			temp.ifPresent(healthPersonnelList::add);
 		}
 		return healthPersonnelList;
+	}
+
+	private String newDni (){
+		int dni[]=new int[8];
+		Random r = new Random();
+		int total=0;
+		String dniFinal="";
+
+		for(int i=0; i<8; i++){
+			dni[i]=r.nextInt(10);
+		}
+		for(int i=0; i<8; i++){
+			total+=dni[i];
+		}
+		for(int i=0; i<8; i++){
+			dniFinal = (dniFinal+String.valueOf(dni[i]));
+		}
+		total=total%23;
+	
+		dniFinal = (dniFinal+LetraDni.fromId(total));
+		return dniFinal;
 	}
 
 }
