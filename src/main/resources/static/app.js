@@ -44,7 +44,7 @@ function createPaciente() {
 
 function loadItems() {
 
-    alert("Eres precioso no cambies");
+    alert("Eres precioso no cambies :p");
 
 }
 
@@ -65,7 +65,13 @@ function createSanitario() {
             "username": username,
             "password": password,
             "email": email,
-            "dni": dni
+            "dni": dni,
+            "role": role,
+            "name": name,
+            "surname1": surname1,
+            "surname2": surname2,
+            "age": age
+
         };
 
     var client = new XMLHttpRequest();
