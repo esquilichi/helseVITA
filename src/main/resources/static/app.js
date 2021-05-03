@@ -83,7 +83,7 @@ function createSanitario() {
         loadItems();
     });
 
-    client.open("POST", "/api/healthPersonnel");
+    client.open("POST", "/api/healthPersonnels");
 
     client.setRequestHeader("Content-type", "application/json");
     var body = JSON.stringify(item);
