@@ -12,5 +12,5 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     public List<Appointment> findAppointmentByYearAndMonthAndDayAndHourAndMinute(Integer year, Integer month, Integer day,Integer hour, Integer minute);
     public Optional<Appointment> findAppointmentsByPatient(Patient patient);
     public Optional<Appointment> findAppointmentsByHealthPersonnel(HealthPersonnel healthPersonnel);
-
+    public List<Appointment> findAppointmentsByPatientId(Integer patient_id);
 }

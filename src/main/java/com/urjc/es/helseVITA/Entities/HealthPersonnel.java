@@ -197,7 +197,7 @@ public class HealthPersonnel {
 
     @Override
     public String toString() {
-        return this.name + " " + 
+        return this.name + " " +
                 this.surname1 + " "  + this.role.toUpperCase(Locale.ROOT);
     }
 }

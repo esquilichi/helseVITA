@@ -3,6 +3,7 @@ package com.urjc.es.helseVITA.Services;
 import com.urjc.es.helseVITA.Entities.Appointment;
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
+import com.urjc.es.helseVITA.Repositories.AppointmentRepository;
 import com.urjc.es.helseVITA.Repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class PatientService {
 
     @Autowired
     PatientRepository patientRepository;
+    @Autowired
+    AppointmentRepository appointmentRepository;
 
     public Patient addPatient(Patient patient){
         return patientRepository.save(patient);
@@ -105,4 +108,8 @@ public class PatientService {
         return temp.orElse(null);
     }
 
+    public Appointment returnLastAppointment(Integer patient){
+        var lista = appointmentRepository.findAppointmentsByPatientId(patient);
+        return lista.get(lista.size() - 1);
+    }
 }

@@ -5,8 +5,11 @@ import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Exceptions.IncorrectSearchParametersException;
 import com.urjc.es.helseVITA.Exceptions.UserNotFoundException;
+import com.urjc.es.helseVITA.Repositories.AppointmentRepository;
+import com.urjc.es.helseVITA.Services.AppointmentService;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +30,12 @@ public class WebController {
     HealthPersonnelService healthPersonnelService;
 
     @Autowired
+    AppointmentService appointmentService;
+
+    @Autowired
     EntityManager entityManager;
+
+    Appointment appointmentToEngage;
 
     @RequestMapping("/")
     ModelAndView index() {
@@ -208,6 +216,7 @@ public class WebController {
     public ModelAndView addAppointmentCode(@RequestParam Map<String,String> requestParams){
         var id_paciente = Integer.parseInt(requestParams.get("id_paciente"));
         var text = requestParams.get("tiempo");
+        //var id_doctor = requestParams.get("id_doctor");
         int year = Integer.parseInt((String) text.subSequence(0,4));
         int month = Integer.parseInt((String) text.subSequence(5,7));
         int day = Integer.parseInt((String) text.subSequence(8,10));
@@ -216,12 +225,12 @@ public class WebController {
 
         var paciente = patientService.returnPatient(id_paciente);
         List<Patient> lista_con_paciente = new ArrayList<>(); lista_con_paciente.add(paciente);
-        Appointment temp = new Appointment(hour,minute, day,month,year,paciente);
+        Appointment temp = this.appointmentToEngage = new Appointment(hour,minute, day,month,year,null,paciente);
 
         List<Appointment> citas = paciente.getAppointments();
-        citas.add(temp);
-        paciente.setAppointments(citas);
-        patientService.addPatient(paciente);
+        //citas.add(temp);
+        //paciente.setAppointments(citas);
+        //patientService.addPatient(paciente);
         //TypedQuery<HealthPersonnel> q1 = entityManager.createQuery("SELECT c FROM health_personnel c where c.id in (select health_personnel_list_id from patient_health_personnel_list where id = :id_paciente)",HealthPersonnel.class);
         //q1.setParameter("id_paciente",id_paciente);
         //var lista = q1.getResultList();
@@ -233,6 +242,23 @@ public class WebController {
         return mv;
     }
 
+    @RequestMapping("/exito")
+    public ModelAndView exito(@RequestParam Map<String,String> requestParams){
+        int id_doctor = Integer.parseInt(requestParams.get("id_doctor"));
+        int id_paciente = Integer.parseInt(requestParams.get("id_paciente"));
+        var paciente  = patientService.returnPatient(id_paciente);
+        var doctor = healthPersonnelService.returnHealthPersonnel(id_doctor);
+        this.appointmentToEngage.setHealthPersonnel(doctor);
+
+        List<Appointment> ap_patient = patientService.addAppointmentToPatient(id_paciente,this.appointmentToEngage);
+        List<Appointment> ap_doctor = healthPersonnelService.addAppointmentToHealthPersonnel(id_doctor,this.appointmentToEngage);
+
+
+
+        var mv = new ModelAndView("exito");
+
+        return mv;
+    }
 
 
     public List<Patient> union(List<Patient> list1, List<Patient> list2) {

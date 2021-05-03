@@ -113,4 +113,17 @@ public class HealthPersonnelService {
     public List<HealthPersonnel> returnHealthPersonnelsByPatient(List<Patient> lista){
         return healthPersonnelRepository.findHealthPersonnelsByPatientsIn(lista);
     }
+
+    public List<Appointment> addAppointmentToHealthPersonnel(Integer id, Appointment a){
+        Optional<HealthPersonnel> op  = healthPersonnelRepository.findById(id);
+        if (op.isPresent()){
+            var temp = op.get();
+            List<Appointment> list = temp.getAppointments();
+            list.add(a);
+            temp.setAppointments(list);
+            healthPersonnelRepository.save(temp);
+            return list;
+        }
+        return null;
+    }
 }

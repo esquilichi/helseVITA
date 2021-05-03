@@ -28,10 +28,6 @@ public class AppointmentService {
         return temp.isPresent();
     }
 
-    public boolean existsPatientAppointment(Patient patient){
-        return appointmentRepository.findAppointmentsByPatient(patient).isPresent();
-    }
-
     public boolean existsHealthPersonnelAppointment(HealthPersonnel healthPersonnel){
         return appointmentRepository.findAppointmentsByHealthPersonnel(healthPersonnel).isPresent();
     }
