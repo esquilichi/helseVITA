@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+{{> head}}
+<main class="page login-page">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2 style="color: #94d4b4;">Nuevo Sanitario</h2>
+                <p>Introduce los siguientes datos para crear un sanitario nuevo</p>
+            </div>
+            <form style="border-top-color: rgb(151, 214, 181);">
+                <div class="form-group">
+                    <label for="Name">Nombre</label><input type="text"
+                                                           class="form-control" id="name"
+                                                           placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                    <label for="surname1">Primer apellido</label><input type="text"
+                                                                        class="form-control" id="surname1"
+                                                                        placeholder="Primer 𝒶𝓅ℯ𝓁𝓁𝒾𝒹ℴ">
+                </div>
+                <div class="form-group">
+                    <label for="Surname2">Segundo apellido</label><input type="text"
+                                                                         class="form-control" id="surname2"
+                                                                         placeholder="Segundo 𝒶𝓅ℯ𝓁𝓁𝒾𝒹ℴ">
+                </div>
+                <div class="form-group">
+                    <label for="Age">Edad</label><input type="text"
+                                                        class="form-control" id="age"
+                                                        placeholder="Edad">
+                </div>
+                <div class="form-group">
+                    <label for="Username">Nombre de usuario</label><input type="text"
+                                                                          class="form-control" id="username"
+                                                                          placeholder="Nombre de usuario">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña</label><input type="password"
+                                                                   class="form-control" id="password"
+                                                                   placeholder="Contraseña">
+                    <small id="Privacy" class="form-text text-muted">Tranquilo, tus datos estan
+                        seguros con nosotros ;)</small>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label><input type="text"
+                                                           class="form-control" id="email"
+                                                           placeholder="Introduce tu direccion de correo">
+                </div>
+                <div class="form-group">
+                    <label for="dni">DNI</label><input type="text"
+                                                       class="form-control" id="dni" placeholder="Introduce tu DNI">
+                </div>
+
+
+                <div id="value" class="form-group">
+                    <label>Especialidad</label>
+                </div>
+                <div style="text-align: center;">
+                    <select id="list" class="form-control" style="margin-bottom: 15px">
+                        <optgroup label="Especialidades">
+                            {{#roles}}
+                            <option value="{{.}}" id="role">{{.}}</option>
+                            {{/roles}}
+                        </optgroup>
+                    </select>
+
+                <button onclick="createSanitario()" type="submit"
+                        class="btn btn-primary btn-block"
+                        style="border-color: rgba(255, 255, 255, 0.4); background: rgb(255, 193, 105); color: #000000;">
+                    Crear
+                </button>
+                <button onclick="location.href='/areaSanitario.html'" class="btn btn-primary btn-block" type="button"
+                        style="background: rgb(255, 193, 105); color: #000000; border-color: rgb(255, 193, 105);text-align: center;">
+                    Volver
+                </button>
+                </div>
+
+
+            </form>
+        </div>
+
+    </section>
+
+</main>
+{{> footer}}
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="assets/js/smoothproducts.min.js"></script>
+<script src="assets/js/theme.js"></script>
+</body>
+
+</html>

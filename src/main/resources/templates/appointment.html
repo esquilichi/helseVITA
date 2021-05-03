@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+{{> head}}
+
+	<main class="page contact-us-page">
+		<section class="clean-block clean-form dark">
+			<div class="container">
+				<div class="block-heading">
+					<h2 style="color: #94d4b4;">Nueva cita</h2>
+				</div>
+				<form action="/whichDoc" style="border-top-color: #97d6b5;">
+					<input  type="hidden"  class="form-control"  name="id_paciente" value="{{paciente.id}}">
+
+						<label>Elige un día para la cita</label>
+					<input class="form-control" id="miInputChulo" type="datetime-local" name="tiempo">
+
+					<center>
+					<button type="submit" class="btn btn-primary"
+							style="margin: 15px; background: rgb(255, 191, 105); font-size: 20px; border-color: rgba(255, 255, 255, 0.4); color: #000000;">
+						Enviar
+					</button></center>
+				</form>
+			</div>
+
+		</section>
+	</main>
+	{{> footer}}
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+	<script src="/assets/js/smoothproducts.min.js"></script>
+	<script src="/assets/js/theme.js"></script>
+	<script src="/assets/js/tabla.js"></script>
+</body>
+
+</html>

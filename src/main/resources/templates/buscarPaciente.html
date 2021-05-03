@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+{{> head}}
+
+<main class="page login-page">
+    <section class="clean-block clean-form dark">
+        <div class="container"></div>
+        <div class="block-heading">
+            <h2 style="color: #94d4b4;">Buscar Paciente</h2>
+            <form action="/searchPatient" class="navbar-form navbar-right" style="border-top-color: rgb(151, 214, 181)">
+                <input type="text" class="form-control" placeholder="Búsqueda general" name="q1">
+                <br></br>
+                <input type="text" class="form-control" placeholder="Búsqueda por edad" name="q2">
+                <br></br>
+                <button class="btn btn-primary btn-block" type="submit" style="background: rgb(255, 193, 105); color: #000000; border-color: rgb(255, 193, 105);text-align: center; margin-bottom: 15px">Click</button>
+                <button onclick="location.href='/areaPaciente.html'" class="btn btn-primary btn-block" type="button"
+							style="background: rgb(255, 193, 105); color: #000000; border-color: rgb(255, 193, 105);text-align: center;">Volver</button>
+            </form>
+            <form  class="navbar-form navbar-right" style="border-top-color: rgb(151, 214, 181)">
+                <br></br>
+                <input type="text" id="myInput2" class="form-control" onkeypress="cambia_nombre()"
+                       placeholder="Filtrado por nombre" title="Nombre">
+                <br></br>
+                <input type="text" id="myInput3" class="form-control" onkeypress="cambia_apellido1()"
+                       placeholder="Filtrado por primer apellido" title="Apellido">
+            </form>
+
+        </div>
+    </section>
+    <section class="clean-block clean-form light">
+        <div class="container" style="border-top-color: rgb(151, 214, 181)">
+            <div class="block-heading">
+                <h2 style="color: #94d4b4;">Listado de Pacientes</h2>
+                <div class="table-responsive">
+                    <table class="table" style="border-top-color: rgb(151, 214, 181)">
+                        <thead>
+                        <tr>
+                            <th style="color: #000000">ID</th>
+                            <th style="color: #000000">Nombre</th>
+                            <th style="color: #000000">Primer 𝒶𝓅ℯ𝓁𝓁𝒾𝒹ℴ</th>
+                            <th style="color: #000000">Segundo 𝒶𝓅ℯ𝓁𝓁𝒾𝒹ℴ</th>
+                            <th style="color: #000000">Email</th>
+                            <th style="color: #000000">Edad</th>
+                            <th style="color: #000000">Nombre de usuario</th>
+                            <th style="color: #000000">Elegir cita</th>
+                        </thead>
+                        <tbody id="myTable">
+                        {{#object}}
+                        <tr>
+                            <th>{{id}}</th>
+                            <th><a href="/mostrar/{{id}}">{{name}}</a></th>
+                            <th>{{surname1}}</th>
+                            <th>{{surname2}}</th>
+                            <th>{{email}}</th>
+                            <th>{{age}}</th>
+                            <th>{{username}}</th>
+                            <th><a href="/addAppointment/{{id}}">Nueva cita</a></th>
+                        </tr>
+                        {{/object}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{{> footer}}
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="assets/js/smoothproducts.min.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/tabla.js"></script>
+
+</body>
+
+</html>

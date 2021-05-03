@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"ismael\",\r\n    \"password\": \"isma\",\r\n    \"email\": \"ismael@gmail.com\",\r\n    \"dni\": \"836204739H\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Ismael\",\r\n    \"surname1\": \"Gómez\",\r\n    \"surname2\": \"Esquilichi\",\r\n    \"age\": \"20\",\r\n    \"username\": \"ismael\",\r\n    \"password\": \"isma\",\r\n    \"email\": \"ismael@gmail.com\",\r\n    \"dni\": \"836204739H\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,15 +20,44 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/healthPersonnel",
-					"protocol": "http",
+					"raw": "https://localhost:8443/api/healthPersonnels",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8443",
 					"path": [
 						"api",
-						"healthPersonnel"
+						"healthPersonnels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/patients Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"username\":\"claraaa\",\r\n\r\n    \"password\":\"sdfgrtnj\",\r\n\r\n    \"email\":\"clara@clara.com\",\r\n\r\n    \"dni\":\"309485720H\",\r\n\r\n    \"name\":\"Clara\",\r\n\r\n    \"surename1\":\"Contreras\",\r\n\r\n    \"surename2\":\"Nevares\",\r\n\r\n    \"age\":19\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/healthPersonnels",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"healthPersonnels"
 					]
 				}
 			},
@@ -40,16 +69,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/api/patients/1",
-					"protocol": "http",
+					"raw": "https://localhost:8443/api/healthPersonnels/59",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8443",
 					"path": [
 						"api",
-						"patients",
-						"1"
+						"healthPersonnels",
+						"59"
 					]
 				}
 			},
@@ -61,15 +90,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/api/healthPersonnel",
-					"protocol": "http",
+					"raw": "https://localhost:8443/api/healthPersonnels",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8443",
 					"path": [
 						"api",
-						"healthPersonnel"
+						"healthPersonnels"
 					]
 				}
 			},
@@ -82,7 +111,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"ismael\",\r\n    \"password\": \"root\",\r\n    \"email\": \"ismael@gmail.com\",\r\n    \"dni\": \"836204739H\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Ismael\",\r\n    \"surname1\": \"Gómez\",\r\n    \"surname2\": \"Esquilichi\",\r\n    \"age\": \"20\",\r\n    \"username\": \"root\",\r\n    \"password\": \"isma\",\r\n    \"email\": \"ismael@gmail.com\",\r\n    \"dni\": \"836204739H\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -90,16 +119,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/healthPersonnel/0",
-					"protocol": "http",
+					"raw": "https://localhost:8443/api/healthPersonnels/1",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8443",
 					"path": [
 						"api",
-						"healthPersonnel",
-						"0"
+						"healthPersonnels",
+						"1"
 					]
 				}
 			},
@@ -111,17 +140,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/api/healthPersonnel/0/",
-					"protocol": "http",
+					"raw": "https://localhost:8443/api/healthPersonnels/2",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8443",
 					"path": [
 						"api",
-						"healthPersonnel",
-						"0",
-						""
+						"healthPersonnels",
+						"2"
 					]
 				}
 			},
@@ -142,16 +170,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/healthPersonnel/0",
-					"protocol": "http",
+					"raw": "https://localhost:8443/api/healthPersonnels/1",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8443",
 					"path": [
 						"api",
-						"healthPersonnel",
-						"0"
+						"healthPersonnels",
+						"1"
 					]
 				}
 			},
