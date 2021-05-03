@@ -87,6 +87,7 @@ function createSanitario() {
 
     client.setRequestHeader("Content-type", "application/json");
     var body = JSON.stringify(item);
+    alert(body);
     client.send(body);
 
 }

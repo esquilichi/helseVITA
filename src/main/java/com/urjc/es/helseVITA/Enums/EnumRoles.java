@@ -1,4 +1,4 @@
-package com.urjc.es.helseVITA.enums;
+package com.urjc.es.helseVITA.Enums;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,9 +11,14 @@ public enum EnumRoles {
     ONCOLOGO, PSIQUIATRA, CIRUJANO, ODONTOLOGO, UROLOGO;    
 
     
-    private static final List<EnumRoles> VALUES = Collections.unmodifiableList(Arrays.asList(values())); 
+    public static final List<EnumRoles> VALUES = List.of(values());
     private static final int SIZE = VALUES.size(); 
     private static final Random RANDOM = new Random(); 
     public static EnumRoles randomRol() { return VALUES.get(RANDOM.nextInt(SIZE)); }
 
+
+    @Override
+    public String toString() {
+        return this.name();
+    }
 }

@@ -14,7 +14,8 @@ import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Repositories.HealthPersonnelRepository;
 import com.urjc.es.helseVITA.Repositories.PatientRepository;
-import com.urjc.es.helseVITA.enums.EnumRoles;
+import com.urjc.es.helseVITA.Enums.EnumRoles;
+import com.urjc.es.helseVITA.Enums.LetraDni;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
