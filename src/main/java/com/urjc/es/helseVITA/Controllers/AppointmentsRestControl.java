@@ -45,7 +45,7 @@ public class AppointmentsRestControl {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    //Get one specified user
+    //Get one specified appointment
     @GetMapping("/api/appointments/{id}")
     public ResponseEntity<Appointment> getSingleAppointment(@PathVariable Integer id){
         if (appointmentService.exists(id)){
@@ -55,7 +55,7 @@ public class AppointmentsRestControl {
         }
     }
 
-    //Get all appointments from one patient
+    /* //Get all appointments from one patient
     @GetMapping("/api/appointments/{patient}")
     public ResponseEntity<Appointment> getPatientAppointment(@PathVariable String patient){
         var temp = patientService.returnPatientByUsername(patient);
@@ -63,9 +63,9 @@ public class AppointmentsRestControl {
                 return new ResponseEntity<>(appointmentService.returnPatientAppointments(temp),HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+    } */
 
-    //Get all appointment from one health personnel
+    /* //Get all appointment from one health personnel
     @GetMapping("/api/appointments/{healthPersonnel}")
     public ResponseEntity<Appointment> getHealthPersonnelAppointment(@PathVariable String healthPersonnel){
         var temp = healthPersonnelService.returnHealthPersonnelByUsername(healthPersonnel);
@@ -74,7 +74,7 @@ public class AppointmentsRestControl {
 
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+    } */
 
 
 

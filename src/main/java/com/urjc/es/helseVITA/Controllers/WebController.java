@@ -5,11 +5,9 @@ import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Exceptions.IncorrectSearchParametersException;
 import com.urjc.es.helseVITA.Exceptions.UserNotFoundException;
-import com.urjc.es.helseVITA.Repositories.AppointmentRepository;
 import com.urjc.es.helseVITA.Services.AppointmentService;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import java.util.*;
 
 @Controller
