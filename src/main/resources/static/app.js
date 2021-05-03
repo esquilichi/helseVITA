@@ -44,15 +44,7 @@ function createPaciente() {
 
 function loadItems() {
 
-    var client = new XMLHttpRequest();
-    client.responseType = "json";
-    client.addEventListener("load", function () {
-        addItemsToPage(this.response);
-    });
-
-    client.open("GET", "/api");
-
-    client.send();
+    alert("Eres precioso no cambies");
 
 }
 
@@ -90,20 +82,6 @@ function createSanitario() {
     client.setRequestHeader("Content-type", "application/json");
     var body = JSON.stringify(item);
     client.send(body);
-
-}
-
-function loadItems() {
-
-    var client = new XMLHttpRequest();
-    client.responseType = "json";
-    client.addEventListener("load", function () {
-        addItemsToPage(this.response);
-    });
-
-    client.open("GET", "/api");
-
-    client.send();
 
 }
 

@@ -1,5 +1,8 @@
 package com.urjc.es.helseVITA.Entities;
 
+import com.urjc.es.helseVITA.Services.HealthPersonnelService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 
 @Entity
