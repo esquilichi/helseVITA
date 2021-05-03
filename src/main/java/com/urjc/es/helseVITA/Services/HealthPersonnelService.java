@@ -2,14 +2,12 @@ package com.urjc.es.helseVITA.Services;
 
 import com.urjc.es.helseVITA.Entities.Appointment;
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
+import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Repositories.HealthPersonnelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class HealthPersonnelService {
@@ -110,5 +108,9 @@ public class HealthPersonnelService {
     public HealthPersonnel returnHealthPersonnelByUsername(String username){
         var temp = healthPersonnelRepository.findHealthPersonnelByUsername(username);
         return temp.orElse(null);
+    }
+
+    public List<HealthPersonnel> returnHealthPersonnelsByPatient(List<Patient> lista){
+        return healthPersonnelRepository.findHealthPersonnelsByPatientsIn(lista);
     }
 }

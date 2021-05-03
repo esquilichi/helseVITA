@@ -1,9 +1,11 @@
 package com.urjc.es.helseVITA.Repositories;
 
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
+import com.urjc.es.helseVITA.Entities.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,4 +23,6 @@ public interface HealthPersonnelRepository extends JpaRepository<HealthPersonnel
     public List<HealthPersonnel> findHealthPersonnelByNameContainsIgnoreCaseOrSurname1ContainsIgnoreCaseOrSurname2ContainsIgnoreCaseOrEmailContainsIgnoreCaseOrAgeContains(String name, String surname1, String surname2, String email, Integer age);
 
     public List<HealthPersonnel> findByAge(Integer input);
+
+    public List<HealthPersonnel> findHealthPersonnelsByPatientsIn(List<Patient> patients);
 }

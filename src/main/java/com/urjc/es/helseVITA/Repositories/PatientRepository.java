@@ -4,6 +4,7 @@ import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.Collection;
 import java.util.List;

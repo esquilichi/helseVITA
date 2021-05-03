@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Entity(name = "health_personnel")
 @Table(name = "health_personnel")
@@ -193,5 +194,10 @@ public class HealthPersonnel {
     public void setAge(Integer age) {
         this.age = age;
     }
-    
+
+    @Override
+    public String toString() {
+        return this.name + " " + 
+                this.surname1 + " "  + this.role.toUpperCase(Locale.ROOT);
+    }
 }

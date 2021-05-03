@@ -215,15 +215,17 @@ public class WebController {
         int minute = Integer.parseInt((String) text.subSequence(14,16)); //Es inútil, no hay atributo minutos, pero no me quiteis la ilusión...
 
         var paciente = patientService.returnPatient(id_paciente);
+        List<Patient> lista_con_paciente = new ArrayList<>(); lista_con_paciente.add(paciente);
         Appointment temp = new Appointment(hour,minute, day,month,year,paciente);
 
         List<Appointment> citas = paciente.getAppointments();
         citas.add(temp);
         paciente.setAppointments(citas);
         patientService.addPatient(paciente);
-        TypedQuery<HealthPersonnel> q1 = entityManager.createQuery("SELECT c FROM health_personnel c where c.id in (select health_personnel_list_id from patient_health_personnel_list where id = :id_paciente)",HealthPersonnel.class);
-        q1.setParameter("id_paciente",id_paciente);
-        var lista = q1.getResultList();
+        //TypedQuery<HealthPersonnel> q1 = entityManager.createQuery("SELECT c FROM health_personnel c where c.id in (select health_personnel_list_id from patient_health_personnel_list where id = :id_paciente)",HealthPersonnel.class);
+        //q1.setParameter("id_paciente",id_paciente);
+        //var lista = q1.getResultList();
+        var lista = healthPersonnelService.returnHealthPersonnelsByPatient(lista_con_paciente);
         var mv = new ModelAndView("cualDoctor");
         mv.addObject("cita", temp);
         mv.addObject("docs",lista);
