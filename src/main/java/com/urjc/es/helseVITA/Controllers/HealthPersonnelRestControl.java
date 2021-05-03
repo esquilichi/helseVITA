@@ -31,6 +31,7 @@ public class HealthPersonnelRestControl {
     @DeleteMapping("/api/healthPersonnels/{id}")
     public ResponseEntity<HealthPersonnel> deleteHealthPersonnel(@PathVariable Integer id){
         if (healthPersonnelService.exists(id)){
+            healthPersonnelService.delete(id);
             return  new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -3,6 +3,7 @@ package com.urjc.es.helseVITA.Controllers;
 import com.urjc.es.helseVITA.Entities.Appointment;
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
+import com.urjc.es.helseVITA.Enums.EnumRoles;
 import com.urjc.es.helseVITA.Exceptions.IncorrectSearchParametersException;
 import com.urjc.es.helseVITA.Exceptions.UserNotFoundException;
 import com.urjc.es.helseVITA.Services.AppointmentService;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class WebController {
@@ -218,13 +220,12 @@ public class WebController {
         int month = Integer.parseInt((String) text.subSequence(5,7));
         int day = Integer.parseInt((String) text.subSequence(8,10));
         int hour = Integer.parseInt((String) text.subSequence(11,13));
-        int minute = Integer.parseInt((String) text.subSequence(14,16)); //Es inútil, no hay atributo minutos, pero no me quiteis la ilusión...
-
+        int minute = Integer.parseInt((String) text.subSequence(14,16)); 
         var paciente = patientService.returnPatient(id_paciente);
         List<Patient> lista_con_paciente = new ArrayList<>(); lista_con_paciente.add(paciente);
         Appointment temp = this.appointmentToEngage = new Appointment(hour,minute, day,month,year,null,paciente);
 
-        List<Appointment> citas = paciente.getAppointments();
+        //List<Appointment> citas = paciente.getAppointments();
         //citas.add(temp);
         //paciente.setAppointments(citas);
         //patientService.addPatient(paciente);
@@ -250,13 +251,22 @@ public class WebController {
         List<Appointment> ap_patient = patientService.addAppointmentToPatient(id_paciente,this.appointmentToEngage);
         //List<Appointment> ap_doctor = healthPersonnelService.addAppointmentToHealthPersonnel(id_doctor,this.appointmentToEngage);
 
-
-
         var mv = new ModelAndView("exito");
 
         return mv;
     }
 
+    @RequestMapping("/crearSanitario")
+    public ModelAndView crearSanitario(){
+        List<String> cosas = new ArrayList<>();
+        var lista = EnumRoles.VALUES;
+        for(EnumRoles c : EnumRoles.values())
+            cosas.add(c.toString());
+
+        var mv = new ModelAndView("crearSanitario");
+        mv.addObject("roles",lista);
+        return mv;
+    }
 
     public List<Patient> union(List<Patient> list1, List<Patient> list2) {
         if (!(list1 == null || list2 == null)){

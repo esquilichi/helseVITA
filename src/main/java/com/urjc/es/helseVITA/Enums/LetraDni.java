@@ -1,4 +1,4 @@
-package com.urjc.es.helseVITA;
+package com.urjc.es.helseVITA.Enums;
 
 import java.util.Map;
 import java.util.HashMap;

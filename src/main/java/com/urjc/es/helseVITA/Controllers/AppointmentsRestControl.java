@@ -40,6 +40,7 @@ public class AppointmentsRestControl {
     @DeleteMapping("/api/appointments/{id}")
     public ResponseEntity<Appointment> deleteAppointment(@PathVariable Integer id){
         if (appointmentService.exists(id)){
+            appointmentService.delete(id);
             return  new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

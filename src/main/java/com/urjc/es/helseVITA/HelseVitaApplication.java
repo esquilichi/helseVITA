@@ -10,11 +10,13 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import com.urjc.es.helseVITA.Entities.EnumRoles;
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Repositories.HealthPersonnelRepository;
 import com.urjc.es.helseVITA.Repositories.PatientRepository;
+import com.urjc.es.helseVITA.Enums.EnumRoles;
+import com.urjc.es.helseVITA.Enums.LetraDni;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -56,7 +58,7 @@ public class HelseVitaApplication {
 			String dni = newDni();
 	
 			Patient temp = new Patient(String.format("%s%s", name, surname1),String.format("1234%s", name),String.format("%s.%s@helsevita.com",
-				name.toLowerCase(),surname1.toLowerCase()), dni, name, surname1, surname2, (int) (Math.random() * 95));
+				name.toLowerCase(),surname1.toLowerCase()), dni, name, surname1, surname2, (int) (Math.random() * 45+22));
 			temp.setHealthPersonnelList(healthPersonnelList);
 			return temp;
 		}).collect(Collectors.toList()));
@@ -69,7 +71,7 @@ public class HelseVitaApplication {
 			String dni = newDni();
 	
 			HealthPersonnel temp = new HealthPersonnel(String.format("%s%s", name, surname1),String.format("1234%s", name),String.format("%s.%s@helsevita.com",
-				name.toLowerCase(),surname1.toLowerCase()), dni, name, surname1, surname2, (int) (Math.random() * 65), EnumRoles.randomRol().toString());
+				name.toLowerCase(),surname1.toLowerCase()), dni, name, surname1, surname2, (int) (Math.random() * 95), EnumRoles.randomRol().toString());
 			temp.setPatients(patientsList);
 			return temp; 
 		}).collect(Collectors.toList()));
