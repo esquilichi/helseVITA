@@ -218,13 +218,12 @@ public class WebController {
         int month = Integer.parseInt((String) text.subSequence(5,7));
         int day = Integer.parseInt((String) text.subSequence(8,10));
         int hour = Integer.parseInt((String) text.subSequence(11,13));
-        int minute = Integer.parseInt((String) text.subSequence(14,16)); //Es inútil, no hay atributo minutos, pero no me quiteis la ilusión...
-
+        int minute = Integer.parseInt((String) text.subSequence(14,16)); 
         var paciente = patientService.returnPatient(id_paciente);
         List<Patient> lista_con_paciente = new ArrayList<>(); lista_con_paciente.add(paciente);
         Appointment temp = this.appointmentToEngage = new Appointment(hour,minute, day,month,year,null,paciente);
 
-        List<Appointment> citas = paciente.getAppointments();
+        //List<Appointment> citas = paciente.getAppointments();
         //citas.add(temp);
         //paciente.setAppointments(citas);
         //patientService.addPatient(paciente);

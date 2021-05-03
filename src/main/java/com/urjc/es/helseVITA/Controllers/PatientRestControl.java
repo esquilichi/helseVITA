@@ -32,6 +32,7 @@ public class PatientRestControl {
     @DeleteMapping("/api/patients/{id}")
     public ResponseEntity<Patient> deletePatient(@PathVariable Integer id){
         if (patientService.exists(id)){
+            patientService.delete(id);
             return  new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
