@@ -53,10 +53,11 @@
                                                        class="form-control" id="dni" placeholder="Introduce tu DNI">
                 </div>
 
+
                 <div id="value" class="form-group">
                     <label>Especialidad</label>
                 </div>
-                <center>
+                <div style="text-align: center;">
                     <select id="list" class="form-control" style="margin: 15px">
                         <optgroup label="Especialidades">
                             {{#roles}}
@@ -64,7 +65,7 @@
                             {{/roles}}
                         </optgroup>
                     </select>
-                </center>
+                </div>
                 <button onclick="createSanitario()" type="submit"
                         class="btn btn-primary btn-block"
                         style="border-color: rgba(255, 255, 255, 0.4); background: rgb(255, 193, 105); color: #000000;">
