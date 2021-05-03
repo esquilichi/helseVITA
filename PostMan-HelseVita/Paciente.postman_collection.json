@@ -6,212 +6,13 @@
 	},
 	"item": [
 		{
-			"name": "Appointment",
-			"item": [
-				{
-					"name": "http://localhost:8081/api/patients/0/appointments",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"hour\": 17,\r\n    \"day\": 5,\r\n    \"month\": 5,\r\n    \"year\": 20200\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8081/api/patients/0/appointments",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"patients",
-								"0",
-								"appointments"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8081/api/patients/0/appointments Copy 2",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"hour\": 17,\r\n    \"day\": 5,\r\n    \"month\": 5,\r\n    \"year\": 20200\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8081/api/patients/0/appointments",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"patients",
-								"0",
-								"appointments"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8081/api/patients/0/appointments/0",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8081/api/patients/0/appointments/0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"patients",
-								"0",
-								"appointments",
-								"0"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8081/api/patients/0/appointments Copy",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8081/api/patients/0/appointments",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"patients",
-								"0",
-								"appointments"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8081/api/patients/0/appointments/0 Copy",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"hour\": 17,\r\n    \"day\": 5,\r\n    \"month\": 4,\r\n    \"year\": 20200\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8081/api/patients/0/appointments/0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"patients",
-								"0",
-								"appointments",
-								"0"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8081/api/patients/0/appointments/0 Copy 2",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8081/api/patients/0/appointments/0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"patients",
-								"0",
-								"appointments",
-								"0"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8081/api/patient Copy",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\r\n\r\n    \"day\": 5\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8081/api/patients/0/appointments/0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"patients",
-								"0",
-								"appointments",
-								"0"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "http://localhost:8081/api/patients",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"imane\",\r\n    \"password\": \"iky767\",\r\n    \"email\": \"imane.kadiri@gmail.com\",\r\n    \"dni\": \"604887Y\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Imane\",\r\n    \"surname1\": \"Kadiri\",\r\n    \"surname2\": \"Yamani\",\r\n    \"username\": \"imane\",\r\n    \"age\":\"20\",\r\n    \"password\": \"iky767\",\r\n    \"email\": \"imane.kadiri@gmail.com\",\r\n    \"dni\": \"604887Y\",\r\n    \"healthPersonnelList\":[{\r\n        \"id\": 168,\r\n    \"username\": \"ismael\",\r\n    \"password\": \"isma\",\r\n    \"email\": \"ismael@gmail.com\",\r\n    \"dni\": \"836204739H\",\r\n    \"role\": null,\r\n    \"name\": \"Ismael\",\r\n    \"surname1\": \"Gómez\",\r\n    \"surname2\": \"Esquilichi\",\r\n    \"age\": 20,\r\n    \"patients\": [],\r\n    \"appointments\": []\r\n\r\n    }]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -219,12 +20,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/patients",
-					"protocol": "http",
+					"raw": "https://localhost:8443/api/patients",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8443",
 					"path": [
 						"api",
 						"patients"
@@ -239,16 +40,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/api/patients/0",
-					"protocol": "http",
+					"raw": "https://localhost:8443/api/patients/7",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8443",
 					"path": [
 						"api",
 						"patients",
-						"0"
+						"7"
 					]
 				}
 			},
@@ -260,12 +61,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/api/patients",
-					"protocol": "http",
+					"raw": "https://localhost:8443/api/patients",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8443",
 					"path": [
 						"api",
 						"patients"
@@ -281,7 +82,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"imane\",\r\n    \"password\": \"imane\",\r\n    \"email\": \"imane.kadiri@gmail.com\",\r\n    \"dni\": \"604887Y\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Imane\",\r\n    \"surname1\": \"Kadiri\",\r\n    \"surname2\": \"Yamani\",\r\n    \"username\": \"imane\",\r\n    \"age\":\"20\",\r\n    \"password\": \"root\",\r\n    \"email\": \"imane.kadiri@gmail.com\",\r\n    \"dni\": \"604887Y\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -289,16 +90,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/patients/0",
-					"protocol": "http",
+					"raw": "https://localhost:8443/api/patients/2",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8443",
 					"path": [
 						"api",
 						"patients",
-						"0"
+						"2"
 					]
 				}
 			},
@@ -310,18 +111,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/api/patients/0/appointments/0",
-					"protocol": "http",
+					"raw": "https://localhost:8443/api/patients/1",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8443",
 					"path": [
 						"api",
 						"patients",
-						"0",
-						"appointments",
-						"0"
+						"1"
 					]
 				}
 			},
@@ -342,16 +141,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/patients/0",
-					"protocol": "http",
+					"raw": "https://localhost:8443/api/patients/1",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8443",
 					"path": [
 						"api",
 						"patients",
-						"0"
+						"1"
 					]
 				}
 			},
