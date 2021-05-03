@@ -10,11 +10,12 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import com.urjc.es.helseVITA.Entities.EnumRoles;
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Repositories.HealthPersonnelRepository;
 import com.urjc.es.helseVITA.Repositories.PatientRepository;
+import com.urjc.es.helseVITA.enums.EnumRoles;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
