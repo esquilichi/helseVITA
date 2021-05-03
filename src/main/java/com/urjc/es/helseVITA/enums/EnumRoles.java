@@ -1,4 +1,4 @@
-package com.urjc.es.helseVITA.Entities;
+package com.urjc.es.helseVITA.enums;
 
 import java.util.Arrays;
 import java.util.Collections;
