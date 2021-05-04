@@ -1,12 +1,21 @@
 package com.urjc.es.helseVITA.Entities;
 
 import javax.persistence.*;
+
+import com.urjc.es.helseVITA.Enums.EnumRolUsers;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table
-public class Patient {
+public class Patient implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -29,6 +38,9 @@ public class Patient {
     private String surname2;
     @Column
     private Integer age;
+
+    @Enumerated(EnumType.STRING)
+    private EnumRolUsers rol = EnumRolUsers.ROLE_PATIENT;
 
     @ManyToMany
     private List<HealthPersonnel> healthPersonnelList = new ArrayList<>();
@@ -78,6 +90,33 @@ public class Patient {
         this.surname2 = surname2;
         this.age = age;
         this.healthPersonnelList = healthPersonnelList;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> roles = new ArrayList<>();
+        roles.add(new SimpleGrantedAuthority(rol.toString()));
+        return roles;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public Integer getId() {
