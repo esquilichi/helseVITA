@@ -133,16 +133,9 @@
                     <label>Especialidad</label>
                 </div>
                 <div style="text-align: center;">
-                    {{#}}
-                    <input type="hidden" value="{{ }}" name=" ">
-                    {{/}}
-                    <select id="list" class="form-control" style="margin: 15px" name="id_doctor">
-                        <optgroup label="Especialidades">
-                            {{#roles}}
-                            <option value="{{ }}" selected href="#">{{.}}</option>
-                            {{/roles}}
-                        </optgroup>
-                    </select>
+                    <label for="especialidad">Especialidad</label><input type="text"
+                                                       class="form-control" id="role" placeholder="Introduce tu rol">
+
                 </div>
                 <button onclick="createSanitario()" type="submit"
                         class="btn btn-primary btn-block"

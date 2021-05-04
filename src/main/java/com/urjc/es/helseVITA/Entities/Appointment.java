@@ -1,5 +1,7 @@
 package com.urjc.es.helseVITA.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,9 +20,11 @@ public class Appointment {
     private Integer year;
 
     @ManyToOne
+    @JsonIgnore
     private HealthPersonnel healthPersonnel;
 
     @ManyToOne
+    @JsonIgnore
     private Patient patient;
 
     public Appointment(){}
