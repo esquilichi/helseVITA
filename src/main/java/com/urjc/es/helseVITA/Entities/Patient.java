@@ -119,6 +119,11 @@ public class Patient implements UserDetails{
         return true;
     }
 
+
+    public EnumRolUsers getRol() {
+        return rol;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -205,5 +210,9 @@ public class Patient implements UserDetails{
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    public String getPasswordHash() {
+        return null;
     }
 }
