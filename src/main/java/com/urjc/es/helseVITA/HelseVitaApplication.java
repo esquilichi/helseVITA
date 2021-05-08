@@ -21,6 +21,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class HelseVitaApplication {
@@ -28,9 +29,9 @@ public class HelseVitaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HelseVitaApplication.class, args);
-}
+	}
 
-	/* @Bean
+	@Bean
 	CommandLineRunner initData(PatientRepository patientRepository, HealthPersonnelRepository healthPersonnelRepository){
 		return (args) -> {
 			if (patientRepository.findAll().size() < 2){
@@ -56,8 +57,9 @@ public class HelseVitaApplication {
 			String surname2 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			List<HealthPersonnel> healthPersonnelList = fillHealthPersonnelList(healthPersonnelRepository);
 			String dni = newDni();
-	
-			Patient temp = new Patient(String.format("%s%s", name, surname1),String.format("1234%s", name),String.format("%s.%s@helsevita.com",
+
+
+			Patient temp = new Patient(String.format("%s%s", name, surname1),new BCryptPasswordEncoder().encode(String.format("1234%s", name)),String.format("%s.%s@helsevita.com",
 				name.toLowerCase(),surname1.toLowerCase()), dni, name, surname1, surname2, (int) (Math.random() * 45+22));
 			temp.setHealthPersonnelList(healthPersonnelList);
 			return temp;
@@ -70,7 +72,7 @@ public class HelseVitaApplication {
 			List<Patient> patientsList = fillPatientsList(patientRepository);
 			String dni = newDni();
 	
-			HealthPersonnel temp = new HealthPersonnel(String.format("%s%s", name, surname1),String.format("1234%s", name),String.format("%s.%s@helsevita.com",
+			HealthPersonnel temp = new HealthPersonnel(String.format("%s%s", name, surname1), new BCryptPasswordEncoder().encode(String.format("1234%s", name)),String.format("%s.%s@helsevita.com",
 				name.toLowerCase(),surname1.toLowerCase()), dni, name, surname1, surname2, (int) (Math.random() * 95), EnumRoles.randomRol().toString());
 			temp.setPatients(patientsList);
 			return temp; 
@@ -88,7 +90,6 @@ public class HelseVitaApplication {
 		}
 		return patientsList;
 	}
- */
 	private List<HealthPersonnel> fillHealthPersonnelList(HealthPersonnelRepository healthPersonnelRepository){
 		List <HealthPersonnel> healthPersonnelList=new ArrayList<>();
 		while (healthPersonnelList.size()<4) {

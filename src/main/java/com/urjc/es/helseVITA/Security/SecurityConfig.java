@@ -1,4 +1,4 @@
-package com.urjc.es.helseVITA;
+package com.urjc.es.helseVITA.Security;
 
 import com.urjc.es.helseVITA.Services.PatientDetailsServiceImpl;
 import com.urjc.es.helseVITA.Enums.EnumRolUsers;
