@@ -40,7 +40,7 @@ public class Patient implements UserDetails{
     private Integer age;
 
     @Enumerated(EnumType.STRING)
-    private EnumRolUsers rol = EnumRolUsers.ROLE_PATIENT;
+    private final EnumRolUsers rol = EnumRolUsers.ROLE_PATIENT;
 
     @ManyToMany
     private List<HealthPersonnel> healthPersonnelList = new ArrayList<>();

@@ -2,6 +2,7 @@ package com.urjc.es.helseVITA.Entities;
 
 import javax.persistence.*;
 
+import com.urjc.es.helseVITA.Enums.EnumRolUsers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class HealthPersonnel {
     @Column(nullable = false)
     private String dni;
     @Column
-    private String role;
+    private String speciality;
 
     @Column
     private String name;
@@ -36,13 +37,16 @@ public class HealthPersonnel {
     @Column
     private Integer age;
 
+    @Enumerated(EnumType.STRING)
+    private final EnumRolUsers rol = EnumRolUsers.ROLE_HEALTHPERSONNEL;
+
     @ManyToMany
     private List<Patient> patients = new ArrayList<>();
 
     @OneToMany (mappedBy="healthPersonnel",cascade = CascadeType.ALL)
     private List<Appointment> appointments = new ArrayList<>();
 
-    public HealthPersonnel(String username, String password, String email, String dni, String name, String surname1, String surname2, Integer age, String role) {
+    public HealthPersonnel(String username, String password, String email, String dni, String name, String surname1, String surname2, Integer age, String speciality) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -51,17 +55,17 @@ public class HealthPersonnel {
         this.surname1 = surname1;
         this.surname2 = surname2;
         this.age = age;
-        this.role=role;
+        this.speciality=speciality;
     }
 
-        public HealthPersonnel(Integer id, String username, String password, String email, String dni, String role,
+        public HealthPersonnel(Integer id, String username, String password, String email, String dni, String speciality,
             String name, String surname1, String surname2, Integer age, List<Patient> patients) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.dni = dni;
-        this.role = role;
+        this.speciality = speciality;
         this.name = name;
         this.surname1 = surname1;
         this.surname2 = surname2;
@@ -71,7 +75,7 @@ public class HealthPersonnel {
 
 
 
-    public HealthPersonnel(Integer id, String username, String password, String email, String dni, String role,
+    public HealthPersonnel(Integer id, String username, String password, String email, String dni, String speciality,
             String name, String surname1, String surname2, Integer age, List<Patient> patients,
             List<Appointment> appointments) {
         this.id = id;
@@ -79,7 +83,7 @@ public class HealthPersonnel {
         this.password = password;
         this.email = email;
         this.dni = dni;
-        this.role = role;
+        this.speciality = speciality;
         this.name = name;
         this.surname1 = surname1;
         this.surname2 = surname2;
@@ -90,14 +94,14 @@ public class HealthPersonnel {
 
 
 
-    public String getRole() {
-        return role;
+    public String getspeciality() {
+        return speciality;
     }
 
 
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setspeciality(String speciality) {
+        this.speciality = speciality;
     }
 
 
@@ -197,6 +201,6 @@ public class HealthPersonnel {
     @Override
     public String toString() {
         return this.name + " " +
-                this.surname1 + " "  + this.role.toUpperCase(Locale.ROOT);
+                this.surname1 + " "  + this.speciality.toUpperCase(Locale.ROOT);
     }
 }

@@ -30,7 +30,7 @@ public class HelseVitaApplication {
 		SpringApplication.run(HelseVitaApplication.class, args);
 }
 
-	@Bean
+	/* @Bean
 	CommandLineRunner initData(PatientRepository patientRepository, HealthPersonnelRepository healthPersonnelRepository){
 		return (args) -> {
 			if (patientRepository.findAll().size() < 2){
@@ -88,7 +88,7 @@ public class HelseVitaApplication {
 		}
 		return patientsList;
 	}
-
+ */
 	private List<HealthPersonnel> fillHealthPersonnelList(HealthPersonnelRepository healthPersonnelRepository){
 		List <HealthPersonnel> healthPersonnelList=new ArrayList<>();
 		while (healthPersonnelList.size()<4) {

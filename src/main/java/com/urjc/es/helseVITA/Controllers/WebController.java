@@ -10,12 +10,15 @@ import com.urjc.es.helseVITA.Services.AppointmentService;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
+
 import java.util.*;
 
 @Controller
@@ -40,6 +43,18 @@ public class WebController {
         var mv = new ModelAndView("index");
         mv.addObject("Users", patientService.returnAllPatients());
         return mv;
+    }
+
+    @GetMapping("/login")
+    public String login(Model model, HttpServletRequest request) {
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        model.addAttribute("token", token.getToken());
+        return "login";
+    }
+
+    @GetMapping("/loginError")
+    public String loginerror() {
+        return "loginerror";
     }
 
     @RequestMapping("/mostrar/{id}")
