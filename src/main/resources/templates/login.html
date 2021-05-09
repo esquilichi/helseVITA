@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+{{> head}}
+
+<main class="page landing-page">
+    <section class="clean-block clean-info light">
+        <form action="/autenticacion" method="get">
+            <div class="form-group" style="margin-top: 80px">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" class="form-control" id="password" placeholder="Password" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+</main>
+
+{{> footer}}
+
+</html>

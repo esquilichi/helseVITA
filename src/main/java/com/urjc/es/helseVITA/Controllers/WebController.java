@@ -10,6 +10,7 @@ import com.urjc.es.helseVITA.Services.AppointmentService;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,13 +44,6 @@ public class WebController {
         var mv = new ModelAndView("index");
         mv.addObject("Users", patientService.returnAllPatients());
         return mv;
-    }
-
-    @GetMapping("/login")
-    public String login(Model model, HttpServletRequest request) {
-        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        model.addAttribute("token", token.getToken());
-        return "login";
     }
 
     @GetMapping("/loginError")
@@ -317,9 +311,24 @@ public class WebController {
                     list.add(t);
                 }
             }
-
             return list;
         }
         return null;
     }
+    @RequestMapping("/login")
+    public ModelAndView login(){
+        var mv = new ModelAndView("/login");
+        return mv;
+    }
+
+    @RequestMapping("/autenticacion")
+    public ModelAndView autenticacion(@RequestParam String username, @RequestParam String password){
+        Patient temp = patientService.returnPatientByUsername(username);
+        if (new BCryptPasswordEncoder().matches(password,temp.getPassword())){
+
+            return new ModelAndView("exito");
+        }
+        return new ModelAndView("error");
+    }
+
 }
