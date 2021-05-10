@@ -26,9 +26,13 @@ public class PatientDetailsServiceImpl implements UserDetailsService{
         Optional <Patient> patient = patientRepository.findByUsername(username);
         Patient temp = new Patient();
 
+        if(patient.isPresent()){
+            temp=patient.get();
+        }
+
         UserBuilder builder = null;
 
-        if (patient.isPresent()){
+        if (patient != null){
             builder = User.withUsername(username);
             builder.disabled(false);
 			builder.password(temp.getPassword());
