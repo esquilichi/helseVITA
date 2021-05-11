@@ -11,7 +11,6 @@ import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,99 +39,58 @@ public class WebController {
     Appointment appointmentToEngage;
 
     @RequestMapping("/")
-    ModelAndView index() {
+    ModelAndView index(HttpServletRequest request) {
         var mv = new ModelAndView("index");
         mv.addObject("Users", patientService.returnAllPatients());
         return mv;
     }
 
     @GetMapping("/loginError")
-    public String loginerror() {
+    public String loginerror(HttpServletRequest request) {
         return "loginerror";
     }
 
     @RequestMapping("/mostrar/{id}")
-    ModelAndView view(@PathVariable Integer id) {
+    ModelAndView view(@PathVariable Integer id,HttpServletRequest request) {
         Patient temp = patientService.returnPatient(id);
         var mv = new ModelAndView("mostrar");
         mv.addObject("user", temp);
         return mv;
     }
-/* 
 
-    @RequestMapping("/viewPatients")
-    ModelAndView viewPatients() {
-        var mv = new ModelAndView("mostrarPacientes");
-        mv.addObject("users", patientService.returnAllPatients());
-        return mv;
-    }
-
-    @RequestMapping("/viewHealthPersonnel")
-    ModelAndView viewHealthPersonnel() {
-        var mv = new ModelAndView("mostrarSanitario");
-        mv.addObject("users", healthPersonnelService.returnAllHealthPersonnels());
-        return mv;
-    } */
-
-    //This is for users, don´t delete in case we go back to
-    //using Inheritance
-    /*@GetMapping("/search")
-    ModelAndView search(@RequestParam Map<String,String> requestParams) {
-        String input=requestParams.get("input");
-        String text=requestParams.get("username");
-        Patient temp = new Patient();
-
-        if(input.equals("0")){
-            temp = patientService.searchUsername(text);
-        }else if(input.equals("1")){
-            temp = patientService.searchEmail(text);
-        }else if(input.equals("2")){
-            temp = patientService.searchDNI(text);
-        }else{
-            throw new IncorrectSearchParametersException();
-        }
-        if(temp != null){
-            var mv = new ModelAndView("mostrar");
-            mv.addObject("user", temp);
-            return mv;
-        }
-        throw new UserNotFoundException(text);
-    }
-    */
     @GetMapping({"/searchPatient"})
-    public String patientList(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2",required = false) String query2) {
+    public String patientList(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2",required = false) String query2,HttpServletRequest request) {
         boolean b1 = false;
         boolean b2 = false;
         List<Patient> result = null;
         List<Patient> result2 = null;
         List<Patient> mi_lista;
-        if (query != null){
+        if (query != null) {
             result = (List<Patient>) patientService.search(query);
             b1 = true;
         }
-        if (query2 != null){
+        if (query2 != null) {
             result2 = patientService.searchByAge(query2);
             b2 = true;
         }
-        if (b1 && b2){
+        if (b1 && b2) {
             mi_lista = intersectionP(result, result2);
-        } else if (b1){
+        } else if (b1) {
             mi_lista = result;
-        }else if (b2){
+        } else if (b2) {
             mi_lista = result2;
-        }else{
+        } else {
             mi_lista = (List<Patient>) patientService.returnAllPatients();
         }
 
-        if (result2 == null){
+        if (result2 == null) {
             mi_lista = result;
         }
         model.addAttribute("object", mi_lista);
         return "buscarPaciente";
     }
-
     @GetMapping({"/searchHealthPersonnel"})
-    public String healthPersonnelList(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2" , required = false) String query2) {
+    public String healthPersonnelList(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2" , required = false) String query2,HttpServletRequest request) {
         boolean b1 = false;
         boolean b2 = false;
         List<HealthPersonnel> result = null;
@@ -188,14 +146,14 @@ public class WebController {
 
     //Call to the exception
     @ExceptionHandler(UserNotFoundException.class)
-    public ModelAndView exception(UserNotFoundException e) {
+    public ModelAndView exception(UserNotFoundException e,HttpServletRequest request) {
         var mv = new ModelAndView("user-not-found");
         mv.addObject("username", e.getUsername());
         return mv;
     }
 
     @ExceptionHandler(IncorrectSearchParametersException.class)
-    public ModelAndView exception2(IncorrectSearchParametersException e) {
+    public ModelAndView exception2(IncorrectSearchParametersException e,HttpServletRequest request) {
         return new ModelAndView("incorrect-parameters");
     }
 /* 
@@ -212,7 +170,7 @@ public class WebController {
     } */
 
     @GetMapping("/addAppointment/{id}")
-    public ModelAndView addAppointment(Model model, @PathVariable Integer id) {
+    public ModelAndView addAppointment(Model model, @PathVariable Integer id,HttpServletRequest request) {
         var temp = patientService.returnPatient(id);
         var mv = new ModelAndView("appointment");
         mv.addObject("paciente", temp);
@@ -220,7 +178,7 @@ public class WebController {
     }
 
     @RequestMapping("/whichDoc")
-    public ModelAndView addAppointmentCode(@RequestParam Map<String,String> requestParams){
+    public ModelAndView addAppointmentCode(@RequestParam Map<String,String> requestParams,HttpServletRequest request){
         var id_paciente = Integer.parseInt(requestParams.get("id_paciente"));
         var text = requestParams.get("tiempo");
         //var id_doctor = requestParams.get("id_doctor");
@@ -249,7 +207,7 @@ public class WebController {
     }
 
     @RequestMapping("/exito")
-    public ModelAndView exito(@RequestParam Map<String,String> requestParams){
+    public ModelAndView exito(@RequestParam Map<String,String> requestParams,HttpServletRequest request){
         int id_doctor = Integer.parseInt(requestParams.get("id_doctor"));
         int id_paciente = Integer.parseInt(requestParams.get("id_paciente"));
         var paciente  = patientService.returnPatient(id_paciente);
@@ -265,7 +223,7 @@ public class WebController {
     }
 
     @RequestMapping("/crearSanitario")
-    public ModelAndView crearSanitario(){
+    public ModelAndView crearSanitario(HttpServletRequest request){
         List<String> cosas = new ArrayList<>();
         var lista = EnumRoles.VALUES;
         for(EnumRoles c : EnumRoles.values())
@@ -276,7 +234,7 @@ public class WebController {
         return mv;
     }
 
-    public List<Patient> union(List<Patient> list1, List<Patient> list2) {
+    public List<Patient> union(List<Patient> list1, List<Patient> list2,HttpServletRequest request) {
         if (!(list1 == null || list2 == null)){
             Set<Patient> set = new HashSet<Patient>();
 
@@ -316,13 +274,13 @@ public class WebController {
         return null;
     }
     @RequestMapping("/login")
-    public ModelAndView login(){
+    public ModelAndView login(HttpServletRequest request){
         var mv = new ModelAndView("/login");
         return mv;
     }
 
     @RequestMapping("/autenticacion")
-    public ModelAndView autenticacion(@RequestParam String username, @RequestParam String password){
+    public ModelAndView autenticacion(@RequestParam String username, @RequestParam String password,HttpServletRequest request){
         Patient temp = patientService.returnPatientByUsername(username);
         if (new BCryptPasswordEncoder().matches(password,temp.getPassword())){
 

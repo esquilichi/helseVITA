@@ -58,8 +58,20 @@ public class HealthPersonnel {
         this.speciality=speciality;
     }
 
-        public HealthPersonnel(Integer id, String username, String password, String email, String dni, String speciality,
-            String name, String surname1, String surname2, Integer age, List<Patient> patients) {
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
+
+    public EnumRolUsers getRol() {
+        return rol;
+    }
+
+    public HealthPersonnel(Integer id, String username, String password, String email, String dni, String speciality,
+                           String name, String surname1, String surname2, Integer age, List<Patient> patients) {
         this.id = id;
         this.username = username;
         this.password = password;

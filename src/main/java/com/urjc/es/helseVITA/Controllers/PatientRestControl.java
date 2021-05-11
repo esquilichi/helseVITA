@@ -4,6 +4,7 @@ import com.urjc.es.helseVITA.Services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.urjc.es.helseVITA.Entities.*;
 import java.util.Collection;
@@ -14,6 +15,7 @@ public class PatientRestControl {
     @Autowired
     PatientService patientService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/api/patients")
     @ResponseStatus(HttpStatus.CREATED)
     public Patient newPatient(@RequestBody Patient patient){

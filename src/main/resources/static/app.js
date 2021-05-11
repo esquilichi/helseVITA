@@ -43,9 +43,7 @@ function createPaciente() {
 }
 
 function loadItems() {
-
-    alert("Eres precioso no cambies :p");
-
+    console.log("Sigue funcionando la página, no has roto nada");
 }
 
 function createSanitario() {

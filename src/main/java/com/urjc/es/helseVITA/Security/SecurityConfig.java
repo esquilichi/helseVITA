@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     
 
     @Autowired
-    public UserRepositoryAuthenticationProvider authenticationProvider;
+    public PatientRepositoryAuthenticationProvider authenticationProvider;
 
     @Autowired
     UserDetailsService userDetailsService;
