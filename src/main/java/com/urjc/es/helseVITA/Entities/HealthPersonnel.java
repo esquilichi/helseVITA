@@ -104,20 +104,6 @@ public class HealthPersonnel {
         this.appointments = appointments;
     }
 
-
-
-    public String getspeciality() {
-        return speciality;
-    }
-
-
-
-    public void setspeciality(String speciality) {
-        this.speciality = speciality;
-    }
-
-
-
     public HealthPersonnel() {
 
     }

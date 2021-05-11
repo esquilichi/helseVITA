@@ -70,5 +70,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .and()
                 .csrf().disable()  
                 .headers().frameOptions().disable();//Para poder acceder a la consola de h2
+
+            http
+                    .headers()
+                    .xssProtection()
+                    .and()
+                    .contentSecurityPolicy("script-src 'self'");
     }
 }
