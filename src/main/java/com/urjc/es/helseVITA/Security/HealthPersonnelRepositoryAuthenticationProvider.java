@@ -1,9 +1,7 @@
 package com.urjc.es.helseVITA.Security;
 
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
-import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Repositories.HealthPersonnelRepository;
-import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

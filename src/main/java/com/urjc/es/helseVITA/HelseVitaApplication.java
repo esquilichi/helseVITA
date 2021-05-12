@@ -30,16 +30,16 @@ public class HelseVitaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HelseVitaApplication.class, args);
 	}
-}
 
-/*	@Bean
+
+	@Bean
 	CommandLineRunner initData(PatientRepository patientRepository, HealthPersonnelRepository healthPersonnelRepository){
 		return (args) -> {
 			if (patientRepository.findAll().size() < 2){
-				patientRepository.saveAndFlush(new Patient("IsmaelEsquilichi" , "root", "ismael.esquilichi@helsevita.com", "4820096E", "Ismael" ,"Gómez", "Esquilichi",20));
-				healthPersonnelRepository.saveAndFlush(new HealthPersonnel("ClaraContreras","root", "clara.contreras@helsevita.com","7563289Y","Clara","Contreras","Nevares",19,"Cardióloga"));
-				patientRepository.saveAndFlush(new Patient("ImaneKadiri" , "root", "imane.kadiri@helsevita.com", "4820096E", "Imane" ,"Kadiri", "Yamani",21));
-				healthPersonnelRepository.saveAndFlush(new HealthPersonnel("Denisa","root", "denisa.noloquieroponermal@helsevita.com","7563289Y","Denisa","Maria","Medovarschi",24,"Cardióloga"));
+				patientRepository.saveAndFlush(new Patient("IsmaelEsquilichi" , new BCryptPasswordEncoder().encode("root"), "ismael.esquilichi@helsevita.com", "4820096E", "Ismael" ,"Gómez", "Esquilichi",20));
+				healthPersonnelRepository.saveAndFlush(new HealthPersonnel("ClaraContreras", new BCryptPasswordEncoder().encode("root"), "clara.contreras@helsevita.com","7563289Y","Clara","Contreras","Nevares",19,"Cardióloga"));
+				patientRepository.saveAndFlush(new Patient("ImaneKadiri" ,  new BCryptPasswordEncoder().encode("root"), "imane.kadiri@helsevita.com", "4820096E", "Imane" ,"Kadiri", "Yamani",21));
+				healthPersonnelRepository.saveAndFlush(new HealthPersonnel("Denisa", new BCryptPasswordEncoder().encode("root"), "denisa.noloquieroponermal@helsevita.com","7563289Y","Denisa","Maria","Medovarschi",24,"Cardióloga"));
 			}
 
 
@@ -123,4 +123,4 @@ public class HelseVitaApplication {
 		return dniFinal;
 	}
 
-}*/
+}
