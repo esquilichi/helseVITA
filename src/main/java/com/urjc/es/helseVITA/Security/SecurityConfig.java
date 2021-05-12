@@ -23,11 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     public PatientRepositoryAuthenticationProvider authenticationProvider;
 
-    @Autowired
-    UserDetailsService userDetailsService;
-
-    @Autowired
-    PatientDetailsServiceImpl patientDetailsService;
 
     public EnumRolUsers rol;
     
@@ -43,20 +38,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+    	http.authorizeRequests().anyRequest().permitAll();
+        /*http
                 //públicas
                 .authorizeRequests()
                     .antMatchers("/index.html", "/login", "/", "/loginError", "/logOut",
                         "/contact-us", "/faq", "/myHelsevita", "/search-center", "/work-with-us", "/error", "/user-not-found")   //Aquí se ponen las rutas que se permiten a ese rol (Anónimo en este caso)     
                     .permitAll()
                     //privadas
-                    .antMatchers("/areaSanitario").hasAnyRole("ROLE_HEALTHPERSONNEL") //Páginas permitidas para HealthPersonnel
-                    .antMatchers("/areaPaciente", "/citaAgregada", "/insurance").hasAnyRole("ROLE_PATIENT") //Páginas permitidas para Paciente
+                    //.antMatchers("/areaSanitario").hasAnyRole("ROLE_HEALTHPERSONNEL") //Páginas permitidas para HealthPersonnel
+                    //.antMatchers("/areaPaciente", "/citaAgregada", "/insurance").hasAnyRole("ROLE_PATIENT") //Páginas permitidas para Paciente
                     .antMatchers("/areaPaciente", "/areaSanitario", "/crearPaciente.html", "/asignarNuevoPaciente", "/asignarNuevosanitario",
                         "/buscarPaciente.html", "/buscarSanitario.html", "/crearSanitario", "/mostrar/**", "/mostrarPacientes", "/mostrarSanitario").hasAnyRole("ROLE_HEALTHPERSONNEL","ROLE_PATIENT","ROLE_ADMIN") //Páginas permitidas para Admin
-                    .and()
-                    
-                .formLogin()
+                    .and();
+                    */
+                   
+                http
+                	.formLogin()
                     .loginPage("/login") //Ruta login
                     .usernameParameter("username")
                     .passwordParameter("password")
@@ -76,5 +74,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .xssProtection()
                     .and()
                     .contentSecurityPolicy("script-src 'self'");
+
+            http.httpBasic();
+            
     }
 }

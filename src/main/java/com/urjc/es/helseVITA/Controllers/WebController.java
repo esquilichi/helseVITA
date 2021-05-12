@@ -274,9 +274,8 @@ public class WebController {
         return null;
     }
     @RequestMapping("/login")
-    public ModelAndView login(HttpServletRequest request){
-        var mv = new ModelAndView("/login");
-        return mv;
+    public String login(HttpServletRequest request){
+        return "login";
     }
 
     @RequestMapping("/autenticacion")
