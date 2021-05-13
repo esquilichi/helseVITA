@@ -4,9 +4,18 @@ import com.urjc.es.helseVITA.Services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.*;
 import com.urjc.es.helseVITA.Entities.*;
+
+import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @RestController
 public class PatientRestControl {
@@ -81,4 +90,35 @@ public class PatientRestControl {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    @PostMapping("/login")
+	public Patient login(@RequestParam("username") String username, @RequestParam("password") String pwd) {
+		
+		String token = getJWTToken(username);
+		Patient patient = new Patient();
+		patient.setUsername(username);
+		patient.setToken(token);		
+		return patient;
+		
+	}
+
+	private String getJWTToken(String username) {
+		String secretKey = "mySecretKey";
+		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
+				.commaSeparatedStringToAuthorityList("ROLE_PATIENT");
+		
+		String token = Jwts
+				.builder()
+				.setId("softtekJWT")
+				.setSubject(username)
+				.claim("authorities",
+						grantedAuthorities.stream()
+								.map(GrantedAuthority::getAuthority)
+								.collect(Collectors.toList()))
+				.setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + 600000))
+				.signWith(SignatureAlgorithm.HS512,
+						secretKey.getBytes()).compact();
+
+		return "Bearer " + token;
+	}
 }

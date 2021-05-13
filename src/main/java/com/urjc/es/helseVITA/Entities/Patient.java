@@ -42,6 +42,8 @@ public class Patient implements UserDetails{
     @Enumerated(EnumType.STRING)
     private final EnumRolUsers rol = EnumRolUsers.ROLE_PATIENT;
 
+    private String token;
+
     @ManyToMany
     private List<HealthPersonnel> healthPersonnelList = new ArrayList<>();
 
@@ -215,4 +217,13 @@ public class Patient implements UserDetails{
     public String getPasswordHash() {
         return null;
     }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+    
 }

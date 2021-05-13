@@ -10,16 +10,27 @@ import com.urjc.es.helseVITA.Services.AppointmentService;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< Updated upstream
 import org.springframework.security.web.csrf.CsrfToken;
+=======
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+>>>>>>> Stashed changes
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class WebController {
@@ -322,4 +333,23 @@ public class WebController {
         }
         return null;
     }
+<<<<<<< Updated upstream
+=======
+    /* @RequestMapping("/login")
+    public String login(HttpServletRequest request){
+        return "login";
+    } */
+    
+
+    @RequestMapping("/autenticacion")
+    public ModelAndView autenticacion(@RequestParam String username, @RequestParam String password,HttpServletRequest request){
+        Patient temp = patientService.returnPatientByUsername(username);
+        if (new BCryptPasswordEncoder().matches(password,temp.getPassword())){
+
+            return new ModelAndView("exito");
+        }
+        return new ModelAndView("error");
+    }
+
+>>>>>>> Stashed changes
 }
