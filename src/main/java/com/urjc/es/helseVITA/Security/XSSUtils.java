@@ -1,4 +1,4 @@
-package com.urjc.es.helseVITA.Security;
+/*package com.urjc.es.helseVITA.Security;
 
 
 import org.jsoup.Jsoup;
@@ -17,4 +17,4 @@ public class XSSUtils {
         return Jsoup.clean(value, Whitelist.none());
     }
 
-}
+}*/

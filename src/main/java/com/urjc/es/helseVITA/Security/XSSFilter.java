@@ -1,4 +1,4 @@
-package com.urjc.es.helseVITA.Security;
+/*package com.urjc.es.helseVITA.Security;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -41,4 +41,4 @@ public class XSSFilter implements Filter {
         chain.doFilter(wrappedRequest, response);
     }
 
-}
+}*/

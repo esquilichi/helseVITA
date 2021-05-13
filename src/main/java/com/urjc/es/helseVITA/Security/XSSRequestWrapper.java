@@ -1,4 +1,4 @@
-package com.urjc.es.helseVITA.Security;
+/*package com.urjc.es.helseVITA.Security;
 
 import org.apache.commons.codec.Charsets;
 import org.apache.commons.io.IOUtils;
@@ -119,4 +119,4 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
         return Collections.enumeration(result);
     }
 
-}
+}*/
