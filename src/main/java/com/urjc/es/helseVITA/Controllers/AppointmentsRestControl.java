@@ -1,7 +1,9 @@
 package com.urjc.es.helseVITA.Controllers;
 import com.urjc.es.helseVITA.Entities.*;
+import com.urjc.es.helseVITA.Exceptions.AppointmentAlreadyExistsException;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
+import org.apache.commons.lang.ObjectUtils;
 import org.springframework.web.bind.annotation.RestController;
 import com.urjc.es.helseVITA.Services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class AppointmentsRestControl {
     @PostMapping("/api/appointments")
     @ResponseStatus(HttpStatus.CREATED)
     public Appointment newAppointment(@RequestBody Appointment appointment){
+        if(appointmentService.exists2(appointment)) {
+            throw new AppointmentAlreadyExistsException(appointment);
+        }
         return appointmentService.addAppointment(appointment);
     }
 

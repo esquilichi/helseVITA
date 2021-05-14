@@ -4,8 +4,7 @@ import com.urjc.es.helseVITA.Entities.Appointment;
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Enums.EnumRoles;
-import com.urjc.es.helseVITA.Exceptions.IncorrectSearchParametersException;
-import com.urjc.es.helseVITA.Exceptions.UserNotFoundException;
+import com.urjc.es.helseVITA.Exceptions.*;
 import com.urjc.es.helseVITA.Services.AppointmentService;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
@@ -156,6 +155,24 @@ public class WebController {
     @ExceptionHandler(IncorrectSearchParametersException.class)
     public ModelAndView exception2(IncorrectSearchParametersException e,HttpServletRequest request) {
         return new ModelAndView("incorrect-parameters");
+    }
+
+    /*@ExceptionHandler(AppointmentNotFoundException.class)
+    public ModelAndView exception3(AppointmentNotFoundException e, HttpServletRequest request) {
+
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ModelAndView exception4(UserAlreadyExistsException e, HttpServletRequest request) {
+
+    }*/
+
+    @ExceptionHandler(AppointmentAlreadyExistsException.class)
+    public ModelAndView exception5(AppointmentAlreadyExistsException e, HttpServletRequest request) {
+        //var mv = new ModelAndView("appointmentAlreadyExists");
+        //mv.addObject("day", e.get());
+        return new ModelAndView("appointmentAlreadyExists");
+
     }
 /* 
     @GetMapping("/chooseDoctors")
