@@ -43,17 +43,21 @@ public class HelseVitaApplication {
 			}
 
 
-		List<String> names = Arrays.asList("Ismael", "Clara", "Imane", "Denisa", "Sara", "Luscas", "Hugo", "Carmen", 
+		List<String> patientNames = Arrays.asList("Ismael", "Clara", "Imane", "Denisa", "Sara", "Luscas", "Hugo", "Carmen", 
 			"María", "Paula","Claudia", "Mario", "Diego", "Julia", "Daniel");
+
+		List <String> healthPersonnelNames = Arrays.asList("Carlos", "Elena", "Alba", "Sandra", "Iván", "Alejandro", "Rodrigo", "Rafael",
+			"Yolanda", "Marina", "Sofía", "Esperanza", "Rosa", "Bárbara", "Azucena");
 
 		List<String> surnames=Arrays.asList("Gómez", "Contreras", "García", "López", "Martín", "Torres", "Parra", 
 			"Flores", "González", "Rodríguez", "Perez", "Esquilichi", "Kadiri", "Velasco", "Nevares", "Saez", "Moya",
 			"Soler", "Parra", "Martínez");
 
-		Collections.shuffle(names);
+		Collections.shuffle(patientNames);
+		Collections.shuffle(healthPersonnelNames);
 
-		patientRepository.saveAll(IntStream.rangeClosed(1, names.size()).mapToObj((i) -> {
-			String name =names.get(i-1);
+		patientRepository.saveAll(IntStream.rangeClosed(1, patientNames.size()).mapToObj((i) -> {
+			String name =patientNames.get(i-1);
 			String surname1 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			String surname2 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			List<HealthPersonnel> healthPersonnelList = fillHealthPersonnelList(healthPersonnelRepository);
@@ -66,8 +70,8 @@ public class HelseVitaApplication {
 			return temp;
 		}).collect(Collectors.toList()));
 
-		healthPersonnelRepository.saveAll(IntStream.rangeClosed(1, names.size()).mapToObj((i) -> {
-			String name =names.get(i-1);
+		healthPersonnelRepository.saveAll(IntStream.rangeClosed(1, healthPersonnelNames.size()).mapToObj((i) -> {
+			String name =healthPersonnelNames.get(i-1);
 			String surname1 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			String surname2 = surnames.get(ThreadLocalRandom.current().nextInt(surnames.size()));
 			List<Patient> patientsList = fillPatientsList(patientRepository);
