@@ -189,6 +189,7 @@ public class WebController {
 
     @GetMapping("/addAppointment/{id}")
     public ModelAndView addAppointment(Model model, @PathVariable Integer id,HttpServletRequest request) {
+
         var temp = patientService.returnPatient(id);
         var mv = new ModelAndView("appointment");
         mv.addObject("paciente", temp);
@@ -206,8 +207,13 @@ public class WebController {
         int hour = Integer.parseInt((String) text.subSequence(11,13));
         int minute = Integer.parseInt((String) text.subSequence(14,16)); 
         var paciente = patientService.returnPatient(id_paciente);
+
         List<Patient> lista_con_paciente = new ArrayList<>(); lista_con_paciente.add(paciente);
         Appointment temp = this.appointmentToEngage = new Appointment(hour,minute, day,month,year,null,paciente);
+
+        if(paciente.getAppointments().contains(temp)) {
+            throw new AppointmentAlreadyExistsException(temp);
+        }
 
         //List<Appointment> citas = paciente.getAppointments();
         //citas.add(temp);

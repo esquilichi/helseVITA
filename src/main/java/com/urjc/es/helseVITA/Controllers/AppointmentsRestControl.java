@@ -27,9 +27,7 @@ public class AppointmentsRestControl {
     @PostMapping("/api/appointments")
     @ResponseStatus(HttpStatus.CREATED)
     public Appointment newAppointment(@RequestBody Appointment appointment){
-        if(appointmentService.exists2(appointment)) {
-            throw new AppointmentAlreadyExistsException(appointment);
-        }
+
         return appointmentService.addAppointment(appointment);
     }
 
