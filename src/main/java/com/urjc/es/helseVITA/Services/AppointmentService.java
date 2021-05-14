@@ -28,6 +28,12 @@ public class AppointmentService {
         return temp.isPresent();
     }
 
+    public boolean exists2(Appointment appointment){
+        //Hay que mirar si funciona, deberia devolver Optional<>
+        List <Appointment> temp = appointmentRepository.findAppointmentByYearAndMonthAndDayAndHourAndMinute(appointment.getYear(), appointment.getMonth(), appointment.getDay(), appointment.getHour(), appointment.getMinute());
+        return !temp.isEmpty();
+    }
+
     public boolean existsHealthPersonnelAppointment(HealthPersonnel healthPersonnel){
         return appointmentRepository.findAppointmentsByHealthPersonnel(healthPersonnel).isPresent();
     }

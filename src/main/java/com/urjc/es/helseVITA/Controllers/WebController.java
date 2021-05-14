@@ -4,8 +4,7 @@ import com.urjc.es.helseVITA.Entities.Appointment;
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Enums.EnumRoles;
-import com.urjc.es.helseVITA.Exceptions.IncorrectSearchParametersException;
-import com.urjc.es.helseVITA.Exceptions.UserNotFoundException;
+import com.urjc.es.helseVITA.Exceptions.*;
 import com.urjc.es.helseVITA.Services.AppointmentService;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
@@ -157,6 +156,24 @@ public class WebController {
     public ModelAndView exception2(IncorrectSearchParametersException e,HttpServletRequest request) {
         return new ModelAndView("incorrect-parameters");
     }
+
+    /*@ExceptionHandler(AppointmentNotFoundException.class)
+    public ModelAndView exception3(AppointmentNotFoundException e, HttpServletRequest request) {
+
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ModelAndView exception4(UserAlreadyExistsException e, HttpServletRequest request) {
+
+    }*/
+
+    @ExceptionHandler(AppointmentAlreadyExistsException.class)
+    public ModelAndView exception5(AppointmentAlreadyExistsException e, HttpServletRequest request) {
+        //var mv = new ModelAndView("appointmentAlreadyExists");
+        //mv.addObject("day", e.get());
+        return new ModelAndView("appointmentAlreadyExists");
+
+    }
 /* 
     @GetMapping("/chooseDoctors")
     public ModelAndView chooseDoc(@RequestParam(required = false) String id) {
@@ -172,6 +189,7 @@ public class WebController {
 
     @GetMapping("/addAppointment/{id}")
     public ModelAndView addAppointment(Model model, @PathVariable Integer id,HttpServletRequest request) {
+
         var temp = patientService.returnPatient(id);
         var mv = new ModelAndView("appointment");
         mv.addObject("paciente", temp);
@@ -189,8 +207,13 @@ public class WebController {
         int hour = Integer.parseInt((String) text.subSequence(11,13));
         int minute = Integer.parseInt((String) text.subSequence(14,16)); 
         var paciente = patientService.returnPatient(id_paciente);
+
         List<Patient> lista_con_paciente = new ArrayList<>(); lista_con_paciente.add(paciente);
         Appointment temp = this.appointmentToEngage = new Appointment(hour,minute, day,month,year,null,paciente);
+
+        if(paciente.getAppointments().contains(temp)) {
+            throw new AppointmentAlreadyExistsException(temp);
+        }
 
         //List<Appointment> citas = paciente.getAppointments();
         //citas.add(temp);
