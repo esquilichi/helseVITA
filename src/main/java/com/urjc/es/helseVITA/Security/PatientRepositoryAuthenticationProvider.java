@@ -39,6 +39,6 @@ public class PatientRepositoryAuthenticationProvider implements AuthenticationPr
     @Override
     public boolean supports(Class<?> aClass) {
         //No se que es esto, pero creo que no hay que implementarlo para DWS ;)
-        return false;
+        return true;
     }
 }

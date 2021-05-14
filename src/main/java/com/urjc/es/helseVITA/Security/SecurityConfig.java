@@ -70,7 +70,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .logoutUrl("/logOut")//Url para deslogearse
                     .logoutSuccessUrl("/index") //Url de la zona pública
                     .and()
-                .csrf().disable()  
                 .headers().frameOptions().disable();//Para poder acceder a la consola de h2
 
             http

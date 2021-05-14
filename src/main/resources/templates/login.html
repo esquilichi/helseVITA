@@ -12,6 +12,7 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="text" class="form-control" id="password" placeholder="Password" name="password">
+                <input type="hidden" name="_csrf" value="{{token}}">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
