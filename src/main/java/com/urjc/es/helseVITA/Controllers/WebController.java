@@ -9,6 +9,7 @@ import com.urjc.es.helseVITA.Services.AppointmentService;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
@@ -37,12 +38,34 @@ public class WebController {
     EntityManager entityManager;
 
     Appointment appointmentToEngage;
-
+    /*
+    Si se necesita saber el usuario que está autenticado navegando al toque se hace
+    SecurityContextHolder.getContext().getAuthentication();
+    Esto nos da opcion a poder coger luego 5 cosas SI NO ES NULL, COMPROBAR
+    1) getPrincipal(), el objeto entero, no interesa
+    2) getCredentials(), password
+    3) getAuthorities(), el rol que tiene
+    4) getDetails(), más detalles como la ip, no interesa.
+    Si se quiere enseñar una página tal cual, y luego enseñarla con cambios al que está logueado...
+    Procedimiento: crear un plantilla para el que no está logueado (index) y cuando detectamos un logged user
+    (SecurityContextHolder.getContext().getAuthentication() != null) llamamos a una plantilla preparada con mustache
+    para poder enseñar ese username o lo que queramos. Ya sabiendo el username, podemos hacer query a BBDD para pedir
+    los pacientes/docs asociados a ese username y mostrarlos :)
+    Un besote
+    Ismael de las 2:15 AM
+     */
     @RequestMapping("/")
     ModelAndView index(HttpServletRequest request) {
-        var mv = new ModelAndView("index");
-        mv.addObject("Users", patientService.returnAllPatients());
-        return mv;
+        var a = SecurityContextHolder.getContext().getAuthentication();
+        var authorities = a.getName();
+        if (authorities == null){
+            return new ModelAndView("index");
+        }else {
+            var mv = new ModelAndView("indexAuth");
+            mv.addObject("user",authorities.toString());
+            return mv;
+        }
+
     }
 
     @GetMapping("/loginError")
