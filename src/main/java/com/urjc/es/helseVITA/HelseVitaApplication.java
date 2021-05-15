@@ -10,8 +10,10 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import com.urjc.es.helseVITA.Entities.Admin;
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
+import com.urjc.es.helseVITA.Repositories.AdminRepository;
 import com.urjc.es.helseVITA.Repositories.HealthPersonnelRepository;
 import com.urjc.es.helseVITA.Repositories.PatientRepository;
 import com.urjc.es.helseVITA.Enums.EnumRoles;
@@ -31,10 +33,13 @@ public class HelseVitaApplication {
         SpringApplication.run(HelseVitaApplication.class, args);
     }
 
-}
-   /* @Bean
-    CommandLineRunner initData(PatientRepository patientRepository, HealthPersonnelRepository healthPersonnelRepository) {
+
+   @Bean
+    CommandLineRunner initData(PatientRepository patientRepository, HealthPersonnelRepository healthPersonnelRepository, AdminRepository adminRepository) {
         return (args) -> {
+
+            adminRepository.saveAndFlush(new Admin ("Nico", new BCryptPasswordEncoder().encode("ponnosun10")));
+
             if (patientRepository.findAll().size() < 2) {
                 patientRepository.saveAndFlush(new Patient("IsmaelEsquilichi", new BCryptPasswordEncoder().encode("root"), "ismael.esquilichi@helsevita.com", "4820096E", "Ismael", "Gómez", "Esquilichi", 20));
                 healthPersonnelRepository.saveAndFlush(new HealthPersonnel("ClaraContreras", new BCryptPasswordEncoder().encode("root"), "clara.contreras@helsevita.com", "7563289Y", "Clara", "Contreras", "Nevares", 19, "Cardióloga"));
@@ -128,4 +133,4 @@ public class HelseVitaApplication {
         return dniFinal;
     }
 
-}*/
+}
