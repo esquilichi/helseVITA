@@ -55,9 +55,11 @@ public class WebController {
     Ismael de las 2:15 AM
      */
     @RequestMapping("/")
-    ModelAndView index(HttpServletRequest request) {
+    ModelAndView index(HttpServletRequest request, Model model) {
         var a = SecurityContextHolder.getContext().getAuthentication();
         var authorities = a.getName();
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        model.addAttribute("token", token.getToken());
         if (authorities == null){
             return new ModelAndView("index");
         }else {
@@ -329,8 +331,8 @@ public class WebController {
     }
     @RequestMapping("/login")
     public String login(HttpServletRequest request, Model model){
-        //CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        //model.addAttribute("token", token.getToken());
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        model.addAttribute("token", token.getToken());
         return "login";
     }
 
@@ -347,4 +349,38 @@ public class WebController {
     public ModelAndView loginExitoso(){
         return new ModelAndView("loginExito");
     }
+
+    @RequestMapping("/areaPaciente")
+    public String areaPaciente(HttpServletRequest request, Model model){  return "areaPaciente";}
+
+    @RequestMapping("/areaSanitario")
+    public String areaSanitario(HttpServletRequest request, Model model){return "areaSanitario";}
+
+    @RequestMapping("/citaAgregada")
+    public String citaAgregada(HttpServletRequest request, Model model){return "areaSanitario";}
+
+    @RequestMapping("/contact-us")
+    public String contactUs(HttpServletRequest request, Model model){return "contact-us";}
+
+    @RequestMapping("/crearPaciente")
+    public String crearPaciente(HttpServletRequest request, Model model){return "crearPaciente";}
+    
+    @RequestMapping("/faq")
+    public String faq(HttpServletRequest request, Model model){return "faq";}
+    
+    @RequestMapping("/insurance")
+    public String insurance(HttpServletRequest request, Model model){return "insurance";}
+    
+    @RequestMapping("/myHelsevita")
+    public String myHelsevita(HttpServletRequest request, Model model){
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        model.addAttribute("token", token.getToken());
+        return "myHelsevita";
+    }
+    
+    @RequestMapping("/search-center")
+    public String searchCenter(HttpServletRequest request, Model model){return "search-center";}
+    
+    @RequestMapping("/work-with-us")
+    public String workWithUs(HttpServletRequest request, Model model){return "work-with-us";}
 }
