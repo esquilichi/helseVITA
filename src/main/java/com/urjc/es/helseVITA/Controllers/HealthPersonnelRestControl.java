@@ -5,6 +5,7 @@ import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
@@ -16,6 +17,7 @@ public class HealthPersonnelRestControl {
     @PostMapping("/api/healthPersonnels")
     @ResponseStatus(HttpStatus.CREATED)
     public HealthPersonnel newHealthPersonnel(@RequestBody HealthPersonnel HealthPersonnel){
+        HealthPersonnel.setPassword(new BCryptPasswordEncoder().encode(HealthPersonnel.getPassword()));
         return healthPersonnelService.addHealthPersonnel(HealthPersonnel);
     }
 

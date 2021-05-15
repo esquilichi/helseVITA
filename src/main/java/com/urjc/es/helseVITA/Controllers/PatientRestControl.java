@@ -4,6 +4,7 @@ import com.urjc.es.helseVITA.Services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import com.urjc.es.helseVITA.Entities.*;
 import java.util.Collection;
@@ -18,6 +19,7 @@ public class PatientRestControl {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/api/patients",consumes = "application/json", produces = "application/json")
     public Patient newPatient(@RequestBody Patient patient){
+        patient.setPassword(new BCryptPasswordEncoder().encode(patient.getPassword()));
         return patientService.addPatient(patient);
     }
 
