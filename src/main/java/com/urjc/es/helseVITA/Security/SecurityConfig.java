@@ -39,25 +39,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	http.authorizeRequests()
+    	http
+        
+            .authorizeRequests()
 
-                    .antMatchers("/index", "/login", "/", "/loginError", "/logOut",
+                .antMatchers("/index", "/login", "/", "/loginError", "/logOut", "/exito", "/exito-contacto", 
 
-                        "/contact-us", "/faq", "/myHelsevita", "/search-center", "/work-with-us", "/error", "/user-not-found")   //Aquí se ponen las rutas que se permiten a ese rol (Anónimo en este caso)     
+                    "/contact-us", "/faq", "/myHelsevita", "/search-center", "/work-with-us", "/error", "/insurance" )   //Aquí se ponen las rutas que se permiten a ese rol (Anónimo en este caso)     
 
-                    .permitAll()
+                .permitAll()
 
-                    //privadas
+                //privadas
 
-                    .antMatchers("/areaAdmin", "/areaPaciente", "/areaSanitario", "/crearPaciente", "/insurance", "/crearSanitario", "/mostrarPacientes", "/mostrarSanitario").hasAnyRole("ADMIN") //Páginas permitidas para HealthPersonnel
+                .antMatchers("/appointmentAlreadyExist/**","/appointment", "/appointmentNotFound", "/asignarNuevoPaciente", "/asignarNuevoSanitario", 
+                    "/buscarPaciente", "/buscarSanitario", "/citaAgregada", "/cualDoctor", "/areaAdmin", "/areaPaciente", "/areaSanitario", 
+                    "/crearPaciente", "/crearSanitario", "/indexAuth", "/loginExito", "/mostrarCitas", "/nuevaCita", "/user-not-found",
+                    "/mostrarPacientes", "/mostrarSanitario", "/userAlreadyExists").hasAnyRole("ADMIN") //Páginas permitidas para Admin
 
-                    .antMatchers("/areaPaciente", "/citaAgregada", "/insurance").hasAnyRole("PATIENT") //Páginas permitidas para Paciente
+                .antMatchers( "/areaSanitario", "/indexAuth", "/loginExito", "/mostrarPacientes").hasAnyRole("HEALTHPERSONNEL") //Páginas permitidas para Sanitario
 
-                .antMatchers("/areaPaciente", "/citaAgregada", "/insurance").hasAnyRole("PATIENT") //Páginas permitidas para Paciente
+                .antMatchers("/appointmentAlreadyExist/**","/appointment", "/appointmentNotFound", "/citaAgregada", "/cualDoctor",  "/areaPaciente", 
+                    "/indexAuth", "/loginExito", "/mostrarCitas", "/nuevaCita").hasAnyRole("PATIENT"); //Páginas permitidas para Paciente
 
-                .antMatchers("/areaPaciente", "/areaSanitario", "/crearPaciente", "/asignarNuevoPaciente", "/asignarNuevosanitario",
-
-                        "/buscarPaciente", "/buscarSanitario", "/crearSanitario", "/mostrar/**", "/mostrarPacientes", "/mostrarSanitario").hasAnyRole("ADMIN","PATIENT","HEALTHPERSONNEL"); //Páginas permitidas para Admin
                    
                 http
                 	.formLogin()

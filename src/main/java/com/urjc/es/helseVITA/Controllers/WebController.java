@@ -385,7 +385,7 @@ public class WebController {
     public String crearPaciente(HttpServletRequest request, Model model) {
         return "crearPaciente";
     }
-    @RequestMapping
+    @RequestMapping("/areaAdmin")
     public String areaAdmin(){
         return "areaAdmin";
     }
