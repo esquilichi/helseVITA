@@ -12,6 +12,8 @@ function createPaciente() {
     var surname1 = document.getElementById('surname1').value;
     var surname2 = document.getElementById('surname2').value;
     var age = document.getElementById('age').value;
+    var csrf_token  = document.getElementById('_csrf').value;
+    var csrf_header = document.getElementById('_csrf.header').value;
 
     var item =
         {
@@ -33,7 +35,7 @@ function createPaciente() {
 
         loadItems();
     });
-
+    client.setRequestHeader(csrf_header,csrf_token);
     client.open("POST", "/api/patients");
 
     client.setRequestHeader("Content-type", "application/json");
