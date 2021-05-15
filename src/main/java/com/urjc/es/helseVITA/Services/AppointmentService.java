@@ -77,10 +77,8 @@ public class AppointmentService {
         return null;
     }
 
-    public Collection<Appointment> returnAllAppointments(){
-        List<Appointment> list = new ArrayList<>();
-        appointmentRepository.findAll().forEach(list::add);
-        return list;
+    public Collection<Appointment> returnAllAppointmentsOfPatient(Patient patient){
+        return appointmentRepository.findAppointmentsByPatientId(patient.getId());
     }
 
     public List <HealthPersonnel> takenHealthPersonnel(Integer year, Integer month, Integer day, Integer hour, Integer minute){
@@ -90,5 +88,8 @@ public class AppointmentService {
             temp2.add(entry.getHealthPersonnel());
         }
         return temp2;
+    }
+    public Collection<Appointment> returnAllAppointments(){
+        return appointmentRepository.findAll();
     }
 }

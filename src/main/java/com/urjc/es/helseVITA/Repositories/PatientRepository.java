@@ -1,5 +1,6 @@
 package com.urjc.es.helseVITA.Repositories;
 
+import com.urjc.es.helseVITA.Entities.Appointment;
 import com.urjc.es.helseVITA.Entities.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -21,5 +22,4 @@ public interface PatientRepository extends JpaRepository<Patient,Integer>, JpaSp
     public List<Patient> findPatientByNameContainsIgnoreCaseOrSurname1ContainsIgnoreCaseOrSurname2ContainsIgnoreCaseOrEmailContainsIgnoreCaseOrAgeContains(String name, String surname1, String surname2, String email, Integer age);
 
     public List<Patient> findPatientByAge(Integer age);
-
 }

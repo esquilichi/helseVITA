@@ -47,6 +47,7 @@ public class WebController {
     2) getCredentials(), password
     3) getAuthorities(), el rol que tiene
     4) getDetails(), más detalles como la ip, no interesa.
+    5) getName(), username!!!
     Si se quiere enseñar una página tal cual, y luego enseñarla con cambios al que está logueado...
     Procedimiento: crear un plantilla para el que no está logueado (index) y cuando detectamos un logged user
     (SecurityContextHolder.getContext().getAuthentication() != null) llamamos a una plantilla preparada con mustache
@@ -260,8 +261,14 @@ public class WebController {
         int id_paciente = Integer.parseInt(requestParams.get("id_paciente"));
         var paciente = patientService.returnPatient(id_paciente);
         List<Appointment> appointmentList = paciente.getAppointments();
+        var text = requestParams.get("tiempo");
+        int year = Integer.parseInt((String) text.subSequence(0, 4));
+        int month = Integer.parseInt((String) text.subSequence(5, 7));
+        int day = Integer.parseInt((String) text.subSequence(8, 10));
+        int hour = Integer.parseInt((String) text.subSequence(11, 13));
+        int minute = Integer.parseInt((String) text.subSequence(14, 16));
         var doctor = healthPersonnelService.returnHealthPersonnel(id_doctor);
-        Appointment temp = this.appointmentToEngage;
+        Appointment temp = new Appointment(hour, minute, day, month, year, doctor, paciente);;
         for (Appointment temp2 : appointmentList) {
             if ((temp2.getYear().equals(temp.getYear())) && (temp2.getMonth().equals(temp.getMonth())) && (temp2.getDay().equals(temp.getDay()))
                     && (temp2.getHour().equals(temp.getHour())) && (temp2.getMinute().equals(temp.getMinute()))) {
@@ -270,9 +277,8 @@ public class WebController {
                 throw new AppointmentAlreadyExistsException(temp2);
             }
         }
-        this.appointmentToEngage.setHealthPersonnel(doctor);
 
-        List<Appointment> ap_patient = patientService.addAppointmentToPatient(id_paciente, this.appointmentToEngage);
+        List<Appointment> ap_patient = patientService.addAppointmentToPatient(id_paciente, temp);
         //List<Appointment> ap_doctor = healthPersonnelService.addAppointmentToHealthPersonnel(id_doctor,this.appointmentToEngage);
 
         var mv = new ModelAndView("exito");
@@ -414,6 +420,26 @@ public class WebController {
 
     @RequestMapping("/nuevaCita")
     public String nuevaCita(HttpServletRequest request, Model model) {
+        Patient patient = patientService.returnPatientByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        var id = patient.getId();
+        model.addAttribute("id_paciente",id);
+        List<Patient> lista = new ArrayList<>(); lista.add(patient);
+        List<HealthPersonnel> docs = healthPersonnelService.returnHealthPersonnelsByPatient(lista);
+        model.addAttribute("docs",docs);
         return "nuevaCita";
+    }
+
+    @RequestMapping("/mostrarCitas")
+    public ModelAndView mostrarCitas(){
+        Patient patient = patientService.returnPatientByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        if (patient != null){
+            List<Appointment> citas = patient.getAppointments();
+            appointmentService.returnAllAppointmentsOfPatient(patient);
+            var mv = new ModelAndView("/mostrarCitas");
+            mv.addObject("citas",citas);
+            return mv;
+        } else{
+            throw new AppointmentNotFoundException();
+        }
     }
 }

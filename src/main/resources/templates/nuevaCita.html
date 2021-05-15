@@ -9,12 +9,20 @@
                 <h2 style="color: #94d4b4;">Nueva cita</h2>
                 <h3>Elige un día para tú cita</h3>
             </div>
+            <form action="/exito" style="border-top-color: #97d6b5;">
             <center>
-                <input type="datetime-local">
-                <button type="submit" class="btn btn-primary"
-                        style="margin: 15px; background: rgb(255, 191, 105); font-size: 20px; border-color: rgba(255, 255, 255, 0.4); color: #000000;">
-                    Enviar</button>
+                <input type="datetime-local" name="tiempo" id="tiempo">
+                <input type="hidden" name="id_paciente" value="{{id_paciente}}">
+                <select id="list" class="form-control"  style="margin-bottom:15px" name="id_doctor">
+                    <optgroup label="Sanitarios">
+                        {{#docs}}
+                        <option value="{{id}}" name="id_doctor" selected href="#">{{.}}</option>
+                        {{/docs}}
+                    </optgroup>
+                </select>
+                <button type="submit" action="/exito" method="get" class="btn btn-primary"> Enviar</button>
             </center>
+            </form>
         </div>
     </section>
 </main>

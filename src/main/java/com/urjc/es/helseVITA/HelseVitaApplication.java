@@ -30,9 +30,9 @@ public class HelseVitaApplication {
     public static void main(String[] args) {
         SpringApplication.run(HelseVitaApplication.class, args);
     }
-    }
 
-  /*  @Bean
+}
+   /* @Bean
     CommandLineRunner initData(PatientRepository patientRepository, HealthPersonnelRepository healthPersonnelRepository) {
         return (args) -> {
             if (patientRepository.findAll().size() < 2) {
