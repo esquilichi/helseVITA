@@ -1,5 +1,6 @@
 package com.urjc.es.helseVITA.Security;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,9 +21,13 @@ public class CSRFHandlerConfiguration implements WebMvcConfigurer {
 class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(final HttpServletRequest request,
-                           final HttpServletResponse response, final Object handler,
+                           final @NotNull HttpServletResponse response, final @NotNull Object handler,
                            final ModelAndView modelAndView) throws Exception {
         CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        modelAndView.addObject("_csrf", token);
+        if (modelAndView != null){
+            modelAndView.addObject("token", token.getToken());
+            modelAndView.addObject("headerName",token.getHeaderName());
+        }
+
     }
 }
