@@ -192,9 +192,9 @@ public class WebController {
 
     @ExceptionHandler(AppointmentAlreadyExistsException.class)
     public ModelAndView exception5(AppointmentAlreadyExistsException e, HttpServletRequest request) {
-        //var mv = new ModelAndView("appointmentAlreadyExists");
-        //mv.addObject("day", e.get());
-        return new ModelAndView("appointmentAlreadyExists");
+        var mv = new ModelAndView("appointmentAlreadyExists");
+        //mv.addObject("day", e.getDay());
+        return mv;
 
     }
 /* 
@@ -233,11 +233,13 @@ public class WebController {
 
         List<Patient> lista_con_paciente = new ArrayList<>(); lista_con_paciente.add(paciente);
         Appointment temp = this.appointmentToEngage = new Appointment(hour,minute, day,month,year,null,paciente);
-
-        if(paciente.getAppointments().contains(temp)) {
-            throw new AppointmentAlreadyExistsException(temp);
+        List <Appointment> appointmentList = paciente.getAppointments();
+        for(Appointment temp2: appointmentList){
+            if((temp2.getYear()==temp.getYear())&&(temp2.getMonth()==temp.getMonth())&&(temp2.getDay()==temp.getDay())
+                &&(temp2.getHour()==temp.getHour())&&(temp2.getMinute()==temp.getMinute())){
+                    return new ModelAndView ("excepcion5");
+            }
         }
-
         //List<Appointment> citas = paciente.getAppointments();
         //citas.add(temp);
         //paciente.setAppointments(citas);
