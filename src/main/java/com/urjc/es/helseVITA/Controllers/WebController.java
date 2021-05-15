@@ -193,7 +193,12 @@ public class WebController {
     @ExceptionHandler(AppointmentAlreadyExistsException.class)
     public ModelAndView exception5(AppointmentAlreadyExistsException e, HttpServletRequest request) {
         var mv = new ModelAndView("appointmentAlreadyExists");
-        //mv.addObject("day", e.getDay());
+        var temp = e.getAppointment();
+        mv.addObject("dia",temp.getDay());
+        mv.addObject("mes",temp.getMonth());
+        mv.addObject("year",temp.getYear());
+        mv.addObject("hora",temp.getHour());
+        mv.addObject("minuto",temp.getMinute());
         return mv;
 
     }
@@ -219,6 +224,7 @@ public class WebController {
         return mv;
     }
 
+
     @RequestMapping("/whichDoc")
     public ModelAndView addAppointmentCode(@RequestParam Map<String,String> requestParams,HttpServletRequest request){
         var id_paciente = Integer.parseInt(requestParams.get("id_paciente"));
@@ -233,20 +239,9 @@ public class WebController {
 
         List<Patient> lista_con_paciente = new ArrayList<>(); lista_con_paciente.add(paciente);
         Appointment temp = this.appointmentToEngage = new Appointment(hour,minute, day,month,year,null,paciente);
-        List <Appointment> appointmentList = paciente.getAppointments();
-        for(Appointment temp2: appointmentList){
-            if((temp2.getYear()==temp.getYear())&&(temp2.getMonth()==temp.getMonth())&&(temp2.getDay()==temp.getDay())
-                &&(temp2.getHour()==temp.getHour())&&(temp2.getMinute()==temp.getMinute())){
-                    return new ModelAndView ("excepcion5");
-            }
-        }
-        //List<Appointment> citas = paciente.getAppointments();
-        //citas.add(temp);
-        //paciente.setAppointments(citas);
-        //patientService.addPatient(paciente);
-        //TypedQuery<HealthPersonnel> q1 = entityManager.createQuery("SELECT c FROM health_personnel c where c.id in (select health_personnel_list_id from patient_health_personnel_list where id = :id_paciente)",HealthPersonnel.class);
-        //q1.setParameter("id_paciente",id_paciente);
-        //var lista = q1.getResultList();
+
+
+
         var lista = healthPersonnelService.returnHealthPersonnelsByPatient(lista_con_paciente);
         var mv = new ModelAndView("cualDoctor");
         mv.addObject("cita", temp);
@@ -260,7 +255,17 @@ public class WebController {
         int id_doctor = Integer.parseInt(requestParams.get("id_doctor"));
         int id_paciente = Integer.parseInt(requestParams.get("id_paciente"));
         var paciente  = patientService.returnPatient(id_paciente);
+        List <Appointment> appointmentList = paciente.getAppointments();
         var doctor = healthPersonnelService.returnHealthPersonnel(id_doctor);
+        Appointment temp = this.appointmentToEngage;
+        for(Appointment temp2: appointmentList){
+            if((temp2.getYear().equals(temp.getYear()))&&(temp2.getMonth().equals(temp.getMonth()))&&(temp2.getDay().equals(temp.getDay()))
+                    &&(temp2.getHour().equals(temp.getHour()))&&(temp2.getMinute().equals(temp.getMinute()))){
+                //Que coño es este return :)
+
+                throw new AppointmentAlreadyExistsException(temp2);
+            }
+        }
         this.appointmentToEngage.setHealthPersonnel(doctor);
 
         List<Appointment> ap_patient = patientService.addAppointmentToPatient(id_paciente,this.appointmentToEngage);
@@ -324,8 +329,8 @@ public class WebController {
     }
     @RequestMapping("/login")
     public String login(HttpServletRequest request, Model model){
-        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        model.addAttribute("token", token.getToken());
+        //CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        //model.addAttribute("token", token.getToken());
         return "login";
     }
 
@@ -338,5 +343,8 @@ public class WebController {
         }
         return new ModelAndView("error");
     }
-
+    @RequestMapping("/loginExitoso")
+    public ModelAndView loginExitoso(){
+        return new ModelAndView("loginExito");
+    }
 }
