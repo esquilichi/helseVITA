@@ -49,13 +49,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
                     //privadas
 
-                    .antMatchers("/areaSanitario.html").hasAnyRole("HEALTHPERSONNEL") //Páginas permitidas para HealthPersonnel
+                    .antMatchers("/areaAdmin", "/areaPaciente", "/areaSanitario", "/crearPaciente", "/insurance", "/crearSanitario", "/mostrarPacientes", "/mostrarSanitario").hasAnyRole("ADMIN") //Páginas permitidas para HealthPersonnel
 
-                    .antMatchers("/areaPaciente.html", "/citaAgregada.html", "/insurance").hasAnyRole("PATIENT") //Páginas permitidas para Paciente
+                    .antMatchers("/areaPaciente", "/citaAgregada", "/insurance").hasAnyRole("PATIENT") //Páginas permitidas para Paciente
 
-                    .antMatchers("/areaPaciente.html", "/areaSanitario.html", "/crearPaciente.html", "/asignarNuevoPaciente", "/asignarNuevosanitario",
+                .antMatchers("/areaPaciente", "/citaAgregada", "/insurance").hasAnyRole("PATIENT") //Páginas permitidas para Paciente
 
-                        "/buscarPaciente", "/buscarSanitario", "/crearSanitario.html", "/mostrar/**", "/mostrarPacientes", "/mostrarSanitario").hasAnyRole("ADMIN","PATIENT","HEALTHPERSONNEL"); //Páginas permitidas para Admin
+                .antMatchers("/areaPaciente", "/areaSanitario", "/crearPaciente", "/asignarNuevoPaciente", "/asignarNuevosanitario",
+
+                        "/buscarPaciente", "/buscarSanitario", "/crearSanitario", "/mostrar/**", "/mostrarPacientes", "/mostrarSanitario").hasAnyRole("ADMIN","PATIENT","HEALTHPERSONNEL"); //Páginas permitidas para Admin
                    
                 http
                 	.formLogin()
