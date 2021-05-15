@@ -2,53 +2,40 @@
 <html>
 
 {{> head}}
-	<main class="page contact-us-page">
-		<section class="clean-block clean-form dark">
-			<div class="container">
-				<div class="block-heading">
-					<h2 style="color: #94d4b4;">Trabaja con nosotros</h2>
-					<p>Envíanos tu solicitud y contactaremos contigo para que nos
-						envíes tu curriculum</p>
-				</div>
-				<form style="border-top-color: rgb(151, 214, 181);">
-					<div class="form-group">
-						<label for="name">Nombre</label><input class="form-control"
-							type="text" id="name" name="name">
-					</div>
-					<div class="form-group">
-						<label for="email">Email</label><input class="form-control"
-							type="email" id="email" name="email">
-					</div>
-					<div class="form-group">
-						<button class="btn btn-primary btn-block" type="submit"
-							style="background: rgb(255, 193, 105); color: #000000; border-color: rgba(255, 255, 255, 0.4);">Enviar</button>
-					</div>
-				</form>
+
+<main class="page contact-us-page">
+	<section class="clean-block clean-form dark">
+		<div class="container">
+			<div class="block-heading">
+				<h2 style="color: #94d4b4;">Trabaja con nosotros</h2>
+				<p>Envíanos tu solicitud y contactaremos contigo para que nos
+					envíes tu curriculum</p>
 			</div>
-		</section>
-	</main>
-	<footer class="footer-basic">
-		<div class="social">
-			<a href="https://www.instagram.com/"><i class="icon ion-social-instagram"></i></a><a href="https://es-es.facebook.com/"><i
-				class="icon ion-social-facebook"></i></a><a href="https://twitter.com"><i
-				class="icon ion-social-twitter"></i></a>
+			<form style="border-top-color: rgb(151, 214, 181);">
+				<div class="form-group">
+					<label for="name">Nombre</label><input class="form-control"
+						type="text" id="name" name="name">
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label><input class="form-control"
+						type="email" id="email" name="email">
+				</div>
+				<div class="form-group">
+					<button onclick="location.href='/exito-contacto'" class="btn btn-primary btn-block" type="button" 
+						style="background: rgb(255, 193, 105); color: #000000; border-color: rgba(255, 255, 255, 0.4);">Enviar</button>
+				</div>
+			</form>
 		</div>
-		<ul class="list-inline">
-			<li class="list-inline-item"><a href="/">Inicio</a></li>
-			<li class="list-inline-item"></li>
-			<li class="list-inline-item"><a href="faq.html">Preguntas
-					Frecuentes</a></li>
-			<li class="list-inline-item"><a href="politica.html">Política de
-				Privacidad</a></li>
-		</ul>
-		<p class="copyright">helseVITA © 2021</p>
-	</footer>
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-	<script src="assets/js/smoothproducts.min.js"></script>
-	<script src="assets/js/theme.js"></script>
-</body>
+	</section>
+</main>
+
+{{>footer}}
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="assets/js/smoothproducts.min.js"></script>
+<script src="assets/js/theme.js"></script>
 
 </html>

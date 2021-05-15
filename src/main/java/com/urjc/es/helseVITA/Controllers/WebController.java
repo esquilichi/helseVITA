@@ -38,6 +38,7 @@ public class WebController {
     EntityManager entityManager;
 
     Appointment appointmentToEngage;
+
     /*
     Si se necesita saber el usuario que está autenticado navegando al toque se hace
     SecurityContextHolder.getContext().getAuthentication();
@@ -60,11 +61,11 @@ public class WebController {
         var authorities = a.getName();
         CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
         model.addAttribute("token", token.getToken());
-        if (authorities == null){
+        if (authorities == null) {
             return new ModelAndView("index");
-        }else {
+        } else {
             var mv = new ModelAndView("indexAuth");
-            mv.addObject("user",authorities.toString());
+            mv.addObject("user", authorities.toString());
             return mv;
         }
 
@@ -76,7 +77,7 @@ public class WebController {
     }
 
     @RequestMapping("/mostrar/{id}")
-    ModelAndView view(@PathVariable Integer id,HttpServletRequest request) {
+    ModelAndView view(@PathVariable Integer id, HttpServletRequest request) {
         Patient temp = patientService.returnPatient(id);
         var mv = new ModelAndView("mostrar");
         mv.addObject("user", temp);
@@ -84,7 +85,7 @@ public class WebController {
     }
 
     @GetMapping({"/searchPatient"})
-    public String patientList(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2",required = false) String query2,HttpServletRequest request) {
+    public String patientList(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2", required = false) String query2, HttpServletRequest request) {
         boolean b1 = false;
         boolean b2 = false;
         List<Patient> result = null;
@@ -114,32 +115,33 @@ public class WebController {
         model.addAttribute("object", mi_lista);
         return "buscarPaciente";
     }
+
     @GetMapping({"/searchHealthPersonnel"})
-    public String healthPersonnelList(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2" , required = false) String query2,HttpServletRequest request) {
+    public String healthPersonnelList(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2", required = false) String query2, HttpServletRequest request) {
         boolean b1 = false;
         boolean b2 = false;
         List<HealthPersonnel> result = null;
         List<HealthPersonnel> result2 = null;
         List<HealthPersonnel> mi_lista;
-        if (query != null){
+        if (query != null) {
             result = (List<HealthPersonnel>) healthPersonnelService.search(query);
             b1 = true;
         }
-        if (query2 != null){
+        if (query2 != null) {
             result2 = healthPersonnelService.searchByAge(query2);
             b2 = true;
         }
-        if (b1 && b2){
+        if (b1 && b2) {
             mi_lista = intersectionH(result, result2);
-        } else if (b1){
+        } else if (b1) {
             mi_lista = result;
-        }else if (b2){
+        } else if (b2) {
             mi_lista = result2;
-        }else{
+        } else {
             mi_lista = healthPersonnelService.returnAllHealthPersonnels();
         }
 
-        if (result2 == null){
+        if (result2 == null) {
             mi_lista = result;
         }
         model.addAttribute("object", mi_lista);
@@ -171,14 +173,14 @@ public class WebController {
 
     //Call to the exception
     @ExceptionHandler(UserNotFoundException.class)
-    public ModelAndView exception(UserNotFoundException e,HttpServletRequest request) {
+    public ModelAndView exception(UserNotFoundException e, HttpServletRequest request) {
         var mv = new ModelAndView("user-not-found");
         mv.addObject("username", e.getUsername());
         return mv;
     }
 
     @ExceptionHandler(IncorrectSearchParametersException.class)
-    public ModelAndView exception2(IncorrectSearchParametersException e,HttpServletRequest request) {
+    public ModelAndView exception2(IncorrectSearchParametersException e, HttpServletRequest request) {
         return new ModelAndView("incorrect-parameters");
     }
 
@@ -196,11 +198,11 @@ public class WebController {
     public ModelAndView exception5(AppointmentAlreadyExistsException e, HttpServletRequest request) {
         var mv = new ModelAndView("appointmentAlreadyExists");
         var temp = e.getAppointment();
-        mv.addObject("dia",temp.getDay());
-        mv.addObject("mes",temp.getMonth());
-        mv.addObject("year",temp.getYear());
-        mv.addObject("hora",temp.getHour());
-        mv.addObject("minuto",temp.getMinute());
+        mv.addObject("dia", temp.getDay());
+        mv.addObject("mes", temp.getMonth());
+        mv.addObject("year", temp.getYear());
+        mv.addObject("hora", temp.getHour());
+        mv.addObject("minuto", temp.getMinute());
         return mv;
 
     }
@@ -218,7 +220,7 @@ public class WebController {
     } */
 
     @GetMapping("/addAppointment/{id}")
-    public ModelAndView addAppointment(Model model, @PathVariable Integer id,HttpServletRequest request) {
+    public ModelAndView addAppointment(Model model, @PathVariable Integer id, HttpServletRequest request) {
 
         var temp = patientService.returnPatient(id);
         var mv = new ModelAndView("appointment");
@@ -228,41 +230,41 @@ public class WebController {
 
 
     @RequestMapping("/whichDoc")
-    public ModelAndView addAppointmentCode(@RequestParam Map<String,String> requestParams,HttpServletRequest request){
+    public ModelAndView addAppointmentCode(@RequestParam Map<String, String> requestParams, HttpServletRequest request) {
         var id_paciente = Integer.parseInt(requestParams.get("id_paciente"));
         var text = requestParams.get("tiempo");
         //var id_doctor = requestParams.get("id_doctor");
-        int year = Integer.parseInt((String) text.subSequence(0,4));
-        int month = Integer.parseInt((String) text.subSequence(5,7));
-        int day = Integer.parseInt((String) text.subSequence(8,10));
-        int hour = Integer.parseInt((String) text.subSequence(11,13));
-        int minute = Integer.parseInt((String) text.subSequence(14,16)); 
+        int year = Integer.parseInt((String) text.subSequence(0, 4));
+        int month = Integer.parseInt((String) text.subSequence(5, 7));
+        int day = Integer.parseInt((String) text.subSequence(8, 10));
+        int hour = Integer.parseInt((String) text.subSequence(11, 13));
+        int minute = Integer.parseInt((String) text.subSequence(14, 16));
         var paciente = patientService.returnPatient(id_paciente);
 
-        List<Patient> lista_con_paciente = new ArrayList<>(); lista_con_paciente.add(paciente);
-        Appointment temp = this.appointmentToEngage = new Appointment(hour,minute, day,month,year,null,paciente);
-
+        List<Patient> lista_con_paciente = new ArrayList<>();
+        lista_con_paciente.add(paciente);
+        Appointment temp = this.appointmentToEngage = new Appointment(hour, minute, day, month, year, null, paciente);
 
 
         var lista = healthPersonnelService.returnHealthPersonnelsByPatient(lista_con_paciente);
         var mv = new ModelAndView("cualDoctor");
         mv.addObject("cita", temp);
-        mv.addObject("docs",lista);
-        mv.addObject("paciente",paciente);
+        mv.addObject("docs", lista);
+        mv.addObject("paciente", paciente);
         return mv;
     }
 
     @RequestMapping("/exito")
-    public ModelAndView exito(@RequestParam Map<String,String> requestParams,HttpServletRequest request){
+    public ModelAndView exito(@RequestParam Map<String, String> requestParams, HttpServletRequest request) {
         int id_doctor = Integer.parseInt(requestParams.get("id_doctor"));
         int id_paciente = Integer.parseInt(requestParams.get("id_paciente"));
-        var paciente  = patientService.returnPatient(id_paciente);
-        List <Appointment> appointmentList = paciente.getAppointments();
+        var paciente = patientService.returnPatient(id_paciente);
+        List<Appointment> appointmentList = paciente.getAppointments();
         var doctor = healthPersonnelService.returnHealthPersonnel(id_doctor);
         Appointment temp = this.appointmentToEngage;
-        for(Appointment temp2: appointmentList){
-            if((temp2.getYear().equals(temp.getYear()))&&(temp2.getMonth().equals(temp.getMonth()))&&(temp2.getDay().equals(temp.getDay()))
-                    &&(temp2.getHour().equals(temp.getHour()))&&(temp2.getMinute().equals(temp.getMinute()))){
+        for (Appointment temp2 : appointmentList) {
+            if ((temp2.getYear().equals(temp.getYear())) && (temp2.getMonth().equals(temp.getMonth())) && (temp2.getDay().equals(temp.getDay()))
+                    && (temp2.getHour().equals(temp.getHour())) && (temp2.getMinute().equals(temp.getMinute()))) {
                 //Que coño es este return :)
 
                 throw new AppointmentAlreadyExistsException(temp2);
@@ -270,7 +272,7 @@ public class WebController {
         }
         this.appointmentToEngage.setHealthPersonnel(doctor);
 
-        List<Appointment> ap_patient = patientService.addAppointmentToPatient(id_paciente,this.appointmentToEngage);
+        List<Appointment> ap_patient = patientService.addAppointmentToPatient(id_paciente, this.appointmentToEngage);
         //List<Appointment> ap_doctor = healthPersonnelService.addAppointmentToHealthPersonnel(id_doctor,this.appointmentToEngage);
 
         var mv = new ModelAndView("exito");
@@ -279,19 +281,19 @@ public class WebController {
     }
 
     @RequestMapping("/crearSanitario")
-    public ModelAndView crearSanitario(HttpServletRequest request){
+    public ModelAndView crearSanitario(HttpServletRequest request) {
         List<String> cosas = new ArrayList<>();
         var lista = EnumRoles.VALUES;
-        for(EnumRoles c : EnumRoles.values())
+        for (EnumRoles c : EnumRoles.values())
             cosas.add(c.toString());
 
         var mv = new ModelAndView("crearSanitario");
-        mv.addObject("roles",lista);
+        mv.addObject("roles", lista);
         return mv;
     }
 
-    public List<Patient> union(List<Patient> list1, List<Patient> list2,HttpServletRequest request) {
-        if (!(list1 == null || list2 == null)){
+    public List<Patient> union(List<Patient> list1, List<Patient> list2, HttpServletRequest request) {
+        if (!(list1 == null || list2 == null)) {
             Set<Patient> set = new HashSet<Patient>();
 
             set.addAll(list1);
@@ -301,12 +303,13 @@ public class WebController {
         }
         return null;
     }
+
     public List<Patient> intersectionP(List<Patient> list1, List<Patient> list2) {
-        if (!(list1 == null || list2 == null)){
+        if (!(list1 == null || list2 == null)) {
             List<Patient> list = new ArrayList<>();
 
             for (Patient t : list1) {
-                if(list2.contains(t)) {
+                if (list2.contains(t)) {
                     list.add(t);
                 }
             }
@@ -317,11 +320,11 @@ public class WebController {
     }
 
     public List<HealthPersonnel> intersectionH(List<HealthPersonnel> list1, List<HealthPersonnel> list2) {
-        if (!(list1 == null || list2 == null)){
+        if (!(list1 == null || list2 == null)) {
             List<HealthPersonnel> list = new ArrayList<>();
 
             for (HealthPersonnel t : list1) {
-                if(list2.contains(t)) {
+                if (list2.contains(t)) {
                     list.add(t);
                 }
             }
@@ -329,58 +332,88 @@ public class WebController {
         }
         return null;
     }
+
     @RequestMapping("/login")
-    public String login(HttpServletRequest request, Model model){
+    public String login(HttpServletRequest request, Model model) {
         CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
         model.addAttribute("token", token.getToken());
         return "login";
     }
 
     @RequestMapping("/autenticacion")
-    public ModelAndView autenticacion(@RequestParam String username, @RequestParam String password,HttpServletRequest request){
+    public ModelAndView autenticacion(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
         Patient temp = patientService.returnPatientByUsername(username);
-        if (new BCryptPasswordEncoder().matches(password,temp.getPassword())){
+        if (new BCryptPasswordEncoder().matches(password, temp.getPassword())) {
 
             return new ModelAndView("exito");
         }
         return new ModelAndView("error");
     }
+
     @RequestMapping("/loginExitoso")
-    public ModelAndView loginExitoso(){
+    public ModelAndView loginExitoso() {
         return new ModelAndView("loginExito");
     }
 
     @RequestMapping("/areaPaciente")
-    public String areaPaciente(HttpServletRequest request, Model model){  return "areaPaciente";}
+    public String areaPaciente(HttpServletRequest request, Model model) {
+        return "areaPaciente";
+    }
 
     @RequestMapping("/areaSanitario")
-    public String areaSanitario(HttpServletRequest request, Model model){return "areaSanitario";}
+    public String areaSanitario(HttpServletRequest request, Model model) {
+        return "areaSanitario";
+    }
 
     @RequestMapping("/citaAgregada")
-    public String citaAgregada(HttpServletRequest request, Model model){return "areaSanitario";}
+    public String citaAgregada(HttpServletRequest request, Model model) {
+        return "citaAgregada";
+    }
 
     @RequestMapping("/contact-us")
-    public String contactUs(HttpServletRequest request, Model model){return "contact-us";}
+    public String contactUs(HttpServletRequest request, Model model) {
+        return "contact-us";
+    }
 
     @RequestMapping("/crearPaciente")
-    public String crearPaciente(HttpServletRequest request, Model model){return "crearPaciente";}
-    
+    public String crearPaciente(HttpServletRequest request, Model model) {
+        return "crearPaciente";
+    }
+
     @RequestMapping("/faq")
-    public String faq(HttpServletRequest request, Model model){return "faq";}
-    
+    public String faq(HttpServletRequest request, Model model) {
+        return "faq";
+    }
+
     @RequestMapping("/insurance")
-    public String insurance(HttpServletRequest request, Model model){return "insurance";}
-    
+    public String insurance(HttpServletRequest request, Model model) {
+        return "insurance";
+    }
+
     @RequestMapping("/myHelsevita")
-    public String myHelsevita(HttpServletRequest request, Model model){
+    public String myHelsevita(HttpServletRequest request, Model model) {
         CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
         model.addAttribute("token", token.getToken());
         return "myHelsevita";
     }
-    
+
     @RequestMapping("/search-center")
-    public String searchCenter(HttpServletRequest request, Model model){return "search-center";}
-    
+    public String searchCenter(HttpServletRequest request, Model model) {
+        return "search-center";
+    }
+
     @RequestMapping("/work-with-us")
-    public String workWithUs(HttpServletRequest request, Model model){return "work-with-us";}
+    public String workWithUs(HttpServletRequest request, Model model) {
+        return "work-with-us";
+    }
+
+    @RequestMapping("/exito-contacto")
+    public String exitoContacto(HttpServletRequest request, Model model) {
+        return "exito-contacto";
+    }
+
+    @RequestMapping("/nuevaCita")
+    public String nuevaCita(HttpServletRequest request, Model model) {
+        return "nuevaCita";
+    }
 }
