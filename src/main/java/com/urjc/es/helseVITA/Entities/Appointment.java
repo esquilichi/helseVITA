@@ -27,11 +27,12 @@ public class Appointment {
     @JsonIgnore
     private Patient patient;
 
-    public Appointment(){}
+    public Appointment() {
+    }
 
     public Appointment(Integer minute, Integer hour, Integer day, Integer month, Integer year, HealthPersonnel healthPersonnel, Patient patient) {
         this.hour = hour;
-        this.minute=minute;
+        this.minute = minute;
         this.day = day;
         this.month = month;
         this.year = year;
@@ -39,19 +40,18 @@ public class Appointment {
         this.patient = patient;
     }
 
-    public Appointment(Integer minute,Integer hour, Integer day, Integer month, Integer year,  Patient patient) {
+    public Appointment(Integer minute, Integer hour, Integer day, Integer month, Integer year, Patient patient) {
         this.hour = hour;
-        this.minute=minute;
+        this.minute = minute;
         this.day = day;
         this.month = month;
         this.year = year;
         this.patient = patient;
     }
-    
 
-    public Appointment(Integer minute,Integer id, Integer hour, Integer day, Integer month, Integer year) {
+    public Appointment(Integer minute, Integer id, Integer hour, Integer day, Integer month, Integer year) {
         this.id = id;
-        this.minute=minute;
+        this.minute = minute;
         this.hour = hour;
         this.day = day;
         this.month = month;
@@ -120,5 +120,10 @@ public class Appointment {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    @Override
+    public String toString() {
+        return "La cita es el " + day + "/" + month + "/" + year + " a las " + hour + ":" + minute;
     }
 }
