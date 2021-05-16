@@ -33,8 +33,8 @@ public class HelseVitaApplication {
         SpringApplication.run(HelseVitaApplication.class, args);
 
     }
-}
-  /* @Bean
+
+  @Bean
     CommandLineRunner initData(PatientRepository patientRepository, HealthPersonnelRepository healthPersonnelRepository, AdminRepository adminRepository) {
         return (args) -> {
 
@@ -133,4 +133,4 @@ public class HelseVitaApplication {
         return dniFinal;
     }
 
-}*/
+}
