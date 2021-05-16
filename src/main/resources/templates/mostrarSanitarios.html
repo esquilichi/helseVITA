@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+{{> head}}
+
+<script>$(document).ready( function () {
+    $('#miTabla').DataTable();
+} );</script>
+
+<main class="page landing-page">
+    <section class="clean-block clean-info light">
+        <div class="container">
+            <div class="block-heading">
+
+                <div class="container">
+                    <div class="row justify-center">
+                        <div class="col-12">
+                            <header>
+                                <h1>Lista de Pacientes</h1>
+
+                            </header>
+                        <table id="miTabla" class="display">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido1</th>
+                                    <th>Apellido2</th>
+                                    <th>DNI</th>
+                                    <th>Username</th>
+                                    <th>Edad</th>
+                                    <th>Especialidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#sanitarios}}
+                                <tr>
+                                    <td>{{name}}</td>
+                                    <td>{{surname1}}</td>
+                                    <td>{{surname2}}</td>
+                                    <td>{{dni}}</td>
+                                    <td>{{username}}</td>
+                                    <td>{{age}}</td>
+                                    <td>{{speciality}}</td>
+                                </tr>
+                                {{/sanitarios}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+</main>
+
+{{> footer}}
+
+</html>

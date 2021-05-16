@@ -467,7 +467,7 @@ public class WebController {
     @RequestMapping("/admin/mostrarSanitarios")
     public ModelAndView mostrarSanitariosAdmin(){
         var sanitarios = healthPersonnelService.returnAllHealthPersonnels();
-        var mv = new ModelAndView("mostrarPacientes");
+        var mv = new ModelAndView("mostrarSanitarios");
         mv.addObject("sanitarios",sanitarios);
         return mv;
     }
