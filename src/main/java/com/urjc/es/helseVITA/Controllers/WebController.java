@@ -457,4 +457,18 @@ public class WebController {
         }
         return new ModelAndView("/error");
     }
+    @RequestMapping("/admin/mostrarPacientes")
+    public ModelAndView mostrarPacientesAdmin(){
+        var pacientes = patientService.returnAllPatients();
+        var mv = new ModelAndView("mostrarPacientes");
+        mv.addObject("pacientes",pacientes);
+        return mv;
+    }
+    @RequestMapping("/admin/mostrarSanitarios")
+    public ModelAndView mostrarSanitariosAdmin(){
+        var sanitarios = healthPersonnelService.returnAllHealthPersonnels();
+        var mv = new ModelAndView("mostrarPacientes");
+        mv.addObject("sanitarios",sanitarios);
+        return mv;
+    }
 }

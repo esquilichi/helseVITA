@@ -52,9 +52,7 @@ public class HealthPersonnelService {
     }
 
     public List<HealthPersonnel> returnAllHealthPersonnels(){
-        List<HealthPersonnel> list = new ArrayList<>();
-        healthPersonnelRepository.findAll().forEach(list::add);
-        return list;
+        return healthPersonnelRepository.findAll();
     }
 
     public List<HealthPersonnel> search(String input){

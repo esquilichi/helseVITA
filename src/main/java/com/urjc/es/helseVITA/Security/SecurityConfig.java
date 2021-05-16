@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/appointmentAlreadyExist/**","/appointment", "/appointmentNotFound", "/asignarNuevoPaciente", "/asignarNuevoSanitario", 
                     "/buscarPaciente", "/buscarSanitario", "/citaAgregada", "/cualDoctor", "/areaAdmin", "/areaPaciente", "/areaSanitario", 
                     "/crearPaciente", "/crearSanitario", "/indexAuth", "/loginExito", "/mostrarCitas", "/nuevaCita", "/user-not-found",
-                    "/mostrarPacientes", "/mostrarSanitario", "/userAlreadyExists").hasAnyRole("ADMIN") //Páginas permitidas para Admin
+                    "/mostrarPacientes", "/mostrarSanitario", "/userAlreadyExists", "/admin/**" , "/mostrar/**").hasAnyRole("ADMIN") //Páginas permitidas para Admin
 
                 .antMatchers( "/areaSanitario", "/indexAuth", "/loginExito", "/mostrarPacientes").hasAnyRole("HEALTHPERSONNEL") //Páginas permitidas para Sanitario
 
