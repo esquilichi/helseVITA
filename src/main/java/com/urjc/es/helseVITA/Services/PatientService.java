@@ -112,4 +112,8 @@ public class PatientService {
         var lista = appointmentRepository.findAppointmentsByPatientId(patient);
         return lista.get(lista.size() - 1);
     }
+
+    public List<Patient> returnAllPatientsByHealthPersonnel(HealthPersonnel h){
+        return patientRepository.findPatientByHealthPersonnelList(h);
+    }
 }

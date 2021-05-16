@@ -99,6 +99,14 @@ public class Patient implements UserDetails{
     }
 
     @Override
+    public boolean equals(Object patient){
+        if (patient == this)
+            return true;
+        if (!(patient instanceof Patient))
+            return false;
+        return this.username.equals(((Patient) patient).username);
+    }
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }

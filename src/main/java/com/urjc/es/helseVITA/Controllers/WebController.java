@@ -445,4 +445,16 @@ public class WebController {
             throw new AppointmentNotFoundException();
         }
     }
+    @RequestMapping("/mostrarPacientes")
+    public ModelAndView mostrarPacientes(){
+        HealthPersonnel healthPersonnel = healthPersonnelService.returnHealthPersonnelByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        if (healthPersonnel != null){
+            List<Patient> pacientes = patientService.returnAllPatientsByHealthPersonnel(healthPersonnel);
+            Set<Patient> set = new HashSet<>(pacientes);
+            var mv = new ModelAndView("/mostrarPacientes");
+            mv.addObject("pacientes",set);
+            return mv;
+        }
+        return new ModelAndView("/error");
+    }
 }
