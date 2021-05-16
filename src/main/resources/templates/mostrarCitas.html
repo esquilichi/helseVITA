@@ -2,42 +2,39 @@
 <html lang="es" xmlns="http://www.w3.org/1999/html">
 {{> head}}
 
-<script src="ajax.js"></script>
+<script>$(document).ready( function () {
+    $('#miTabla').DataTable();
+} );</script>
 
 <main class="page landing-page">
-    <section class="clean-block clean-info light">
-        <div class="container">
-            <div class="block-heading">
-
-                <div class="container">
-                    <div class="row justify-center">
-                        <div class="col-12"></div>
-                        <h1>Lista de citas</h1>
-                    </div>
-                    <div class="col-12">
-                        <ul class="list-group">
-                            <br>{{#citas}}</br>
-                            <li class="list-group-item"><a id="{{-index}}">{{.}}</a></li>
-                            </br>{{/citas}}</br>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <center>
-        <button onclick="location.href='/areaPaciente'" class="btn btn-primary "
-                type="button"
-                style="background: rgb(255, 193, 105); color: #000000; border-color: rgb(255, 193, 105);">Volver
-        </button>
-        </center>
-    </section>
+    <div style="margin-top: 100px">
+    <table id="miTabla" class="display">
+        <thead>
+        <tr>
+            <th>Día</th>
+            <th>Hora</th>
+            <th>Minuto</th>
+            <th>Mes</th>
+            <th>Año</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#citas}}
+        <tr>
+            <td>{{day}}</td>
+            <td>{{hour}}</td>
+            <td>{{minute}}</td>
+            <td>{{month}}</td>
+            <td>{{year}}</td>
+        </tr>
+        {{/citas}}
+        </tbody>
+    </table>
+    </div>
 </main>
 
 {{> footer}}
 
 
 <!-- Scripts -->
-<script src="/assets/js/jquery-3.3.1.slim.min.js"></script>
-<script src="/assets/js/popper.min.js"></script>
-<script src="/assets/js/jquery-3.1.0.js"></script>
 </html>
