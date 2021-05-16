@@ -77,8 +77,7 @@ function createSanitario() {
 			"age": age
 
 		};
-
-	var client = new XMLHttpRequest();
+		var client = new XMLHttpRequest();
 	client.responseType = "json";
 	client.addEventListener("load", function () {
 		console.log(this.response);
@@ -87,13 +86,43 @@ function createSanitario() {
 		loadItems();
 	});
 
-	client.open("POST", "/api/healthPersonnels");
+	client.open("POST", "/api/healthPersonnel");
 	client.setRequestHeader(csrf_header,csrf_token);
 	client.setRequestHeader("Content-type", "application/json");
 	var body = JSON.stringify(item);
 	client.send(body);
 
 }
+
+	function submitQuestion(){
+		var texto = CKEDITOR.instances.editor.getData();
+		var csrf_token  = document.getElementById('_csrf').content;
+		var csrf_header = document.getElementById('_csrf_header').content;
+
+		
+		var item ={
+
+			"cosa": texto,
+			"answer": null
+		};
+		
+		var client = new XMLHttpRequest();
+		client.responseType = "json";
+		client.addEventListener("load", function(){
+			console.log(this.response);
+			console.log(client.status);
+		});
+
+		client.open("POST", "/api/preguntas");
+		client.setRequestHeader(csrf_header,csrf_token);
+		client.setRequestHeader("Content-type", "application/json");
+		var body = JSON.stringify(item);
+		alert(body);
+		client.send(body);
+	}
+
+
+
 
 function addItemsToPage(response) {
 	console.log("Ha funcionado");

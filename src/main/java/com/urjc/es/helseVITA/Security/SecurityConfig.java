@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         
             .authorizeRequests()
 
-                .antMatchers("/index", "/login", "/", "/loginError", "/logOut", "/exito", "/exito-contacto", 
+                .antMatchers("/index", "/login", "/", "/loginError", "/logout", "/exito", "/exito-contacto", 
 
                     "/contact-us", "/faq", "/myHelsevita", "/search-center", "/work-with-us", "/error", "/insurance" )   //Aquí se ponen las rutas que se permiten a ese rol (Anónimo en este caso)     
 
@@ -54,9 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/appointmentAlreadyExist/**","/appointment", "/appointmentNotFound", "/asignarNuevoPaciente", "/asignarNuevoSanitario", 
                     "/buscarPaciente", "/buscarSanitario", "/citaAgregada", "/cualDoctor", "/areaAdmin", "/areaPaciente", "/areaSanitario", 
                     "/crearPaciente", "/crearSanitario", "/indexAuth", "/loginExito", "/mostrarCitas", "/nuevaCita", "/user-not-found",
-                    "/mostrarPacientes", "/mostrarSanitario", "/userAlreadyExists", "/admin/**" , "/mostrar/**").hasAnyRole("ADMIN") //Páginas permitidas para Admin
+                    "/mostrarPacientes", "/mostrarSanitario", "/userAlreadyExists", "/admin/**" , "/mostrar/**", "/preguntasSinContestar/**").hasAnyRole("ADMIN") //Páginas permitidas para Admin
 
-                .antMatchers( "/areaSanitario", "/indexAuth", "/loginExito", "/mostrarPacientes").hasAnyRole("HEALTHPERSONNEL") //Páginas permitidas para Sanitario
+                .antMatchers( "/areaSanitario", "/indexAuth", "/loginExito", "/mostrarPacientes", "/preguntasSinContestar/**").hasAnyRole("HEALTHPERSONNEL") //Páginas permitidas para Sanitario
 
                 .antMatchers("/appointmentAlreadyExist/**","/appointment", "/appointmentNotFound", "/citaAgregada", "/cualDoctor",  "/areaPaciente", 
                     "/indexAuth", "/loginExito", "/mostrarCitas", "/nuevaCita").hasAnyRole("PATIENT"); //Páginas permitidas para Paciente
@@ -72,8 +72,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .permitAll()
                     .and()
                 .logout()
-                    .logoutUrl("/logOut")//Url para deslogearse
-                    .logoutSuccessUrl("/index") //Url de la zona pública
+                    .logoutUrl("/logout")//Url para deslogearse
+                    .logoutSuccessUrl("/logout") //Url de la zona pública
                     .and()
                 .headers().frameOptions().disable();//Para poder acceder a la consola de h2
 

@@ -1,41 +1,20 @@
 <!DOCTYPE html>
-<html lang="es">
 <script src="/assets/js/app.js"></script>
+
 {{> head}}
-
-
-<main class="page faq-page">
+<main class="page contestarPreguntas-page">
 	<section class="clean-block clean-faq dark"
 		style="background: rgb(151, 214, 181);">
 		<div class="container">
 			<div class="block-heading">
-				<h2 style="color: #000000">Preguntas Frecuentes</h2>
-			</div>
-			<div class="block-content">
-				<div class="faq-item">
-				{{#question}}
-					<h4 style="color: #94d4b4;">Pregunta:</h4>
-					<h4>{{cosa}}</h4>
-					<h5 style="color: #94d4b4;">Respuesta:</h5>
-					<h5>{{answer}}</h5>
-				{{/question}}
-				</div>
-				
+				<h2 style="color: #000000; margin-top: 50px">Contestar Pregunta</h2>
 			</div>
 
-			<div class="container">
-	
-	
-     <div class="block-heading">
-        <h2 style="color: #94d4b4;">Déjanos tu pregunta</h2>
-	
-
-	
-	<form  style="border-top-color: rgb(151, 214, 181);" >
+  <form  style="border-top-color: rgb(151, 214, 181);" >
 		<textarea name="editor" id="editor" >
-			BIENVENIDO A HELSEVITA
+			Contesta aquí a la pregunta
 		</textarea>
-		<button onclick="submitQuestion();" class="btn btn-primary btn-block"
+		<button onclick="submitAnswer();" class="btn btn-primary btn-block"
                         style="border-color: rgba(255, 255, 255, 0.4); background: rgb(255, 193, 105); color: #000000;">
                     Crear
                 </button>
@@ -61,13 +40,9 @@
     
     		</script>
 			
-		</div>
+				</div>
+				
+			</div>
 
-	</div>
-	</section>
 </main>
-
 {{> footer}}
-
-
-</html>

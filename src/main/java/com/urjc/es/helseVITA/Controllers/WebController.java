@@ -3,11 +3,13 @@ package com.urjc.es.helseVITA.Controllers;
 import com.urjc.es.helseVITA.Entities.Appointment;
 import com.urjc.es.helseVITA.Entities.HealthPersonnel;
 import com.urjc.es.helseVITA.Entities.Patient;
+import com.urjc.es.helseVITA.Entities.Question;
 import com.urjc.es.helseVITA.Enums.EnumRoles;
 import com.urjc.es.helseVITA.Exceptions.*;
 import com.urjc.es.helseVITA.Services.AppointmentService;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
+import com.urjc.es.helseVITA.Services.QuestionService;
 
 import org.apache.regexp.recompile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class WebController {
 
     @Autowired
     AppointmentService appointmentService;
+
+    @Autowired
+    QuestionService questionService;
 
     @Autowired
     EntityManager entityManager;
@@ -393,6 +398,16 @@ public class WebController {
     }
     @RequestMapping("/faq")
     public String faq(HttpServletRequest request, Model model) {
+        var lista = questionService.returnAll();
+        for (var txt : lista){
+            if (txt.getAnswer() == null){
+                txt.setAnswer("No hay respuesta aún :(");
+            }
+            if (txt.getCosa().toLowerCase().contains("script") || txt.getCosa().toLowerCase().contains("%") ){
+                txt.setCosa("A donde ibas crack");
+            }
+        }
+        model.addAttribute("question", lista);
         return "faq";
     }
 
@@ -477,5 +492,24 @@ public class WebController {
     @RequestMapping("/textoEnriquecido")
     public String textorich(){
         return "textoEnriquecido";
+    }
+
+    @RequestMapping("/logOut")
+    public String logOut(){
+        return "logout";
+    }
+
+    @RequestMapping("/preguntasSinContestar")
+    public ModelAndView preguntasSinContestar(HttpServletRequest request){
+        List<Question> questions = questionService.returnAll();
+        Set <Question> set = new HashSet<>();
+        for (var text: questions){
+            if(text.getAnswer()==null){
+                set.add(text);
+            }
+        }
+        var mv = new ModelAndView("preguntasSinContestar");
+        mv.addObject("question",set);
+        return mv;
     }
 }
