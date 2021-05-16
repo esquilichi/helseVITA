@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+{{> head}}
+
+    <div id="editor" style="margin-top 150px">
+        <p>BIENVENIDO A HELSEVITA</p>
+    </div>
+    <script>CKEDITOR.replace('editor', {
+      height: 200,
+      // By default, some basic text styles buttons are removed in the Standard preset.
+      // The code below resets the default config.removeButtons setting.
+      removeButtons: '',
+      // Custom style definition for the Bold feature.
+      coreStyles_bold: {
+        element: 'b',
+        overrides: 'strong'
+      },
+      // Custom style definition for the Italic feature.
+      coreStyles_italic: {
+        element: 'i',
+        overrides: 'em'
+      }
+    });
+    
+    </script>
+
+{{> footer}}
+
+
+</html>

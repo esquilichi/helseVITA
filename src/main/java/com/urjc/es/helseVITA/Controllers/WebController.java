@@ -8,6 +8,8 @@ import com.urjc.es.helseVITA.Exceptions.*;
 import com.urjc.es.helseVITA.Services.AppointmentService;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
+
+import org.apache.regexp.recompile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -470,5 +472,10 @@ public class WebController {
         var mv = new ModelAndView("mostrarSanitarios");
         mv.addObject("sanitarios",sanitarios);
         return mv;
+    }
+
+    @RequestMapping("/textoEnriquecido")
+    public String textorich(){
+        return "textoEnriquecido";
     }
 }

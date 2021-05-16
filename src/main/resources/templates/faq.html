@@ -32,16 +32,36 @@
 					</div>
 				</div>
 			</div>
+			<div class="container">
+    <div class="block-heading">
+        <h2 style="color: #94d4b4;">Déjanos tu pregunta</h2>
+	<div id="editor" style="margin-top 150px">
+        <p>BIENVENIDO A HELSEVITA</p>
+    </div>
+    <script>CKEDITOR.replace('editor', {
+      height: 200,
+      // By default, some basic text styles buttons are removed in the Standard preset.
+      // The code below resets the default config.removeButtons setting.
+      removeButtons: '',
+      // Custom style definition for the Bold feature.
+      coreStyles_bold: {
+        element: 'b',
+        overrides: 'strong'
+      },
+      // Custom style definition for the Italic feature.
+      coreStyles_italic: {
+        element: 'i',
+        overrides: 'em'
+      }
+    });
+    
+    		</script>
 		</div>
+	</div>
 	</section>
 </main>
 
 {{> footer}}
 
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-<script src="assets/js/smoothproducts.min.js"></script>
-<script src="assets/js/theme.js"></script>
 
 </html>
