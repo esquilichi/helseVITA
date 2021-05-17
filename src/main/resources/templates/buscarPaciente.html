@@ -3,9 +3,13 @@
 
 {{> head}}
 
+<script>$(document).ready( function () {
+    $('#miTabla').DataTable();
+} );</script>
+
 <main class="page login-page">
     <section class="clean-block clean-form dark">
-        <div class="container"></div>
+        <div style="margin-top: 100px" class="container"></div>
         <div class="block-heading">
             <h2 style="color: #94d4b4;">Buscar Paciente</h2>
             <form action="/searchPatient" class="navbar-form navbar-right" style="border-top-color: rgb(151, 214, 181)">
@@ -33,13 +37,13 @@
             <div class="block-heading">
                 <h2 style="color: #94d4b4;">Listado de Pacientes</h2>
                 <div class="table-responsive">
-                    <table class="table" style="border-top-color: rgb(151, 214, 181)">
+                    <table id="miTabla" style="border-top-color: rgb(151, 214, 181)">
                         <thead>
                         <tr>
                             <th style="color: #000000">ID</th>
                             <th style="color: #000000">Nombre</th>
-                            <th style="color: #000000">Primer 𝒶𝓅ℯ𝓁𝓁𝒾𝒹ℴ</th>
-                            <th style="color: #000000">Segundo 𝒶𝓅ℯ𝓁𝓁𝒾𝒹ℴ</th>
+                            <th style="color: #000000">Primer apellido</th>
+                            <th style="color: #000000">Segundo apellido</th>
                             <th style="color: #000000">Email</th>
                             <th style="color: #000000">Edad</th>
                             <th style="color: #000000">Nombre de usuario</th>
@@ -66,7 +70,6 @@
     </section>
 </main>
 {{> footer}}
-<script src="assets/js/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script
         src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>

@@ -92,37 +92,7 @@ public class WebController {
         return mv;
     }
 
-    @GetMapping({"/searchPatient"})
-    public String patientList(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2", required = false) String query2, HttpServletRequest request) {
-        boolean b1 = false;
-        boolean b2 = false;
-        List<Patient> result = null;
-        List<Patient> result2 = null;
-        List<Patient> mi_lista;
-        if (query != null) {
-            result = (List<Patient>) patientService.search(query);
-            b1 = true;
-        }
-        if (query2 != null) {
-            result2 = patientService.searchByAge(query2);
-            b2 = true;
-        }
-        if (b1 && b2) {
-            mi_lista = intersectionP(result, result2);
-        } else if (b1) {
-            mi_lista = result;
-        } else if (b2) {
-            mi_lista = result2;
-        } else {
-            mi_lista = (List<Patient>) patientService.returnAllPatients();
-        }
 
-        if (result2 == null) {
-            mi_lista = result;
-        }
-        model.addAttribute("object", mi_lista);
-        return "buscarPaciente";
-    }
 
     @GetMapping({"/searchHealthPersonnel"})
     public String healthPersonnelList(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2", required = false) String query2, HttpServletRequest request) {
@@ -462,37 +432,63 @@ public class WebController {
             throw new AppointmentNotFoundException();
         }
     }
-    @RequestMapping("/mostrarPacientes")
-    public ModelAndView mostrarPacientes(){
-        HealthPersonnel healthPersonnel = healthPersonnelService.returnHealthPersonnelByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        if (healthPersonnel != null){
-            List<Patient> pacientes = patientService.returnAllPatientsByHealthPersonnel(healthPersonnel);
-            Set<Patient> set = new HashSet<>(pacientes);
-            var mv = new ModelAndView("/mostrarPacientes");
-            mv.addObject("pacientes",set);
-            return mv;
+
+    @GetMapping({"/searchPatient"})
+    public String patientList(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2", required = false) String query2, HttpServletRequest request) {
+        boolean b1 = false;
+        boolean b2 = false;
+        List<Patient> result = null;
+        List<Patient> result2 = null;
+        List<Patient> mi_lista;
+        if (query != null) {
+            result = (List<Patient>) patientService.search(query);
+            b1 = true;
         }
-        return new ModelAndView("/error");
-    }
-    @RequestMapping("/admin/mostrarPacientes")
-    public ModelAndView mostrarPacientesAdmin(){
-        var pacientes = patientService.returnAllPatients();
-        var mv = new ModelAndView("mostrarPacientes");
-        mv.addObject("pacientes",pacientes);
-        return mv;
-    }
-    @RequestMapping("/admin/mostrarSanitarios")
-    public ModelAndView mostrarSanitariosAdmin(){
-        var sanitarios = healthPersonnelService.returnAllHealthPersonnels();
-        var mv = new ModelAndView("mostrarSanitarios");
-        mv.addObject("sanitarios",sanitarios);
-        return mv;
+        if (query2 != null) {
+            result2 = patientService.searchByAge(query2);
+            b2 = true;
+        }
+        if (b1 && b2) {
+            mi_lista = intersectionP(result, result2);
+        } else if (b1) {
+            mi_lista = result;
+        } else if (b2) {
+            mi_lista = result2;
+        } else {
+            mi_lista = (List<Patient>) patientService.returnAllPatients();
+        }
+
+        if (result2 == null) {
+            mi_lista = result;
+        }
+        model.addAttribute("object", mi_lista);
+        return "buscarPaciente";
     }
 
-    @RequestMapping("/textoEnriquecido")
-    public String textorich(){
-        return "textoEnriquecido";
+    @RequestMapping("/mostrarPacientes")
+    public String mostrarPacientes(Model model, HttpServletRequest request){
+        HealthPersonnel healthPersonnel = healthPersonnelService.returnHealthPersonnelByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        if (healthPersonnel != null){
+            var lista = patientService.returnAllPatientsByHealthPersonnel(healthPersonnel);
+            Set<Patient> set = new HashSet<>(lista);
+            model.addAttribute("pacientes",set);
+            return "mostrarPacientes";
+        }
+        return "error";
     }
+    @RequestMapping("/admin/mostrarPacientes")
+    public String mostrarPacientesAdmin(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2", required = false) String query2,HttpServletRequest request){
+        var pacientes = patientService.returnAllPatients();
+        model.addAttribute("pacientes",pacientes);
+        return this.patientList(model,query,query2,request);
+    }
+    @RequestMapping("/admin/mostrarSanitarios")
+    public String mostrarSanitariosAdmin(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2", required = false) String query2,HttpServletRequest request){
+        var sanitarios = healthPersonnelService.returnAllHealthPersonnels();
+        model.addAttribute("sanitarios",sanitarios);
+        return this.healthPersonnelList(model,query,query2,request);
+    }
+
 
     @RequestMapping("/performLogout")
     public String logOut(){
