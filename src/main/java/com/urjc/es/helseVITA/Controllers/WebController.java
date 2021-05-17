@@ -478,15 +478,65 @@ public class WebController {
     }
     @RequestMapping("/admin/mostrarPacientes")
     public String mostrarPacientesAdmin(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2", required = false) String query2,HttpServletRequest request){
-        var pacientes = patientService.returnAllPatients();
-        model.addAttribute("pacientes",pacientes);
-        return this.patientList(model,query,query2,request);
+        boolean b1 = false;
+        boolean b2 = false;
+        List<Patient> result = null;
+        List<Patient> result2 = null;
+        List<Patient> mi_lista;
+        if (query != null) {
+            result = (List<Patient>) patientService.search(query);
+            b1 = true;
+        }
+        if (query2 != null) {
+            result2 = patientService.searchByAge(query2);
+            b2 = true;
+        }
+        if (b1 && b2) {
+            mi_lista = intersectionP(result, result2);
+        } else if (b1) {
+            mi_lista = result;
+        } else if (b2) {
+            mi_lista = result2;
+        } else {
+            mi_lista = (List<Patient>) patientService.returnAllPatients();
+        }
+
+        if (result2 == null) {
+            mi_lista = result;
+        }
+        model.addAttribute("object", mi_lista);
+        return "buscarPaciente";
     }
     @RequestMapping("/admin/mostrarSanitarios")
     public String mostrarSanitariosAdmin(Model model, @RequestParam(name = "q1", required = false) String query, @RequestParam(name = "q2", required = false) String query2,HttpServletRequest request){
-        var sanitarios = healthPersonnelService.returnAllHealthPersonnels();
-        model.addAttribute("sanitarios",sanitarios);
-        return this.healthPersonnelList(model,query,query2,request);
+        boolean b1 = false;
+        boolean b2 = false;
+        List<HealthPersonnel> result = null;
+        List<HealthPersonnel> result2 = null;
+        List<HealthPersonnel> mi_lista;
+        if (query != null) {
+            result = (List<HealthPersonnel>) healthPersonnelService.search(query);
+            b1 = true;
+        }
+        if (query2 != null) {
+            result2 = healthPersonnelService.searchByAge(query2);
+            b2 = true;
+        }
+        if (b1 && b2) {
+            mi_lista = intersectionH(result, result2);
+        } else if (b1) {
+            mi_lista = result;
+        } else if (b2) {
+            mi_lista = result2;
+        } else {
+            mi_lista = (List<HealthPersonnel>) healthPersonnelService.returnAllHealthPersonnels();
+        }
+
+        if (result2 == null) {
+            mi_lista = result;
+        }
+        model.addAttribute("object", mi_lista);
+        return "buscarSanitario";
     }
 
 
