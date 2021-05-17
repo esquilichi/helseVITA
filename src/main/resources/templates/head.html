@@ -35,6 +35,7 @@
         }
 
         #myTable th, #myTable td {
+            border-collapse: collapse;
             width: 100px;
             text-align: left;
             padding: 12px;
@@ -55,7 +56,7 @@
         }
 
         a:visited {
-            color: rgb(255, 160, 0);
+            color: rgb(149, 213, 180);
             background-color: transparent;
             text-decoration: none;
         }
@@ -67,8 +68,7 @@
     </style>
 </head>
 <body>
-<nav
-        class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar justify-content-between">
+<nav class="navbar navbar-light navbar-expand-sm fixed-top bg-white clean-navbar justify-content-between">
     <div class="container-fluid">
         <button data-toggle="collapse" class="navbar-toggler"
                 data-target="#navcol-1">
@@ -82,12 +82,12 @@
                 <li class="nav-item"><a class="nav-link active" href="/"
                                         style="width: 100px; font-size: 20px; color: rgba(0, 0, 0, 0.5);">Inicio</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#seguros"
+                <li class="nav-item"><a class="nav-link" href="/#seguros"
                                         style="width: 100px; font-size: 20px;">Seguros</a></li>
-                <li class="nav-item"><a class="nav-link" href="#somos"
+                <li class="nav-item"><a class="nav-link" href="/#somos"
                                         style="font-size: 20px; width: 100px;">Somos</a></li>
                 <li class="nav-item" style="width: 100px;"><a class="nav-link"
-                                                              href="contact-us.html"
+                                                              href="/contact-us"
                                                               style="font-size: 20px;">Contacto</a></li>
             </ul>
             <ul class="navbar-nav">
@@ -128,7 +128,6 @@
                 helseVITA
             </button>
         </div>
-    </div>
     </div>
 </nav>
 </body>

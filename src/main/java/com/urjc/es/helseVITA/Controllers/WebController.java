@@ -530,4 +530,9 @@ public class WebController {
         questionService.addQuestion(question);
         return new ModelAndView("exito");
     }
+    
+    @RequestMapping("/politica")
+    public String politica(){
+        return "politica";
+    }
 }
