@@ -623,7 +623,7 @@ public class WebController {
     }
 
 
-
+/* 
     @RequestMapping("/asignarNuevoPaciente/{id}")
     public ModelAndView asignarNuevoPaciente(@PathVariable Integer id){
         var h = healthPersonnelService.returnHealthPersonnel(id);
@@ -643,5 +643,5 @@ public class WebController {
         mv.addObject("pacientes",listaFinal);
         mv.addObject("id_doctor", id);
         return mv;
-    }
+    } */
 }
