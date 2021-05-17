@@ -22,8 +22,9 @@
             </form>
             <form action="/logout" method="post"
                   style="border-top-color: rgb(151, 214, 181);">
+                <input type="hidden" name="_csrf" value="{{token}}">
                 <button onclick="location.href='/'"
-                        class="btn btn-primary" type="button"
+                        class="btn btn-primary" type="submit"
                         style="width: 205px; background: rgb(151, 214, 181); font-size: 20px; border-color: rgba(255, 255, 255, 0.4); color: #000000;">
                     Logout
                 </button>

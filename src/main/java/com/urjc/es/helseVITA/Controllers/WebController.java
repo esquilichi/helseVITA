@@ -512,4 +512,9 @@ public class WebController {
         mv.addObject("question",set);
         return mv;
     }
+
+    @RequestMapping("/politica")
+    public String politica(){
+        return "politica";
+    }
 }
