@@ -69,7 +69,7 @@ public class WebController {
         var username = a.getName();
         CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
         model.addAttribute("token", token.getToken());
-        if (!username.equals("anonymousUser")) {
+        if (username.equals("anonymousUser")) {
             return new ModelAndView("index");
         } else {
             var mv = new ModelAndView("indexAuth");
