@@ -99,6 +99,11 @@ public class Patient implements UserDetails{
     }
 
     @Override
+    public String toString(){
+        return this.name + " " + this.surname1;
+    }
+
+    @Override
     public boolean equals(Object patient){
         if (patient == this)
             return true;

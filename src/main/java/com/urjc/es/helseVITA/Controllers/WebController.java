@@ -537,4 +537,31 @@ public class WebController {
     public String profile() {
         return "my-profile";
     }
+
+    @PostMapping("/setNewPatient")
+    public String setNewPatient(@RequestBody Integer idHealthPersonnel, @RequestBody Integer idPatient){
+        healthPersonnelService.addPatientToHealthPersonnel(idHealthPersonnel, patientService.returnPatient(idPatient));
+        return "exito";
+    }
+
+    @RequestMapping("/asignarNuevoPaciente/{id}")
+    public ModelAndView asignarNuevoPaciente(@PathVariable Integer id){
+        var h = healthPersonnelService.returnHealthPersonnel(id);
+        var listaCompleta = patientService.returnAllPatients();
+        Set <Patient> listaFinal = new HashSet<Patient>();
+        Set<Patient> set = new HashSet<>();
+        List <Patient> list = patientService.returnAllPatientsByHealthPersonnel(h);
+        for (var s : list){
+            set.add(s);
+        }
+        for(var temp :listaCompleta){
+            if(!set.contains(temp)){
+                listaFinal.add(temp);
+            }
+        }
+        var mv = new ModelAndView("/asignarNuevoPaciente");
+        mv.addObject("pacientes",listaFinal);
+        mv.addObject("id_doctor", id);
+        return mv;
+    }
 }

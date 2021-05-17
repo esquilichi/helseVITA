@@ -124,4 +124,12 @@ public class HealthPersonnelService {
         }
         return null;
     }
+
+    public List <Patient> addPatientToHealthPersonnel(Integer id, Patient patient){
+        var temp = healthPersonnelRepository.findById(id).orElse(null);
+        List <Patient> list = temp.getPatients();
+        list.add(patient);
+        healthPersonnelRepository.save(temp);
+        return list;
+    }
 }

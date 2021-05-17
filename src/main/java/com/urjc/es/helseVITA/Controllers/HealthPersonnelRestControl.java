@@ -82,4 +82,10 @@ public class HealthPersonnelRestControl {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @PostMapping("/api/setNewPatient")
+    public String setNewPatient(@RequestBody Integer idHealthPersonnel, @RequestBody Integer idPatient){
+        healthPersonnelService.addPatientToHealthPersonnel(idHealthPersonnel, patientService.returnPatient(idPatient));
+        return "exito";
+    }
 }

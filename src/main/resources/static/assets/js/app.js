@@ -169,3 +169,31 @@ function getJSessionId(){
 function addItemsToPage(response) {
 	console.log("Ha funcionado");
 }
+
+function newPatient() {
+    var selectedValue = document.getElementById("list").value;
+	var idHealthPersonnel =document.getElementsByName("id_HealthPersonnel").value;
+	var csrf_token  = document.getElementById('_csrf').content;
+	var csrf_header = document.getElementById('_csrf_header').content;
+	var item ={
+		"id1":selectedValue,
+		"id2":idHealthPersonnel
+	};
+
+
+    var client = new XMLHttpRequest();
+	client.responseType = "json";
+	client.addEventListener("load", function () {
+		console.log(this.response);
+		console.log(client.status);
+
+		loadItems();
+	});
+
+	client.open("POST", "/api/setNewPatient");
+	client.setRequestHeader(csrf_header,csrf_token);
+	client.setRequestHeader("Content-type", "application/json");
+	var body = JSON.stringify(item);
+	client.send(body);
+
+}
