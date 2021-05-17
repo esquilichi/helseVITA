@@ -66,14 +66,14 @@ public class WebController {
     @RequestMapping("/")
     ModelAndView index(HttpServletRequest request, Model model) {
         var a = SecurityContextHolder.getContext().getAuthentication();
-        var authorities = a.getName();
+        var username = a.getName();
         CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
         model.addAttribute("token", token.getToken());
-        if (authorities == null) {
+        if (!username.equals("anonymousUser")) {
             return new ModelAndView("index");
         } else {
             var mv = new ModelAndView("indexAuth");
-            mv.addObject("user", authorities.toString());
+            mv.addObject("user", username.toString());
             return mv;
         }
 
@@ -494,7 +494,7 @@ public class WebController {
         return "textoEnriquecido";
     }
 
-    @RequestMapping("/logOut")
+    @RequestMapping("/performLogout")
     public String logOut(){
         return "logout";
     }

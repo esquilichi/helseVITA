@@ -54,10 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/appointmentAlreadyExist/**","/appointment", "/appointmentNotFound", "/asignarNuevoPaciente", "/asignarNuevoSanitario", 
                     "/buscarPaciente", "/buscarSanitario", "/citaAgregada", "/cualDoctor", "/areaAdmin", "/areaPaciente", "/areaSanitario", 
                     "/crearPaciente", "/crearSanitario", "/indexAuth", "/loginExito", "/mostrarCitas", "/nuevaCita", "/user-not-found",
-                    "/mostrarPacientes", "/mostrarSanitario", "/userAlreadyExists", "/admin/**" , "/mostrar/**", "/preguntasSinContestar/**").hasAnyRole("ADMIN") //Páginas permitidas para Admin
+                    "/mostrarPacientes", "/mostrarSanitario", "/userAlreadyExists", "/admin/**" , "/mostrar/**").hasAnyRole("ADMIN") //Páginas permitidas para Admin
 
-                .antMatchers( "/areaSanitario", "/indexAuth", "/loginExito", "/mostrarPacientes", "/preguntasSinContestar/**").hasAnyRole("HEALTHPERSONNEL") //Páginas permitidas para Sanitario
-
+                .antMatchers( "/areaSanitario", "/indexAuth", "/loginExito", "/mostrarPacientes").hasAnyRole("HEALTHPERSONNEL") //Páginas permitidas para Sanitario
+                .antMatchers("/preguntasSinContestar","/preguntasSinContestar/**").hasAnyRole("ADMIN","HEALTHPERSONNEL")
                 .antMatchers("/appointmentAlreadyExist/**","/appointment", "/appointmentNotFound", "/citaAgregada", "/cualDoctor",  "/areaPaciente", 
                     "/indexAuth", "/loginExito", "/mostrarCitas", "/nuevaCita").hasAnyRole("PATIENT"); //Páginas permitidas para Paciente
 
@@ -73,7 +73,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .and()
                 .logout()
                     .logoutUrl("/logout")//Url para deslogearse
-                    .logoutSuccessUrl("/logout") //Url de la zona pública
+                    .logoutSuccessUrl("/performLogout") //Url de la zona pública
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
                     .and()
                 .headers().frameOptions().disable();//Para poder acceder a la consola de h2
 
