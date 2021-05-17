@@ -1,71 +1,34 @@
-<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="es">
+<script src="/assets/js/app.js"></script>
+{{> head}}
 
-<html lang="es">
-
-<script src="/assets/js/app.js"></script>
-
-{{> head}}
-
-
-
-
-<main class="page faq-page">
-
-    <section class="clean-block clean-faq dark"
-
-        style="background: rgb(151, 214, 181);">
-
-        <div class="container">
-
-            <div class="block-heading">
-
-                <h2 style="color: #000000">Preguntas Frecuentes</h2>
-
-            </div>
-
-            <div class="block-content">
-
-                <div class="faq-item">
-
-                {{#question}}
-
-                    <i><h6 style ="color:#00000">{{{personName}}} pregunta:</h6><i>
-
-                    <h4>
-
-                    {{{cosa}}}
-
-                    </h4>
-
-                    <h5 style="color: #94d4b4;">Respuesta:</h5>
-
-                    {{{answer}}}
-
-                    <br>
-
-                    <br>
-
-                    <br>
-
-                {{/question}}
-
-                </div>
-
-                
-
-            </div>
-
-
-
-    </section>
-
+<main class="page faq-page">
+    <section class="clean-block clean-faq dark"
+             style="background: rgb(151, 214, 181);">
+        <div class="container">
+            <div class="block-heading">
+                <h2 style="color: #000000">Preguntas Frecuentes</h2>
+            </div>
+            <div class="block-content">
+                <div class="faq-item">
+                    {{#question}}
+                    <i><h6 style="color:#00000">{{{personName}}} pregunta:</h6></i>
+                        <h4>
+                            {{{cosa}}}
+                        </h4>
+                        <h5 style="color: #94d4b4;">Respuesta:</h5>
+                        {{{answer}}}
+                        <br>
+                        <br>
+                        <br>
+                        {{/question}}
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
-
-
-{{> footer}}
-
-
-
+{{> footer}}
 
 </html>
