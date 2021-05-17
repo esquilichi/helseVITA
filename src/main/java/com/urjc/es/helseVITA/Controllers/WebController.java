@@ -6,6 +6,7 @@ import com.urjc.es.helseVITA.Entities.Patient;
 import com.urjc.es.helseVITA.Entities.Question;
 import com.urjc.es.helseVITA.Enums.EnumRoles;
 import com.urjc.es.helseVITA.Exceptions.*;
+import com.urjc.es.helseVITA.Repositories.AdminRepository;
 import com.urjc.es.helseVITA.Services.AppointmentService;
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
 import com.urjc.es.helseVITA.Services.PatientService;
@@ -43,6 +44,9 @@ public class WebController {
 
     @Autowired
     EntityManager entityManager;
+
+    @Autowired
+    AdminRepository adminRepository;
 
     Appointment appointmentToEngage;
 
@@ -584,8 +588,38 @@ public class WebController {
     }
 
     @RequestMapping("/myProfile")
-    public String profile() {
-        return "my-profile";
+    public String profile(Model model) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (!username.equals("anonymousUser")){
+            if (patientService.returnPatientByUsername(username) != null){
+                var paciente = patientService.returnPatientByUsername(username);
+                model.addAttribute("username",paciente.getUsername());
+                model.addAttribute("name",paciente.getName());
+                model.addAttribute("surname1",paciente.getSurname1());
+                model.addAttribute("surname2",paciente.getSurname2());
+                model.addAttribute("dni",paciente.getDni());
+                model.addAttribute("age",paciente.getAge());
+                return "my-profile";
+            }
+            if (healthPersonnelService.returnHealthPersonnelByUsername(username) != null){
+                var sanitario = healthPersonnelService.returnHealthPersonnelByUsername(username);
+                model.addAttribute("username",sanitario.getUsername());
+                model.addAttribute("name",sanitario.getName());
+                model.addAttribute("surname1",sanitario.getSurname1());
+                model.addAttribute("surname2",sanitario.getSurname2());
+                model.addAttribute("dni",sanitario.getDni());
+                model.addAttribute("age",sanitario.getAge());
+                model.addAttribute("speciality",sanitario.getSpeciality());
+
+                return "my-profile-sanitario";
+            }
+            if (adminRepository.findByUsername(username) != null){
+                var admin = adminRepository.findByUsername(username);
+                model.addAttribute("username",admin.getUsername());
+                return "my-profile-admin";
+            }
+        }
+        return "error";
     }
 
 

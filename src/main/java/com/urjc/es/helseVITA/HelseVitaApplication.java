@@ -41,7 +41,7 @@ public class HelseVitaApplication {
         return (args) -> {
 
             //questionRepository.saveAndFlush(new Question("¿Vamos a sacar un 10?", "Por supuesto que sí"));
-            //adminRepository.saveAndFlush(new Admin ("Nico", new BCryptPasswordEncoder().encode("ponnosun10")));
+            adminRepository.saveAndFlush(new Admin ("Nico", new BCryptPasswordEncoder().encode("ponnosun10")));
 
             if (patientRepository.findAll().size() < 2) {
                 patientRepository.saveAndFlush(new Patient("IsmaelEsquilichi", new BCryptPasswordEncoder().encode("root"), "ismael.esquilichi@helsevita.com", "4820096E", "Ismael", "Gómez", "Esquilichi", 20));
