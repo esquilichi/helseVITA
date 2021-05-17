@@ -2,7 +2,7 @@
 <script src="/assets/js/app.js"></script>
 
 {{> head}}
-<main class="page faq-page">
+<main class="page preguntasSinContestar-page">
 	<section class="clean-block clean-faq dark"
 		style="background: rgb(151, 214, 181);">
 		<div class="container">
@@ -10,14 +10,14 @@
 				<h2 style="color: #000000; margin-top: 50px">Preguntas sin contestar</h2>
 			</div>
 			<div class="block-content">
-				<div class="faq-item">
+			<div class="faq-item">
 				{{#question}}
 					<h4 style="color: #94d4b4;">Pregunta:</h4>
 					{{{cosa}}}
-				{{/question}}
-                <button onclick="location.href='/contestarPregunta'" class="btn btn-primary "
-					type="button"
+				
+                <button onclick="location.href='/contestarPregunta/{{id}}'" class="btn btn-primary "
+					type="submit"
 					style="background: rgb(255, 193, 105); color: #000000; border-color: rgb(255, 193, 105);">Contestar</button>
-              
+              {{/question}}
 </main>
 {{> footer}}

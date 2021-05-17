@@ -512,4 +512,22 @@ public class WebController {
         mv.addObject("question",set);
         return mv;
     }
+
+    @RequestMapping("/contestarPregunta/{id}")
+    public ModelAndView contestarPregunta(HttpServletRequest request, @PathVariable Integer id){
+        Question q = questionService.returnQuestion(id);
+        var mv = new ModelAndView("contestarPregunta");
+        mv.addObject("question",q);
+        return mv;
+    }
+
+    @RequestMapping("/postAnswer")
+    public ModelAndView postAnswer(@RequestParam Map<String, String> requestParams, HttpServletRequest request){
+        var idQuestion = Integer.parseInt(requestParams.get("id_question"));
+        var text = requestParams.get("editor");
+
+        Question question =  new Question(questionService.returnQuestion(idQuestion).getCosa(), text, (Integer)idQuestion);
+        questionService.addQuestion(question);
+        return new ModelAndView("exito");
+    }
 }
