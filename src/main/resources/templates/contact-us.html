@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
-
+<script src="/assets/js/app.js"></script>
 {{> head}}
 <main class="page contact-us-page">
     <section class="clean-block clean-form dark"
              style="border-color: #000000;">
         <div class="container">
             <div class="block-heading">
+                <head>
                 <h2 style="color: #94d4b4">Contacto</h2>
                 <p>Contacta con nosotros para resolver tus dudas. Puedes
                     hacerlos por teléfono o dejando tus datos en el siguiente
                     formulario.</p>
+                </head>
             </div>
             <form style="border-top-color: #97d7b5;">
                 <div class="form-group">
@@ -27,16 +29,37 @@
                 </div>
                 <div class="form-group">
                     <label for="message">Mensaje</label>
-                    <textarea class="form-control" id="message" name="message"></textarea>
+                    <textarea name="editor" id="editor" >
+                            Introduce tu mensaje
+                        </textarea>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-primary btn-block" onclick="location.href='/exito-contacto'"
-                            type="button"
-                            style="background: rgb(255, 193, 105); color: #000000; border-color: rgb(255, 193, 105);">
-                        Enviar
-                    </button>
-                </div>
-            </form>
+                <div class="container">
+                        
+                        <button onclick="submitQuestion();" class="btn btn-primary btn-block"
+                                        style="border-color: rgba(255, 255, 255, 0.4); background: rgb(255, 193, 105); color: #000000;">
+                                    Crear
+                                </button>        
+                </div>      
+                </form>
+
+                 <script>CKEDITOR.replace('editor', {
+                    height: 200,
+                    // By default, some basic text styles buttons are removed in the Standard preset.
+                    // The code below resets the default config.removeButtons setting.
+                    removeButtons: '',
+                    // Custom style definition for the Bold feature.
+                    coreStyles_bold: {
+                        element: 'b',
+                        overrides: 'strong'
+                    },
+                    // Custom style definition for the Italic feature.
+                    coreStyles_italic: {
+                        element: 'i',
+                        overrides: 'em'
+                    }
+                    });
+                    
+                            </script>
         </div>
     </section>
 </main>

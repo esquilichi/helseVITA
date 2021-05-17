@@ -100,14 +100,18 @@ function createSanitario() {
 
 	function submitQuestion(){
 		var texto = CKEDITOR.instances.editor.getData();
+		var nombre = document.getElementById('name').value;
+		var asunto = document.getElementById('subject').value;
+		var email = document.getElementById('email').value;
 		var csrf_token  = document.getElementById('_csrf').content;
 		var csrf_header = document.getElementById('_csrf_header').content;
-
 		
 		var item ={
-
 			"cosa": texto,
-			"answer": null
+			"answer": null,
+			"personName":nombre,
+			"email":email,
+			"subject":asunto
 		};
 		
 		var client = new XMLHttpRequest();
@@ -121,7 +125,6 @@ function createSanitario() {
 		client.setRequestHeader(csrf_header,csrf_token);
 		client.setRequestHeader("Content-type", "application/json");
 		var body = JSON.stringify(item);
-		alert(body);
 		client.send(body);
 	}
 

@@ -275,8 +275,7 @@ public class WebController {
         int hour = Integer.parseInt((String) text.subSequence(11, 13));
         int minute = Integer.parseInt((String) text.subSequence(14, 16));
         var doctor = healthPersonnelService.returnHealthPersonnel(id_doctor);
-        Appointment temp = new Appointment(hour, minute, day, month, year, doctor, paciente);
-        ;
+        Appointment temp = new Appointment(hour, minute, day, month, year, doctor, paciente);;
         for (Appointment temp2 : appointmentList) {
             if ((temp2.getYear().equals(temp.getYear())) && (temp2.getMonth().equals(temp.getMonth())) && (temp2.getDay().equals(temp.getDay()))
                     && (temp2.getHour().equals(temp.getHour())) && (temp2.getMinute().equals(temp.getMinute()))) {
@@ -393,20 +392,18 @@ public class WebController {
     public String crearPaciente(HttpServletRequest request, Model model) {
         return "crearPaciente";
     }
-
     @RequestMapping("/areaAdmin")
-    public String areaAdmin() {
+    public String areaAdmin(){
         return "areaAdmin";
     }
-
     @RequestMapping("/faq")
     public String faq(HttpServletRequest request, Model model) {
         var lista = questionService.returnAll();
-        for (var txt : lista) {
-            if (txt.getAnswer() == null) {
+        for (var txt : lista){
+            if (txt.getAnswer() == null){
                 txt.setAnswer("No hay respuesta aún :(");
             }
-            if (txt.getCosa().toLowerCase().contains("script") || txt.getCosa().toLowerCase().contains("%")) {
+            if (txt.getCosa().toLowerCase().contains("script") || txt.getCosa().toLowerCase().contains("%") ){
                 txt.setCosa("A donde ibas crack");
             }
         }
@@ -445,78 +442,74 @@ public class WebController {
     public String nuevaCita(HttpServletRequest request, Model model) {
         Patient patient = patientService.returnPatientByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         var id = patient.getId();
-        model.addAttribute("id_paciente", id);
-        List<Patient> lista = new ArrayList<>();
-        lista.add(patient);
+        model.addAttribute("id_paciente",id);
+        List<Patient> lista = new ArrayList<>(); lista.add(patient);
         List<HealthPersonnel> docs = healthPersonnelService.returnHealthPersonnelsByPatient(lista);
-        model.addAttribute("docs", docs);
+        model.addAttribute("docs",docs);
         return "nuevaCita";
     }
 
     @RequestMapping("/mostrarCitas")
-    public ModelAndView mostrarCitas() {
+    public ModelAndView mostrarCitas(){
         Patient patient = patientService.returnPatientByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        if (patient != null) {
+        if (patient != null){
             List<Appointment> citas = patient.getAppointments();
             appointmentService.returnAllAppointmentsOfPatient(patient);
             var mv = new ModelAndView("/mostrarCitas");
-            mv.addObject("citas", citas);
+            mv.addObject("citas",citas);
             return mv;
-        } else {
+        } else{
             throw new AppointmentNotFoundException();
         }
     }
-
     @RequestMapping("/mostrarPacientes")
-    public ModelAndView mostrarPacientes() {
+    public ModelAndView mostrarPacientes(){
         HealthPersonnel healthPersonnel = healthPersonnelService.returnHealthPersonnelByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        if (healthPersonnel != null) {
+        if (healthPersonnel != null){
             List<Patient> pacientes = patientService.returnAllPatientsByHealthPersonnel(healthPersonnel);
             Set<Patient> set = new HashSet<>(pacientes);
             var mv = new ModelAndView("/mostrarPacientes");
-            mv.addObject("pacientes", set);
+            mv.addObject("pacientes",set);
             return mv;
         }
         return new ModelAndView("/error");
     }
-
     @RequestMapping("/admin/mostrarPacientes")
-    public ModelAndView mostrarPacientesAdmin() {
+    public ModelAndView mostrarPacientesAdmin(){
         var pacientes = patientService.returnAllPatients();
         var mv = new ModelAndView("mostrarPacientes");
-        mv.addObject("pacientes", pacientes);
+        mv.addObject("pacientes",pacientes);
         return mv;
     }
-
     @RequestMapping("/admin/mostrarSanitarios")
-    public ModelAndView mostrarSanitariosAdmin() {
+    public ModelAndView mostrarSanitariosAdmin(){
         var sanitarios = healthPersonnelService.returnAllHealthPersonnels();
         var mv = new ModelAndView("mostrarSanitarios");
-        mv.addObject("sanitarios", sanitarios);
+        mv.addObject("sanitarios",sanitarios);
         return mv;
     }
 
     @RequestMapping("/textoEnriquecido")
-    public String textorich() {
+    public String textorich(){
         return "textoEnriquecido";
     }
 
     @RequestMapping("/performLogout")
-    public String logOut() {
+    public String logOut(){
         return "logout";
     }
 
     @RequestMapping("/preguntasSinContestar")
-    public ModelAndView preguntasSinContestar(HttpServletRequest request) {
+    public ModelAndView preguntasSinContestar(HttpServletRequest request){
         List<Question> questions = questionService.returnAll();
-        Set<Question> set = new HashSet<>();
-        for (var text : questions) {
-            if (text.getAnswer() == null) {
+        Set <Question> set = new HashSet<>();
+        for (var text: questions){
+            if(text.getAnswer()==null){
                 set.add(text);
             }
         }
         var mv = new ModelAndView("preguntasSinContestar");
-        mv.addObject("question", set);
+        mv.addObject("question",set);
         return mv;
     }
 
@@ -528,18 +521,19 @@ public class WebController {
         return mv;
     }
 
-    @RequestMapping("/postAnswer")
+    /* @RequestMapping("/postAnswer")
     public ModelAndView postAnswer(@RequestParam Map<String, String> requestParams, HttpServletRequest request){
         var idQuestion = Integer.parseInt(requestParams.get("id_question"));
         var text = requestParams.get("editor");
+        var temp = questionService.returnQuestion(idQuestion);
 
-        Question question =  new Question(questionService.returnQuestion(idQuestion).getCosa(), text, (Integer)idQuestion);
+        Question question =  new Question(temp.getAnswer(), text, temp.getPersonName(), temp.getEmail(), temp.getSubjet(), idQuestion);
         questionService.addQuestion(question);
         return new ModelAndView("exito");
-    }
-    
+    } */
+
     @RequestMapping("/politica")
-    public String politica() {
+    public String politica(){
         return "politica";
     }
 

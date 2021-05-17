@@ -36,12 +36,12 @@ public class HelseVitaApplication {
 
     }
 
-   /* @Bean
+    @Bean
     CommandLineRunner initData(PatientRepository patientRepository, HealthPersonnelRepository healthPersonnelRepository, AdminRepository adminRepository, QuestionRepository questionRepository) {
         return (args) -> {
 
-            questionRepository.saveAndFlush(new Question("¿Vamos a sacar un 10?", "Por supuesto que sí"));
-            adminRepository.saveAndFlush(new Admin ("Nico", new BCryptPasswordEncoder().encode("ponnosun10")));
+            //questionRepository.saveAndFlush(new Question("¿Vamos a sacar un 10?", "Por supuesto que sí"));
+            //adminRepository.saveAndFlush(new Admin ("Nico", new BCryptPasswordEncoder().encode("ponnosun10")));
 
             if (patientRepository.findAll().size() < 2) {
                 patientRepository.saveAndFlush(new Patient("IsmaelEsquilichi", new BCryptPasswordEncoder().encode("root"), "ismael.esquilichi@helsevita.com", "4820096E", "Ismael", "Gómez", "Esquilichi", 20));
@@ -135,5 +135,4 @@ public class HelseVitaApplication {
         dniFinal = (dniFinal + LetraDni.fromId(total));
         return dniFinal;
     } 
- */
 }

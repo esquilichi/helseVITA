@@ -15,19 +15,37 @@ public class Question {
     @Column
     private String answer;
 
+    @Column
+    private String personName;
+
+    @Column
+    private String email;
+
+    @Column
+    private String subject;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    public Question(String cosa, String answer){
+    
+    public Question(String cosa, String answer, String personName, String email, String subjet) {
         this.cosa = cosa;
-        this.answer=answer;
+        this.answer = answer;
+        this.personName = personName;
+        this.email = email;
+        this.subject = subjet;
     }
-    public Question(String cosa, String answer, Integer id){
+    
+    public Question(String cosa, String answer, String personName, String email, String subject, Integer id) {
         this.cosa = cosa;
-        this.answer=answer;
+        this.answer = answer;
+        this.personName = personName;
+        this.email = email;
+        this.subject = subject;
         this.id = id;
     }
+
     public Question(){
         
     }
@@ -51,6 +69,30 @@ public class Question {
     }
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
     
     

@@ -76,6 +76,12 @@ public class QuestionsController {
                 temp.setCosa(question.getCosa());
             if(question.getAnswer() != null)
                 temp.setAnswer(question.getAnswer());
+            if(question.getEmail() != null)
+                temp.setEmail(question.getEmail());
+            if(question.getPersonName() != null)
+                temp.setPersonName(question.getPersonName());
+            if(question.getSubject() != null)
+                temp.setSubject(question.getSubject());
            
 
             return new ResponseEntity<>(questionService.addQuestion(temp),HttpStatus.OK);
