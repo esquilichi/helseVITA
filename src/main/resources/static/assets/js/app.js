@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function createPaciente() {
 
+	getJSessionId();
+
 	var username = document.getElementById('username').value;
 	var password = document.getElementById('password').value;
 	var email = document.getElementById('email').value;
@@ -50,6 +52,8 @@ function loadItems() {
 }
 
 function createSanitario() {
+
+	getJSessionId();
 
 	var username = document.getElementById('username').value;
 	var password = document.getElementById('password').value;
@@ -121,44 +125,44 @@ function createSanitario() {
 		client.send(body);
 	}
 
+	function submitAnswer(){
+		var texto = CKEDITOR.instances.editor.getData();
+		var id = document.getElementById('id_question').value;
+		var csrf_token  = document.getElementById('_csrf').content;
+		var csrf_header = document.getElementById('_csrf_header').content;
 
+		
+		var item ={
+			"answer": texto
+		};
+		
+		var client = new XMLHttpRequest();
+		client.responseType = "json";
+		client.addEventListener("load", function(){
+			console.log(this.response);
+			console.log(client.status);
+		});
 
-
-function addItemsToPage(response) {
-	console.log("Ha funcionado");
-	/*var itemsElem = document.getElementById('items');
-
-    itemsElem.innerHTML = '';
-
-    for(var item of response){
-        var username = item.username;
-        var li = document.createElement('li');
-        itemsElem.appendChild(li);
-
-        var text = document.createTextNode(username);
-        li.appendChild(text);
-    }	*/
-}
-
-/* 
-function search(){
-	alert("hola");
-	var checkbox1=document.getElementById("Username");
-	var checkbox2=document.getElementById("Email");
-	var checkbox3=document.getElementById("Dni");
-	alert("1");
-	if (checkbox1.checked){
-		window.location.href("/searchUsername");
-		client.open("GET", "/searchUsername?input=0&username=" + text);
-	}
-	else if (checkbox2.checked){
-		window.location.href("/searchEmail");
-		client.open("GET", "/searchEmail?input=1&email=" + text);
-	}
-	else if (checkbox3.checked){
-		window.location.href("/searchDni");
-		client.open("GET", "/searchDni?input=2&dni=" + text);
+		client.open("PATCH", "/api/preguntas/" + id);
+		client.setRequestHeader(csrf_header,csrf_token);
+		client.setRequestHeader("Content-type", "application/json");
+		var body = JSON.stringify(item);
+		alert(body);
+		client.send(body);
 	}
 	
 
-  }*/
+function getJSessionId(){
+	var jsId = document.cookie.match(/JSESSIONID=[^;]+/);
+    if(jsId != null) {
+        if (jsId instanceof Array)
+            jsId = jsId[0].substring(11);
+        else
+            jsId = jsId.substring(11);
+    }
+    return jsId;
+}
+
+function addItemsToPage(response) {
+	console.log("Ha funcionado");
+}

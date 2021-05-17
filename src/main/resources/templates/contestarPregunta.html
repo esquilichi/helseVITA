@@ -9,17 +9,21 @@
 			<div class="block-heading">
 				<h2 style="color: #000000; margin-top: 50px">Contestar Pregunta</h2>
 			</div>
-
+ {{#question}}
+  {{{cosa}}}
+  {{/question}}
   <form  style="border-top-color: rgb(151, 214, 181);" >
+   {{#question}}
+  	<input type="hidden" class="form-control" id="id_question"  value="{{id}}">			
+  {{/question}}	
 		<textarea name="editor" id="editor" >
 			Contesta aquí a la pregunta
 		</textarea>
-		<button onclick="submitAnswer();" class="btn btn-primary btn-block"
+		<button onclick="submitAnswer();" class="btn btn-primary btn-block" 
                         style="border-color: rgba(255, 255, 255, 0.4); background: rgb(255, 193, 105); color: #000000;">
-                    Crear
+                    Enviar
                 </button>
 	</form>
-        
 
     <script>CKEDITOR.replace('editor', {
       height: 200,
