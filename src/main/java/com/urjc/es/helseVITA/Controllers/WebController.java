@@ -538,11 +538,7 @@ public class WebController {
         return "my-profile";
     }
 
-    @PostMapping("/setNewPatient")
-    public String setNewPatient(@RequestBody Integer idHealthPersonnel, @RequestBody Integer idPatient){
-        healthPersonnelService.addPatientToHealthPersonnel(idHealthPersonnel, patientService.returnPatient(idPatient));
-        return "exito";
-    }
+
 
     @RequestMapping("/asignarNuevoPaciente/{id}")
     public ModelAndView asignarNuevoPaciente(@PathVariable Integer id){

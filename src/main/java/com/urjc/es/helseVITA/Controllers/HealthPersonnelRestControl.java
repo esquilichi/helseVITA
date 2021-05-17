@@ -2,6 +2,8 @@ package com.urjc.es.helseVITA.Controllers;
 import com.urjc.es.helseVITA.Entities.*;
 
 import com.urjc.es.helseVITA.Services.HealthPersonnelService;
+import com.urjc.es.helseVITA.Services.PatientService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,9 @@ import java.util.Collection;
 public class HealthPersonnelRestControl {
     @Autowired
     HealthPersonnelService healthPersonnelService;
+
+    @Autowired
+    PatientService patientService;
 
     @PostMapping("/api/healthPersonnels")
     @ResponseStatus(HttpStatus.CREATED)
